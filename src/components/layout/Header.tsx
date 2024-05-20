@@ -2,7 +2,6 @@ import React from "react";
 import RoundedBtn from "../global/RoundedBtn";
 import Link from "next/link";
 import Logout from "../auth/Logout";
-import GetUser from "./GetUser";
 import { createClient } from "@/utils/supabase/server";
 
 export default async function Header() {
@@ -18,7 +17,6 @@ export default async function Header() {
       <div>
         <Link href="/123123sds">Diary</Link>
       </div>
-      <GetUser />
       {user !== null ? (
         <>
           <p>{user.email}</p>
