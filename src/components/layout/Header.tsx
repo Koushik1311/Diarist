@@ -12,7 +12,7 @@ export default async function Header() {
   } = await supabase.auth.getUser();
 
   return (
-    <div className="max-w-[1250px] mx-auto flex items-center justify-between">
+    <div className="max-w-[1260px] mx-auto flex items-center justify-between">
       <div>Diarist</div>
       <div>
         <Link href="/123123sds">Diary</Link>
