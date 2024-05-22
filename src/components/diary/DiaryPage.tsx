@@ -13,10 +13,9 @@ import FontFamilyBtn from "../global/FontFamilyBtn";
 import { RiDeleteBinLine } from "react-icons/ri";
 import useItems from "@/hooks/useItems";
 import { updateItems } from "@/redux/features/items-slice";
-import { useDispatch } from "react-redux";
-import { AppDispatch } from "@/redux/store";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "@/redux/store";
 import LockButton from "./LockButton";
-import { IoIosBookmark } from "react-icons/io";
 import BookmarkBtn from "./BookmarkBtn";
 
 const dancing_script = Dancing_Script({ subsets: ["latin"] });
@@ -36,17 +35,9 @@ export default function DiaryPage() {
   const dispatch = useDispatch<AppDispatch>();
 
   const handleChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
-    // Set value
     setValue(event.target.value);
-    // setTextareaHeight("auto");
-    // Adjust the textarea height based on its scroll height
     const newHeight = event.target.scrollHeight;
     setTextareaHeight(`${newHeight}px`);
-    // if (textareaHeight > "50vh") {
-    //   setTextareaHeight(textareaHeight);
-    // }
-    // console.log(newHeight);
-    // const prevHeight = event.target.scr
 
     const newValue = event.target.value;
     setPage({

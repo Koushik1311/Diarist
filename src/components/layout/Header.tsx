@@ -15,7 +15,7 @@ export default async function Header() {
     <div className="max-w-[1260px] mx-auto flex items-center justify-between">
       <div>Diarist</div>
       <div>
-        <Link href="/123123sds">Diary</Link>
+        <Link href="/diary">Diary</Link>
       </div>
       {user !== null ? (
         <>
