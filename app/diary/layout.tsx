@@ -19,7 +19,7 @@ export default function DiaryLayout({
       </div>
       <div className="border-r-[1.6px] border-violet-100 h-screen" />
 
-      <div>{children}</div>
+      <div className="flex-1">{children}</div>
     </main>
   );
 }
