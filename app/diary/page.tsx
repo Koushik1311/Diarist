@@ -2,7 +2,7 @@ import { getUser } from "@/data/User";
 import { redirect } from "next/navigation";
 import React from "react";
 
-export default async function DiaryPage() {
+export default async function DiaryHome() {
   const user = await getUser();
 
   if (!user) {
