@@ -95,14 +95,14 @@ export default async function Leftbar() {
           <span>Diaryspace</span>
 
           {/* Month & Year */}
-          <DiaryFilter className="h-8 px-2 rounded-sm transition-colors">
+          {/* <DiaryFilter className="h-8 px-2 rounded-sm transition-colors">
             <div className="flex items-center gap-1">
               <span>Jan, 2024</span>
               <span>
                 <ChevronDown className="h-4 w-4" />
               </span>
             </div>
-          </DiaryFilter>
+          </DiaryFilter> */}
         </div>
 
         {/* Entry */}
