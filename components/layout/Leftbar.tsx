@@ -13,10 +13,14 @@ import {
 import Link from "next/link";
 import { DiaryEntryList } from "@/constants/DiaryEntryList";
 import DiaryFilter from "../filter/DiaryFilter";
+import { getAllRecords } from "@/data/action/diary_entry";
+import { getDay, getMonth, getYear } from "@/utils/local-date-&-time";
 
 export default async function Leftbar() {
   const user = await getUser();
   const first_letter = user?.user_metadata.display_name.charAt(0);
+
+  const records = await getAllRecords();
 
   const colorClasses = [
     "text-emerald-400",
@@ -78,7 +82,10 @@ export default async function Leftbar() {
           </DropdownMenu>
 
           {/* Add button */}
-          <AddEntryButton className="w-6 h-6 hover:bg-zinc-200 flex items-center justify-center rounded-sm">
+          <AddEntryButton
+            userId={user?.id!}
+            className="w-6 h-6 hover:bg-zinc-200 flex items-center justify-center rounded-sm"
+          >
             <Plus className="h-5 w-5 text-zinc-600" />
           </AddEntryButton>
         </div>
@@ -106,15 +113,16 @@ export default async function Leftbar() {
         </div>
 
         {/* Entry */}
-        <div className="mr-3 flex-1 overflow-y-auto last:pb-6">
-          {DiaryEntryList.slice()
+        <div className="-mr-3 flex-1 overflow-y-auto last:pb-6 pr-2">
+          {records
+            .slice()
             .reverse()
             .map((entry, index) => {
               const color = colorClasses[index % colorClasses.length];
               return (
                 <Link
                   key={index}
-                  href="/diary/12"
+                  href={`/diary/${entry.id}`}
                   className="h-8 hover:bg-zinc-200 flex items-center px-3 rounded-sm"
                 >
                   <div className="">
@@ -122,7 +130,9 @@ export default async function Leftbar() {
                       <NotebookPen className={`w-4 h-4 ${color}`} />
                       <span>{entry.title}</span>
                       <span> - </span>
-                      <span>{entry.date}</span>
+                      <span>{getMonth(entry.created_at)}</span>
+                      <span>{getDay(entry.created_at)},</span>
+                      <span>{getYear(entry.created_at)}</span>
                     </p>
                   </div>
                 </Link>
