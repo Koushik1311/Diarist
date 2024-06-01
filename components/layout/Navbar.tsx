@@ -9,7 +9,7 @@ export default function Navbar() {
     <div className="container flex items-center justify-between mt-3">
       {/* <h1 className="font-bold text-2xl">LOGO</h1> */}
       <Link href="/">
-        <Logo className="" />
+        <Logo />
       </Link>
       <div className="flex items-center gap-10">
         <div className="lg:flex items-center gap-8 hidden">

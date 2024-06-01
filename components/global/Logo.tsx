@@ -4,13 +4,9 @@ import { Pacifico } from "next/font/google";
 
 const pacifico = Pacifico({ weight: "400", subsets: ["latin"] });
 
-type Props = {
-  className: string;
-};
-
-export default function Logo({ className }: Props) {
+export default function Logo() {
   return (
-    <div className={`${className} ${pacifico.className} flex items-end`}>
+    <div className={`${pacifico.className} flex items-end`}>
       <Image
         width={40}
         height={90}

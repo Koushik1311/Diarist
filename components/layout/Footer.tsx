@@ -43,7 +43,7 @@ export default function Footer() {
         </div>
       </div>
       <div className="border-b border-slate-200 mt-10" />
-      <p className="text-lg text-slate-500 my-8 text-center">
+      <p className="text-sm text-slate-500 my-5 text-center">
         Copyright 2024 &copy; Diarist
       </p>
     </footer>
