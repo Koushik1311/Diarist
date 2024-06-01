@@ -1,3 +1,4 @@
+import Footer from "@/components/layout/Footer";
 import Navbar from "@/components/layout/Navbar";
 import { Metadata } from "next";
 
@@ -17,11 +18,12 @@ export default function BaseLayout({
   children: React.ReactNode;
 }) {
   return (
-    <main>
+    <>
       <header>
         <Navbar />
       </header>
       {children}
-    </main>
+      <Footer />
+    </>
   );
 }

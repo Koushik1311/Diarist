@@ -6,7 +6,9 @@ import StarterKit from "@tiptap/starter-kit";
 import { Bold, Italic, List } from "lucide-react";
 import React from "react";
 
-export default function Edditor() {
+export default function Edditor({ content }: { content: string }) {
+  console.log(content);
+
   const CustomTabExtension = Extension.create({
     addKeyboardShortcuts() {
       return {
@@ -34,6 +36,7 @@ export default function Edditor() {
         class: "min-h-[300px] border-none ring-0 focus:outline-none py-5",
       },
     },
+    content: content,
   });
 
   return (
