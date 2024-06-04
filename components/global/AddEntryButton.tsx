@@ -18,7 +18,6 @@ export default async function AddEntryButton({
     const records = await insertRecord(userId);
     if (records && records.length > 0) {
       const lastRecord = records[records.length - 1];
-      console.log(lastRecord);
       redirect(`/diary/${lastRecord.id}`);
     }
   };
