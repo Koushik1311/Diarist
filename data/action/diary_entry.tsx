@@ -1,5 +1,6 @@
 import { DiaryTypes } from "@/types/diary.types";
 import { getToday } from "@/utils/local-day";
+import { browserClient } from "@/utils/supabase/client";
 import { createClient } from "@/utils/supabase/server";
 
 const getAllRecords = async () => {
@@ -46,6 +47,22 @@ const insertRecord = async (userId: string) => {
   return data;
 };
 
+const updateContentField = async (id: number, content: string) => {
+  const supabase = browserClient();
+
+  const { data, error } = await supabase
+    .from("diary_entry")
+    .update({ content: content })
+    .eq("id", id)
+    .select();
+
+  if (error) {
+    console.log("Error updating content field: ", error.message);
+  }
+
+  return data;
+};
+
 const updateIsLockedField = async (id: number, isLocked: boolean) => {
   const supabase = createClient();
 
@@ -60,7 +77,12 @@ const updateIsLockedField = async (id: number, isLocked: boolean) => {
   }
 
   console.log("is_locked field updated successfully");
-  console.log(data);
 };
 
-export { getAllRecords, getSingleRecord, insertRecord, updateIsLockedField };
+export {
+  getAllRecords,
+  getSingleRecord,
+  insertRecord,
+  updateContentField,
+  updateIsLockedField,
+};
