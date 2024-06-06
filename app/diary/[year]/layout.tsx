@@ -14,7 +14,7 @@ export default function DiaryLayout({
 }) {
   return (
     <main className="flex">
-      <div className="">
+      <div className="hidden lg:block">
         <Leftbar />
       </div>
       <div className="border-r-[1.6px] border-violet-100 h-screen" />

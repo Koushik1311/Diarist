@@ -53,6 +53,7 @@ export default async function Index() {
       </section>
 
       <section id="features">
+        <AuthButton />
         <div className="container">
           <h2>Features</h2>
           <div className="feature">
