@@ -20,4 +20,9 @@ const getTime = (utcTimestamp: string) => {
   return time;
 };
 
-export { getMonth, getDay, getYear, getTime };
+const getWeekday = (utcTimeStamp: string) => {
+  const { weekday } = convertTimestampToComponents(utcTimeStamp);
+  return weekday;
+};
+
+export { getMonth, getDay, getYear, getTime, getWeekday };
