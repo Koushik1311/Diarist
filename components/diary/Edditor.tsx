@@ -4,10 +4,34 @@ import Placeholder from "@tiptap/extension-placeholder";
 import { BubbleMenu, EditorContent, Extension, useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import { Bold, Italic, List } from "lucide-react";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { debounce } from "lodash";
+import { browserClient } from "@/utils/supabase/client";
 
-export default function Edditor({ content }: { content: string }) {
-  console.log(content);
+export default function Edditor({
+  id,
+  content,
+}: {
+  id: number;
+  content: string;
+}) {
+  // const debouncedUpdate = debounce(async (content: string) => {
+  //   await updateContentField(id, content);
+  // }, 10000);
+
+  // useEffect(() => {
+  //   const updateData = async () => {
+  //     const debouncedUpdate = debounce(async (content: string) => {
+  //       const { data, error } = await supabase
+  //         .from("diary_entry")
+  //         .update({ content: content })
+  //         .eq("id", id)
+  //         .select();
+  //     }, 10000);
+  //   };
+
+  //   updateData();
+  // }, []);
 
   const CustomTabExtension = Extension.create({
     addKeyboardShortcuts() {
@@ -40,7 +64,7 @@ export default function Edditor({ content }: { content: string }) {
   });
 
   return (
-    <>
+    <form>
       {editor && (
         <BubbleMenu editor={editor} tippyOptions={{ duration: 100 }}>
           <button
@@ -70,6 +94,6 @@ export default function Edditor({ content }: { content: string }) {
         </BubbleMenu>
       )}
       <EditorContent editor={editor} className="flex-1 w-full" />
-    </>
+    </form>
   );
 }

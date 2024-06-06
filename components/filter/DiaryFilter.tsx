@@ -11,48 +11,51 @@ import {
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Mail, MessageSquare, PlusCircle, UserPlus } from "lucide-react";
+import { Months } from "@/constants/months";
+import { getLocalYear } from "@/utils/local-day";
+
+type DateObject = {
+  year: number;
+  month: number;
+};
 
 type Props = {
   children: React.ReactNode;
   className: string;
+  formAction: (year: number, month: number) => void;
 };
 
-export default function DiaryFilter({ children, className }: Props) {
+export default function DiaryFilter({
+  children,
+  className,
+  formAction,
+}: Props) {
   return (
-    <DropdownMenu>
-      <DropdownMenuTrigger>
-        <button className={className}>{children}</button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent>
-        <DropdownMenuItem>Profile</DropdownMenuItem>
-        <DropdownMenuItem>Billing</DropdownMenuItem>
-        <DropdownMenuItem>Team</DropdownMenuItem>
-        <DropdownMenuItem>Subscription</DropdownMenuItem>
-        <DropdownMenuSub>
-          <DropdownMenuSubTrigger>
-            <UserPlus className="mr-2 h-4 w-4" />
-            <span>Invite users</span>
-          </DropdownMenuSubTrigger>
-          <DropdownMenuPortal>
-            <DropdownMenuSubContent>
-              <DropdownMenuItem>
-                <Mail className="mr-2 h-4 w-4" />
-                <span>Email</span>
-              </DropdownMenuItem>
-              <DropdownMenuItem>
-                <MessageSquare className="mr-2 h-4 w-4" />
-                <span>Message</span>
-              </DropdownMenuItem>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem>
-                <PlusCircle className="mr-2 h-4 w-4" />
-                <span>More...</span>
-              </DropdownMenuItem>
-            </DropdownMenuSubContent>
-          </DropdownMenuPortal>
-        </DropdownMenuSub>
-      </DropdownMenuContent>
-    </DropdownMenu>
+    <form>
+      <DropdownMenu>
+        <DropdownMenuTrigger className="border-none ring-0 focus:outline-none">
+          <span className={className}>{children}</span>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent>
+          <DropdownMenuItem className="flex items-center justify-center">
+            {getLocalYear()}
+          </DropdownMenuItem>
+          <DropdownMenuSeparator />
+          <DropdownMenuItem className="cursor-pointer">
+            <ul className="grid grid-cols-4 gap-4">
+              {Months.map((month, index) => (
+                <li key={index}>
+                  <button
+                    formAction={() => formAction(getLocalYear(), month.index)}
+                  >
+                    {month.name}
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
+    </form>
   );
 }
