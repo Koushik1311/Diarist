@@ -4,7 +4,7 @@ import React from "react";
 import { Sacramento } from "next/font/google";
 import { getLocalYear } from "@/utils/local-day";
 import Link from "next/link";
-import { NotebookText, PanelLeftOpen } from "lucide-react";
+import { Key, Lock } from "lucide-react";
 
 const sacramento = Sacramento({ subsets: ["latin"], weight: "400" });
 
@@ -23,18 +23,19 @@ export default async function DiaryHome() {
           <p className="text-2xl uppercase tracking-[0.5em] text-center">
             {user?.user_metadata.display_name}
           </p>
-          <p className="text-2xl uppercase tracking-[0.5em] text-center">
+          <button className="text-2xl uppercase tracking-[0.5em] text-center mt-2">
             {getLocalYear()}
-          </p>
+          </button>
 
           <Link
             href={`/diary/${getLocalYear()}`}
-            className="flex items-center gap-1 group mt-5"
+            className="flex items-center group mt-5"
           >
-            <span className="uppercase text-lg tracking-[0.4em] transition duration-700">
+            <Lock className="w-[18px] h-[18px] group-hover:text-white group-hover:-translate-x-3 mr-2 transition duration-500" />
+            <span className="uppercase text-lg tracking-[0.4em] last:tracking-[0px]">
               Open
             </span>
-            {/* <PanelLeftOpen className="w-4 h-4 group-hover:translate-x-3 transition duration-700" /> */}
+            <Key className="w-[18px] h-[18px] ml-[1px] translate-x-3 text-white group-hover:text-zinc-950 group-hover:translate-x-0 transition duration-500" />
           </Link>
         </div>
       </div>
