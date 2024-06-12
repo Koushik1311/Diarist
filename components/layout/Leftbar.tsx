@@ -1,6 +1,6 @@
 import React from "react";
 import { getUser } from "@/data/User";
-import { ChevronDown, Home, LogOut, Plus } from "lucide-react";
+import { ChevronDown, CreditCard, Home, LogOut, Plus } from "lucide-react";
 import AddEntryButton from "../global/AddEntryButton";
 import {
   DropdownMenu,
@@ -41,13 +41,26 @@ export default async function Leftbar() {
               </DropdownMenuLabel>
               <DropdownMenuSeparator />
               <DropdownMenuItem className="flex items-center gap-2">
-                <span className="h-6 w-6 rounded-sm text-sm font-medium bg-zinc-200 flex items-center justify-center uppercase">
+                <span className="h-8 w-8 rounded-sm text-xl text-zinc-500 bg-zinc-200 flex items-center justify-center uppercase">
                   {first_letter}
                 </span>
-                <span>{user?.user_metadata.display_name}</span>
+                <div>
+                  <p className="text-sm text-zinc-500">
+                    {user?.user_metadata.display_name}
+                  </p>
+                  {/* TODO: Make me dynamic */}
+                  <p className="text-xs text-zinc-700 font-extralight">
+                    Lifetime Plan <span>. 5 entry</span>
+                  </p>
+                </div>
               </DropdownMenuItem>
               <DropdownMenuSeparator />
+              <DropdownMenuSeparator />
               <form action={signOut}>
+                <DropdownMenuItem className="cursor-pointer flex items-center gap-2 w-full">
+                  <CreditCard className="w-4 h-4 text-zinc-700" />
+                  <span>Purchase entry</span>
+                </DropdownMenuItem>
                 <button className="w-full cursor-pointer">
                   <DropdownMenuItem className="cursor-pointer flex items-center gap-2 w-full">
                     <LogOut className="w-4 h-4 text-zinc-700" />
