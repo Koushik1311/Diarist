@@ -1,4 +1,4 @@
-import Edditor from "@/components/diary/Edditor";
+import Editor from "@/components/diary/Editor";
 import { Ellipsis } from "lucide-react";
 import React from "react";
 import { Dancing_Script } from "next/font/google";
@@ -10,7 +10,6 @@ import {
   getTime,
   getWeekday,
 } from "@/utils/local-date-&-time";
-import EditorCopy from "@/components/diary/Edditor copy";
 
 const dancing_script = Dancing_Script({ subsets: ["latin"] });
 
@@ -55,7 +54,7 @@ export default async function DiaryPage({
           </div>
           <div className="border-b border-zinc-200 mt-3" />
           {/* <Edditor id={id} content={record.content} /> */}
-          <EditorCopy id={id} content={record.content} />
+          <Editor id={id} content={record.content} />
         </div>
       </div>
     </div>

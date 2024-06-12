@@ -1,9 +1,4 @@
 import { createClient } from "@/utils/supabase/server";
-import ConnectSupabaseSteps from "@/components/tutorial/ConnectSupabaseSteps";
-import SignUpUserSteps from "@/components/tutorial/SignUpUserSteps";
-import Header from "@/components/Header";
-import DeployButton from "@/components/DeployButton";
-import AuthButton from "@/components/AuthButton";
 import GetStartedBtn from "@/components/global/GetStartedBtn";
 
 export default async function Index() {
@@ -53,7 +48,6 @@ export default async function Index() {
       </section>
 
       <section id="features">
-        <AuthButton />
         <div className="container">
           <h2>Features</h2>
           <div className="feature">

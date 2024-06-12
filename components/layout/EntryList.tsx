@@ -14,18 +14,14 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Months } from "@/constants/months";
-import { getLocalYear } from "@/utils/local-day";
-import { colorClasses } from "@/utils/diary-entry-colors";
-import { useParams, usePathname } from "next/navigation";
+import { getLocalMonth, getLocalYear } from "@/utils/local-day";
+import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 
 export default function EntryList() {
   const [year, setYear] = useState<number>();
   const [month, setMonth] = useState<number>();
   const [entryRecords, setEntryRecords] = useState<DiaryTypes[]>([]);
-
-  const params = useParams<{ id: string }>();
-  const diaryId = parseInt(params.id);
 
   const pathname = usePathname();
 
@@ -55,17 +51,46 @@ export default function EntryList() {
     setMonth(filterMonth);
   };
 
+  const getMonthName = (index: number) => {
+    const month = Months.find((m) => m.index === index);
+    return month ? month.name : "";
+  };
+
+  const colorClasses = [
+    "text-emerald-400",
+    "text-teal-400",
+    "text-cyan-400",
+    "text-indigo-400",
+    "text-violet-400",
+    "text-purple-400",
+    "text-fuchsia-400",
+    "text-pink-400",
+    "text-rose-400",
+    "text-rose-600",
+    "text-pink-600",
+    "text-fuchsia-600",
+    "text-purple-600",
+    "text-violet-600",
+    "text-indigo-600",
+    "text-cyan-600",
+    "text-teal-600",
+    "text-emerald-600",
+  ];
+
   return (
     <>
       <div className="pl-3 pr-1 text-xs font-medium text-zinc-400 mt-2 h-8 flex items-center justify-between rounded-sm">
-        <span>Diaryspace</span>
+        <Link href={`/diary/${getLocalYear()}`}>Diaryspace</Link>
 
         {/* Month & Year */}
         <DropdownMenu>
           <DropdownMenuTrigger className="border-none ring-0 focus:outline-none">
             <div className="h-8 px-2 rounded-sm transition-colors">
               <div className="flex items-center gap-1">
-                <span>Jan, 2024</span>
+                <span>
+                  {!month ? getMonthName(getLocalMonth()) : getMonthName(month)}
+                  , {getLocalYear()}
+                </span>
                 <span>
                   <ChevronDown className="h-4 w-4" />
                 </span>
