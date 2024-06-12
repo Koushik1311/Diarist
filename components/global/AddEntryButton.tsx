@@ -1,4 +1,5 @@
 import { insertRecord } from "@/data/action/diary_entry";
+import { getLocalYear } from "@/utils/local-day";
 import { redirect } from "next/navigation";
 import React, { useEffect } from "react";
 
@@ -18,7 +19,7 @@ export default async function AddEntryButton({
     const records = await insertRecord(userId);
     if (records && records.length > 0) {
       const lastRecord = records[records.length - 1];
-      redirect(`/diary/${lastRecord.id}`);
+      redirect(`/diary/${getLocalYear()}/${lastRecord.id}`);
     }
   };
 
