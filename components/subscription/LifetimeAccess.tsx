@@ -3,7 +3,7 @@ import { Check } from "lucide-react";
 import Checkout from "./Checkout";
 import { getUser } from "@/data/User";
 
-export default async function Price() {
+export default async function LifetimeAccess() {
   const price = {
     title: "Life-time access",
     description: "Start your personal diary journey",
