@@ -1,5 +1,5 @@
 import Editor from "@/components/diary/Editor";
-import { Ellipsis } from "lucide-react";
+import { Ellipsis, Save } from "lucide-react";
 import React from "react";
 import { Dancing_Script } from "next/font/google";
 import { getSingleRecord } from "@/data/action/diary_entry";
@@ -41,7 +41,7 @@ export default async function DiaryPage({
         </div>
       </div>
 
-      <div className="flex-1 overflow-y-scroll py-[20vh]">
+      <div className="flex-1 overflow-y-scroll pt-20 pb-20 md:py-[20vh]">
         {/* Editor */}
         <div className="max-w-2xl mx-3 md:mx-auto">
           <div>
@@ -55,6 +55,10 @@ export default async function DiaryPage({
           <div className="border-b border-zinc-200 mt-3" />
           {/* <Edditor id={id} content={record.content} /> */}
           <Editor id={id} content={record.content} />
+        </div>
+
+        <div className="lg:hidden fixed bottom-5 right-7 w-14 h-14 rounded-full bg-zinc-300 flex items-center justify-center">
+          <Save className="text-zinc-600" />
         </div>
       </div>
     </div>

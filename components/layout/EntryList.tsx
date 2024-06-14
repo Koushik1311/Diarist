@@ -17,6 +17,8 @@ import { Months } from "@/constants/months";
 import { getLocalMonth, getLocalYear } from "@/utils/local-day";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
+import { browserClient } from "@/utils/supabase/client";
+import { RealtimePostgresInsertPayload } from "@supabase/supabase-js";
 
 export default function EntryList() {
   const [year, setYear] = useState<number>();
@@ -24,6 +26,29 @@ export default function EntryList() {
   const [entryRecords, setEntryRecords] = useState<DiaryTypes[]>([]);
 
   const pathname = usePathname();
+
+  const supabase = browserClient();
+
+  useEffect(() => {
+    const channel = supabase
+      .channel("realtime entry")
+      .on(
+        "postgres_changes",
+        {
+          event: "INSERT",
+          schema: "public",
+          table: "diary_entry",
+        },
+        (payload: RealtimePostgresInsertPayload<DiaryTypes>) => {
+          setEntryRecords((prevRecords) => [payload.new, ...prevRecords]);
+        }
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
+  }, [supabase]);
 
   useEffect(() => {
     const getData = async () => {
@@ -121,7 +146,9 @@ export default function EntryList() {
 
       <div className="-mr-3 flex-1 overflow-y-auto last:pb-6 pr-2">
         {sortedRecords.map((entry, index) => {
-          const isActive = pathname.startsWith(`/diary/${entry.id}`);
+          const isActive = pathname.startsWith(
+            `/diary/${getLocalYear()}/${entry.id}`
+          );
 
           const color = colorClasses[index % colorClasses.length];
           return (

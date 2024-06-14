@@ -68,6 +68,7 @@ const insertRecord = async (userId: string) => {
   if (error) {
     console.log("Error inserting diary record: ", error.message);
   }
+
   return data;
 };
 
@@ -87,26 +88,4 @@ const updateContentField = async (id: number, content: string) => {
   return data;
 };
 
-const updateIsLockedField = async (id: number, isLocked: boolean) => {
-  const supabase = createClient();
-
-  const { data, error } = await supabase
-    .from("diary_entry")
-    .update({ is_locked: isLocked })
-    .eq("id", id)
-    .select();
-
-  if (error) {
-    console.log("Error updating is_locked field: ", error.message);
-  }
-
-  console.log("is_locked field updated successfully");
-};
-
-export {
-  getAllRecords,
-  getSingleRecord,
-  insertRecord,
-  updateContentField,
-  updateIsLockedField,
-};
+export { getAllRecords, getSingleRecord, insertRecord, updateContentField };
