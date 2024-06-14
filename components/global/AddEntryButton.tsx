@@ -2,7 +2,7 @@
 
 import { insertRecord } from "@/data/diary";
 import { getLocalYear } from "@/utils/local-day";
-import { redirect, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import React from "react";
 import toast, { Toaster } from "react-hot-toast";
 
