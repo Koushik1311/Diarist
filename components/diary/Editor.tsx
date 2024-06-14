@@ -34,14 +34,14 @@ export default function Editor({
       });
   };
 
-  // const debouncedUpdate = debounce((content: string) => {
+  // debounce((content: string) => {
   //   if (editor) {
   //     const newContent = editor.getHTML();
   //     if (newContent !== currentContent) {
   //       updateContentField(id, content);
   //     }
   //   }
-  // }, 300000);
+  // }, 20000);
 
   const CustomTabExtension = Extension.create({
     addKeyboardShortcuts() {
