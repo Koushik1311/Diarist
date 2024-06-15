@@ -1,7 +1,7 @@
 export const PrivacyLinks = [
   {
-    name: "Terms & Condition",
-    link: "/terms&condition",
+    name: "Terms & Conditions",
+    link: "/terms&conditions",
   },
   {
     name: "Privacy Policy",
