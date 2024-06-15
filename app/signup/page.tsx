@@ -1,14 +1,11 @@
-import SocialAuthButton from "@/components/user/SocialAuthButton";
 import { createClient } from "@/utils/supabase/server";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
-import { FcGoogle } from "react-icons/fc";
-import { FaApple } from "react-icons/fa";
-import { IoKey } from "react-icons/io5";
 import React from "react";
 import Link from "next/link";
 import Logo from "@/components/global/Logo";
 import AuthButton from "@/components/user/AuthButton";
+import SocialAuthentication from "@/components/user/SocialAuthentication";
 
 export default async function SignUp({
   searchParams,
@@ -56,21 +53,10 @@ export default async function SignUp({
           <span className="text-slate-700">Make it. Write it.</span>
           <span className="text-purple-400">Create your Diarist account</span>
         </p>
+
+        <SocialAuthentication />
+
         <form className="flex flex-col gap-1 w-full">
-          <div className="flex flex-col gap-2">
-            <SocialAuthButton>
-              <FcGoogle className="text-lg" />
-              <span>Continue with Google</span>
-            </SocialAuthButton>
-            <SocialAuthButton>
-              <FaApple className="text-lg" />
-              <span>Continue with Apple</span>
-            </SocialAuthButton>
-            <SocialAuthButton>
-              <IoKey className="text-lg" />
-              <span>Continue with SSO</span>
-            </SocialAuthButton>
-          </div>
           <label
             htmlFor="display_name"
             className="text-xs text-slate-500 font-medium mt-10"
