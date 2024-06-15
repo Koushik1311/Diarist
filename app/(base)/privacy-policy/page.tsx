@@ -23,7 +23,33 @@ export default function PrivacyPolicy() {
 
       <section className="mb-6">
         <h2 className="text-2xl font-semibold mb-2 text-zinc-900">
-          How We Use Your Information
+          2. Information We Collect
+        </h2>
+        <p>
+          We collect information that you provide to us directly when you use
+          our service. This includes:
+        </p>
+        <ul className="list-disc list-inside text-zinc-600">
+          <li>
+            <strong className="text-zinc-900">Personal Information:</strong>{" "}
+            When you sign up, we collect your email address and any other
+            information you choose to provide.
+          </li>
+          <li>
+            <strong className="text-zinc-900">Diary Entries:</strong> The
+            content you add to your diary entries.
+          </li>
+          <li>
+            <strong className="text-zinc-900">Usage Data:</strong> Information
+            about how you use our service, such as the date and time you log in
+            and the features you use.
+          </li>
+        </ul>
+      </section>
+
+      <section className="mb-6">
+        <h2 className="text-2xl font-semibold mb-2 text-zinc-900">
+          3. How We Use Your Information
         </h2>
         <p className="text-zinc-600">
           We use your information for the following purposes:
