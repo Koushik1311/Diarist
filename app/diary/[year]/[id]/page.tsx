@@ -32,8 +32,6 @@ export default async function DiaryPage({
               <span>{getMonth(record.created_at)}</span>
               <span>{getDay(record.created_at)},</span>
               <span>{getYear(record.created_at)}</span>
-              <span> | </span>
-              <span>{getTime(record.created_at)}</span>
             </p>
           </div>
 
