@@ -1,13 +1,10 @@
-import SocialAuthButton from "@/components/user/SocialAuthButton";
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
-import { FcGoogle } from "react-icons/fc";
-import { FaApple } from "react-icons/fa";
-import { IoKey } from "react-icons/io5";
 import React from "react";
 import Link from "next/link";
 import Logo from "@/components/global/Logo";
 import AuthButton from "@/components/user/AuthButton";
+import SocialAuthentication from "@/components/user/SocialAuthentication";
 
 export default function Login({
   searchParams,
@@ -49,25 +46,12 @@ export default function Login({
             Log in to your Diarist account
           </span>
         </p>
-        <form className="flex flex-col gap-1 w-full">
-          <div className="flex flex-col gap-2">
-            <SocialAuthButton>
-              <FcGoogle className="text-lg" />
-              <span>Continue with Google</span>
-            </SocialAuthButton>
-            <SocialAuthButton>
-              <FaApple className="text-lg" />
-              <span>Continue with Apple</span>
-            </SocialAuthButton>
-            <SocialAuthButton>
-              <IoKey className="text-lg" />
-              <span>Continue with SSO</span>
-            </SocialAuthButton>
-          </div>
+        <SocialAuthentication />
 
+        <form className="flex flex-col gap-1 w-full">
           <label
             htmlFor="email"
-            className="text-xs text-slate-500 font-medium mt-3"
+            className="text-xs text-slate-500 font-medium mt-10"
           >
             Email
           </label>

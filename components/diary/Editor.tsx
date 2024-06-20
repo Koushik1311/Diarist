@@ -3,10 +3,12 @@
 import Placeholder from "@tiptap/extension-placeholder";
 import { BubbleMenu, EditorContent, Extension, useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
-import { Bold, Italic, List } from "lucide-react";
+import { Bold, Italic, List, Save } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import { debounce } from "lodash";
 import { browserClient } from "@/utils/supabase/client";
+import { cn } from "@/lib/utils";
+import { motion } from "framer-motion";
 
 export default function Editor({
   id,
@@ -93,6 +95,8 @@ export default function Editor({
     };
   }, [editor, currentContent]);
 
+  const newContent = editor?.getHTML();
+
   return (
     <>
       {editor && (
@@ -128,6 +132,21 @@ export default function Editor({
         </BubbleMenu>
       )}
       <EditorContent editor={editor} className="flex-1 w-full" />
+
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{
+          opacity: newContent !== currentContent ? 1 : 0,
+          transition: { duration: 0.9 },
+        }}
+        style={{
+          cursor: newContent !== currentContent ? "pointer" : "none",
+          zIndex: newContent !== currentContent ? 1 : -5,
+        }}
+        className="fixed bottom-5 right-7 md:bottom-12 md:right-16 w-14 h-14 bg-zinc-200 hover:bg-zinc-300 transition-colors flex items-center justify-center rounded-full"
+      >
+        <Save className="text-zinc-800" />
+      </motion.div>
     </>
   );
 }

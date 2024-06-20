@@ -21,7 +21,7 @@ export default async function DiaryHome() {
         <h1 className={`${sacramento.className} text-[10rem]`}>Diary</h1>
         <div className="flex flex-col items-center">
           <p className="text-2xl uppercase tracking-[0.5em] text-center">
-            {user?.user_metadata.display_name}
+            {user?.user_metadata.display_name || user?.user_metadata.full_name}
           </p>
           <button className="text-2xl uppercase tracking-[0.5em] text-center mt-2">
             {getLocalYear()}

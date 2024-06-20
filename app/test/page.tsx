@@ -1,22 +1,31 @@
-"use client";
-
-import { getAllRecords } from "@/data/client/diary";
-import { DiaryTypes } from "@/types/diary.types";
-import React, { useEffect, useState } from "react";
+import { createClient } from "@/utils/supabase/server";
+import { headers } from "next/headers";
+import { redirect } from "next/navigation";
 
 export default function page() {
-  const [diaryData, setDiaryData] = useState<DiaryTypes[]>([]);
+  const socialAuthentication = async () => {
+    "use server";
 
-  useEffect(() => {
-    const getData = async () => {
-      const result = await getAllRecords();
-      setDiaryData(result);
-    };
+    const origin = headers().get("origin");
+    const supabase = createClient();
 
-    getData();
-  }, [setDiaryData]);
+    const { error, data } = await supabase.auth.signInWithOAuth({
+      provider: "github",
+      options: {
+        redirectTo: `${origin}/auth/callback`,
+      },
+    });
 
-  console.log(diaryData);
+    if (error) {
+      console.log(error.message);
+    } else {
+      return redirect(data.url);
+    }
+  };
 
-  return <div>page</div>;
+  return (
+    <form action={socialAuthentication}>
+      <button>github</button>
+    </form>
+  );
 }

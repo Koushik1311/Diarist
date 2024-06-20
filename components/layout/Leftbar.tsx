@@ -16,7 +16,10 @@ import { signOut } from "@/actions/auth";
 
 export default async function Leftbar() {
   const user = await getUser();
-  const first_letter = user?.user_metadata.display_name.charAt(0);
+  const first_letter =
+    user?.user_metadata.display_name?.charAt(0) ??
+    user?.user_metadata.full_name?.charAt(0) ??
+    "";
 
   return (
     <div className="relative w-80">
@@ -29,7 +32,8 @@ export default async function Leftbar() {
                 {first_letter}
               </span>
               <span className="font-medium">
-                {user?.user_metadata.display_name}
+                {user?.user_metadata.display_name ||
+                  user?.user_metadata.full_name}
               </span>
               <span>
                 <ChevronDown className="h-4 w-4" />
@@ -46,7 +50,8 @@ export default async function Leftbar() {
                 </span>
                 <div>
                   <p className="text-sm text-zinc-500">
-                    {user?.user_metadata.display_name}
+                    {user?.user_metadata.display_name ||
+                      user?.user_metadata.full_name}
                   </p>
                   {/* TODO: Make me dynamic */}
                   <p className="text-xs text-zinc-700 font-extralight">

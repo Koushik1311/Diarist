@@ -56,10 +56,6 @@ export default async function DiaryPage({
           {/* <Edditor id={id} content={record.content} /> */}
           <Editor id={id} content={record.content} />
         </div>
-
-        <div className="lg:hidden fixed bottom-5 right-7 w-14 h-14 rounded-full bg-zinc-300 flex items-center justify-center">
-          <Save className="text-zinc-600" />
-        </div>
       </div>
     </div>
   );
