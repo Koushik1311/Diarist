@@ -4,15 +4,13 @@ import Link from "next/link";
 
 type Props = {
   className: string;
+  variantName?: "default" | "outline";
 };
 
-export default function GetStartedBtn({ className }: Props) {
+export default function GetStartedBtn({ className, variantName }: Props) {
   return (
     <Link href="/signup">
-      {/* <Button className="bg-gradient-to-r from-violet-400 to-rose-300 hover:bg-gradient-to-r hover:from-violet-500 hover:to-rose-400 transition-all duration-700 ease-in-out"> */}
-      <Button
-        className={`${className} bg-purple-500 hover:bg-fuchsia-500 transition-all duration-150`}
-      >
+      <Button className={`${className}`} variant={variantName || "default"}>
         Get started
       </Button>
     </Link>
