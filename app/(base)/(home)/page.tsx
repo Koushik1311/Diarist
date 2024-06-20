@@ -1,5 +1,9 @@
 import { createClient } from "@/utils/supabase/server";
 import GetStartedBtn from "@/components/global/GetStartedBtn";
+import Image from "next/image";
+import Features from "@/components/home/Features";
+import BundlePricing from "@/components/subscription/BundlePricing";
+import FAQ from "@/components/global/FAQ";
 
 export default async function Index() {
   const canInitSupabaseClient = () => {
@@ -27,13 +31,13 @@ export default async function Index() {
     //   <p>This is new Home page</p>
     // </div>
     <main className="container">
-      <section className="mt-36">
+      <section className="mt-20">
         {/* Hero */}
         <div className="flex flex-col items-center justify-center gap-3 md:gap-5">
           <h1 className="text-[28px] md:text-4xl lg:text-6xl font-semibold text-center flex flex-col -space-y-3 lg:space-y-0 md:gap-2">
             <span className="text-gray-700">Embark</span>
-            <span className="text-fuchsia-500">on a Journey with</span>
-            <span className="text-purple-500">
+            <span className="text-gray-700">on a Journey with</span>
+            <span className="text-violet-500">
               Your Personal Digital Diary.
             </span>
           </h1>
@@ -47,23 +51,55 @@ export default async function Index() {
         <GetStartedBtn className="mt-6 md:mt-8 flex mx-auto px-7 py-6" />
       </section>
 
-      <section id="features">
-        <div className="container">
-          <h2>Features</h2>
-          <div className="feature">
-            <h3>Secure Entries</h3>
-            <p>Keep your entries safe with top-notch security.</p>
-          </div>
-          <div className="feature">
-            <h3>Easy to Use</h3>
-            <p>Intuitive interface designed for simplicity.</p>
-          </div>
-          <div className="feature">
-            <h3>Anywhere Access</h3>
-            <p>Access your diary from any device, anytime.</p>
+      <section className="flex items-center justify-center mt-12">
+        <div className="shadow-[0px_19px_84px_1px_#ddd6fe] w-full h-full lg:w-[80%]">
+          <Image
+            src="/diary-image.jpg"
+            width={1024}
+            height={800}
+            quality={100}
+            alt="Diary Image"
+            className="w-full h-full rounded-lg"
+          />
+        </div>
+      </section>
+
+      <Features />
+
+      <section className="mt-24">
+        <h2 className="text-center text-[28px] md:text-3xl lg:text-5xl font-semibold text-violet-500">
+          Special Lifetime Offer
+        </h2>
+        <p className="text-center text-lg md:text-xl text-slate-600 mt-2">
+          Capture your memories and thoughts with our exclusive discount.
+        </p>
+
+        <div className="mt-8 flex flex-col items-center">
+          {/* Lifetime Discount */}
+          <div className="discount-box bg-violet-100 p-8 rounded-lg shadow-lg text-center max-w-md">
+            <h3 className="text-2xl md:text-3xl font-semibold text-violet-700">
+              $10 Off for the First 1000 Lifetime Users
+            </h3>
+            <p className="text-lg font-normal text-slate-500 mt-4">
+              Get a lifetime subscription for just $39 instead of $49. Limited
+              time offer for the first 1,000 users.
+            </p>
+            <ul className="text-left text-lg font-normal text-slate-500 mt-4 list-disc list-inside">
+              <li>Lifetime access to all premium features</li>
+              <li>Can add a single entry per day</li>
+              <li>Unlimited storage for your diary entries</li>
+              <li>Access your diary from any device, anytime</li>
+              <li>Priority customer support</li>
+            </ul>
+            <GetStartedBtn className="mt-6 md:mt-8 px-7 py-4" />
           </div>
         </div>
       </section>
+
+      {/* Bundle Pricing Section */}
+      <BundlePricing />
+
+      <FAQ />
     </main>
   );
 }

@@ -8,6 +8,10 @@ export const Navlinks = [
     link: "/pricing",
   },
   {
+    name: "Fratures",
+    link: "/fratures",
+  },
+  {
     name: "Contact",
     link: "/contact",
   },
