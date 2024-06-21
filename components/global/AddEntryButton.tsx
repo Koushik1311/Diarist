@@ -4,7 +4,7 @@ import { insertRecord } from "@/data/diary";
 import { getLocalYear } from "@/utils/local-day";
 import { useRouter } from "next/navigation";
 import React from "react";
-import toast, { Toaster } from "react-hot-toast";
+import { Toaster, toast } from "sonner";
 
 type Props = {
   children: React.ReactNode;
@@ -18,14 +18,13 @@ export default function AddEntryButton({ children, className, userId }: Props) {
   const insertEntry = async (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
 
+    const loadingToastId = toast.loading("Creating entry...");
+
     try {
       const { data, error } = await insertRecord(userId);
       if (error) {
         console.error("Error inserting record: ", error);
-        toast(error, {
-          icon: "💰",
-        });
-        // Handle error scenario, e.g., show a message to the user
+        toast.info(error, { id: loadingToastId });
       }
 
       console.log(data);
@@ -33,11 +32,10 @@ export default function AddEntryButton({ children, className, userId }: Props) {
       if (data) {
         const lastRecord = data[data.length - 1];
         router.push(`/diary/${getLocalYear()}/${lastRecord.id}`);
-        toast.success("Entry created");
+        toast.success("Entry created successfully!", { id: loadingToastId });
       }
     } catch (error) {
       console.error("Error inserting record: ", error);
-      // Handle unexpected error scenario
     }
   };
 
