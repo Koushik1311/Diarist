@@ -5,7 +5,18 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "supabase:start": "npx supabase start",
+    "supabase:stop": "npx supabase stop",
+    "supabase:status": "npx supabase status",
+    "supabase:restart": "npm run supabase:stop && npm run supabase:start",
+    "supabase:reset": "npx supabase db reset",
+    "supabase:link": "npx supabase link",
+    "supabase:generate-types": "npx supabase gen types typescript --local --schema public > types_db.ts",
+    "supabase:generate-migration": "npx supabase db diff | npx supabase migration new",
+    "supabase:generate-seed": "npx supabase db dump --data-only -f supabase/seed.sql",
+    "supabase:push": "npx supabase db push",
+    "supabase:pull": "npx supabase db pull"
   },
   "dependencies": {
     "@radix-ui/react-accordion": "^1.2.0",
@@ -46,6 +57,7 @@
     "@types/react": "18.2.48",
     "@types/react-dom": "18.2.18",
     "encoding": "^0.1.13",
-    "postcss-nesting": "^12.1.5"
+    "postcss-nesting": "^12.1.5",
+    "supabase": "^1.178.2"
   }
 }
