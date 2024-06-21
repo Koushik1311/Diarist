@@ -2,10 +2,21 @@ import React from "react";
 import { Check } from "lucide-react";
 import Checkout from "./Checkout";
 import { getUser } from "@/data/User";
+import GetStartedBtn from "../global/GetStartedBtn";
+import Link from "next/link";
+import { Button } from "../ui/button";
+import { getLSSingleProduct } from "@/data/lemonsqueezy/getProducts";
+import { notFound } from "next/navigation";
+
+const productId = Number(process.env.LEMONSQUEEZY_LIFETIME_PRODUCT_ID);
 
 export default async function LifetimeAccess() {
+  const user = await getUser();
+
+  const lifetimeProduct = await getLSSingleProduct(productId);
+
   const price = {
-    title: "Life-time access",
+    title: "Lifetime Access",
     description: "Start your personal diary journey",
     benefits: [
       "Access from anywhere",
@@ -14,32 +25,55 @@ export default async function LifetimeAccess() {
       "Single diary entry everyday",
       "Update your entry on the go",
     ],
-    amount: 39,
+    amount: lifetimeProduct?.attributes.price_formatted,
     priceId: "price_1PLIILSFtb4t8pCU8nnVHMqD",
   };
 
-  const user = await getUser();
-
-  const user_email = user?.email;
+  if (!lifetimeProduct) {
+    return notFound();
+  }
 
   return (
-    <section className="bg-violet-500 text-white px-8 py-8 rounded-lg">
-      <h2 className="text-3xl font-medium">{price.title}</h2>
-      <p className="my-4 text-base text-violet-300 font-semibold">
-        {price.description}
-      </p>
-      <ul className="text-base flex flex-col gap-3 mb-10">
-        {price.benefits.map((benefit, index) => (
-          <li key={index} className="flex items-center gap-3">
-            <Check className="w-5 h-5 p-1 bg-white rounded-full text-violet-500" />
-            {benefit}
-          </li>
-        ))}
-      </ul>
-
-      <p className="text-4xl font-medium mb-5">${price.amount}</p>
-
-      <Checkout priceId={price.priceId} userEmail={user_email!} />
+    <section className="flex flex-col items-center mt-24">
+      <h2 className="text-center text-3xl md:text-4xl lg:text-5xl font-semibold text-violet-500 mb-8">
+        {price.title}
+      </h2>
+      <div className="p-6 rounded-lg flex flex-col items-start justify-start bg-violet-500 shadow-lg text-white border border-violet-500">
+        <div className="text-center mb-6">
+          <h3 className="text-2xl font-semibold">One-Time Payment</h3>
+        </div>
+        <ul className="text-base flex flex-col gap-3 mb-12">
+          {price.benefits.map((benefit, index) => (
+            <li key={index} className="flex items-center gap-2">
+              <Check className="w-5 h-5 p-1 rounded-full bg-white text-violet-500" />
+              {benefit}
+            </li>
+          ))}
+        </ul>
+        <div className="flex items-center justify-center">
+          <div className="flex flex-col items-start justify-center">
+            <p className="text-4xl font-bold">{price.amount}</p>
+          </div>
+        </div>
+        {!user ? (
+          <GetStartedBtn
+            className="w-full mt-5 px-7 py-4 text-violet-600 hover:text-violet-600"
+            variantName="outline"
+          />
+        ) : (
+          <Link
+            href={lifetimeProduct.attributes.buy_now_url}
+            className="w-full"
+          >
+            <Button
+              className="w-full mt-5 px-7 py-4 text-violet-600 hover:text-violet-600"
+              variant="outline"
+            >
+              Buy now
+            </Button>
+          </Link>
+        )}
+      </div>
     </section>
   );
 }
