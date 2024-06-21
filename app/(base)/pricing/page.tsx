@@ -1,4 +1,5 @@
 import Bundle from "@/components/subscription/Bundle";
+import BundlePricing from "@/components/subscription/BundlePricing";
 import LifetimeAccess from "@/components/subscription/LifetimeAccess";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -23,40 +24,34 @@ export default function Price({
   };
 
   return (
-    <div>
-      <form className="flex items-center justify-center gap-5">
+    <main className="container">
+      <form className="flex items-center justify-center gap-5 mt-5">
         <Button
           formAction={bundleClick}
-          className={cn(
-            "hover:bg-purple-500 text-white transition-colors",
+          variant={
             searchParams.pricing === "bundle" || !searchParams.pricing
-              ? "bg-purple-500"
-              : "bg-white text-black"
-          )}
+              ? "default"
+              : "outline"
+          }
         >
           Bundle
         </Button>
         <Button
           formAction={lifetimeClick}
-          className={cn(
-            "hover:bg-purple-500 text-white transition-colors",
-            searchParams.pricing === "lifetime"
-              ? "bg-purple-500"
-              : "bg-white text-black"
-          )}
+          variant={searchParams.pricing === "lifetime" ? "default" : "outline"}
         >
           Lifetime
         </Button>
       </form>
-      <div className="flex items-center justify-center h-[90vh]">
+      <div className="flex items-center justify-center lg:h-[90vh]">
         {searchParams.pricing === "bundle" || !searchParams.pricing ? (
-          <Bundle />
+          <BundlePricing />
         ) : searchParams.pricing === "lifetime" ? (
           <LifetimeAccess />
         ) : (
           notFound()
         )}
       </div>
-    </div>
+    </main>
   );
 }

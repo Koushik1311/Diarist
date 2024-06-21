@@ -1,3 +1,4 @@
+import { LSProductTypes } from "@/types/lsProduct.types";
 import axios from "axios";
 
 const lsqyConfig = {
@@ -31,4 +32,28 @@ const getProducts = async () => {
   }
 };
 
-export { getProducts };
+const getLSSingleProduct = async (productId: number) => {
+  try {
+    const response = await axios.get(
+      `${lsqyConfig.URL}/products/${productId}`,
+      {
+        headers,
+      }
+    );
+
+    // Access the data array from the response
+    const product = response.data.data;
+
+    // Loop through the data array and log each product's attributes
+    // products.forEach((product) => {
+    //   console.log(product.attributes);
+    // });
+    // console.log(product);
+
+    return product as LSProductTypes;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export { getProducts, getLSSingleProduct };

@@ -17,7 +17,6 @@ export default async function DiaryLayout({
   children: React.ReactNode;
 }) {
   const user = await getUser();
-  console.log(user);
   if (!user) {
     redirect("/login");
   }

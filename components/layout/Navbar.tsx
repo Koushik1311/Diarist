@@ -3,8 +3,12 @@ import Link from "next/link";
 import React from "react";
 import GetStartedBtn from "../global/GetStartedBtn";
 import Logo from "../global/Logo";
+import { getUser } from "@/data/User";
+import { Button } from "../ui/button";
 
-export default function Navbar() {
+export default async function Navbar() {
+  const user = await getUser();
+
   return (
     <div className="container flex items-center justify-between mt-3">
       {/* <h1 className="font-bold text-2xl">LOGO</h1> */}
@@ -23,7 +27,13 @@ export default function Navbar() {
             </Link>
           ))}
         </div>
-        <GetStartedBtn className="" />
+        {user ? (
+          <Link href="/diary">
+            <Button>My diary</Button>
+          </Link>
+        ) : (
+          <GetStartedBtn className="" />
+        )}
       </div>
     </div>
   );
