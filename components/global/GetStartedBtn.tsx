@@ -9,7 +9,7 @@ type Props = {
 
 export default function GetStartedBtn({ className, variantName }: Props) {
   return (
-    <Link href="/signup">
+    <Link href="/signup" className="w-full">
       <Button className={`${className}`} variant={variantName || "default"}>
         Get started
       </Button>
