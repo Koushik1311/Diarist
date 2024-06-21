@@ -4,20 +4,12 @@ import Image from "next/image";
 import Features from "@/components/home/Features";
 import BundlePricing from "@/components/subscription/BundlePricing";
 import FAQ from "@/components/global/FAQ";
+import { getUser } from "@/data/User";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
 
 export default async function Index() {
-  const canInitSupabaseClient = () => {
-    // This function is just for the interactive tutorial.
-    // Feel free to remove it once you have Supabase connected.
-    try {
-      createClient();
-      return true;
-    } catch (e) {
-      return false;
-    }
-  };
-
-  const isSupabaseConnected = canInitSupabaseClient();
+  const user = await getUser();
 
   return (
     // <div className="flex-1 w-full flex flex-col gap-20 items-center">
@@ -48,7 +40,15 @@ export default async function Index() {
         </div>
 
         {/* Button */}
-        <GetStartedBtn className="mt-6 md:mt-8 flex mx-auto px-7 py-6" />
+        {user ? (
+          <Link href="/diary">
+            <Button className="mt-6 md:mt-8 flex mx-auto px-7 py-6">
+              My diary
+            </Button>
+          </Link>
+        ) : (
+          <GetStartedBtn className="mt-6 md:mt-8 flex mx-auto px-7 py-6" />
+        )}
       </section>
 
       <section className="flex items-center justify-center mt-12">
@@ -97,7 +97,9 @@ export default async function Index() {
       </section>
 
       {/* Bundle Pricing Section */}
-      <BundlePricing />
+      <section className="mt-24 flex items-center justify-center">
+        <BundlePricing />
+      </section>
 
       <FAQ />
     </main>
