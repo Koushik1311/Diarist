@@ -25,7 +25,7 @@ const getAllRecords = async (year?: number, month?: number) => {
   const formattedEndOfMonth = endDate.toISOString();
 
   const { data, error } = await supabase
-    .from("diary_entry")
+    .from("diary_entries")
     .select("*")
     .gte("created_at", formattedStartOfMonth)
     .lte("created_at", formattedEndOfMonth);
@@ -41,7 +41,7 @@ const getAllRecords = async (year?: number, month?: number) => {
 const getSingleRecord = async (id: number) => {
   const supabase = createClient();
   const { data, error } = await supabase
-    .from("diary_entry")
+    .from("diary_entries")
     .select("*")
     .eq("id", id)
     .single();
@@ -57,7 +57,7 @@ const insertRecord = async (userId: string) => {
   const supabase = createClient();
   const day = getToday();
   const { data, error } = await supabase
-    .from("diary_entry")
+    .from("diary_entries")
     .insert({
       title: `Diary Entry ${day}`,
       // created_at: "2024-04-01T03:00:46+00:00",
@@ -76,7 +76,7 @@ const updateContentField = async (id: number, content: string) => {
   const supabase = browserClient();
 
   const { data, error } = await supabase
-    .from("diary_entry")
+    .from("diary_entries")
     .update({ content: content })
     .eq("id", id)
     .select();

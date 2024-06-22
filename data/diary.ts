@@ -1,3 +1,4 @@
+import { DiaryTypes } from "@/types/diary.types";
 import { getToday } from "@/utils/local-day";
 import { browserClient } from "@/utils/supabase/client";
 import { endOfDay, startOfDay } from "date-fns";
@@ -28,7 +29,7 @@ const insertRecord = async (userId: string) => {
 
   // Check if the user has created an entry today
   const { data: entriesToday, error: entriesError } = await supabase
-    .from("diary_entry")
+    .from("diary_entries")
     .select("*")
     .eq("user_id", userId)
     .gte("created_at", startDate)
@@ -85,7 +86,7 @@ const insertRecord = async (userId: string) => {
 
   // Create the diary entry
   const { data, error } = await supabase
-    .from("diary_entry")
+    .from("diary_entries")
     .insert({
       title: `Diary Entry ${day}`,
       user_id: userId,
@@ -100,5 +101,23 @@ const insertRecord = async (userId: string) => {
   return { data };
 };
 
+// Get single record on client
+const getRecordTitle = async (id: number) => {
+  const supabase = browserClient();
+  const { data, error } = await supabase
+    .from("diary_entries")
+    .select("title")
+    .eq("id", id)
+    .single();
+
+  if (error) {
+    console.log("Error fetching diary record: ", error.message);
+  }
+
+  console.log(data);
+
+  return data;
+};
+
 // Exports
-export { insertRecord };
+export { insertRecord, getRecordTitle };

@@ -22,7 +22,7 @@ export default function Editor({
 
   const updateContentField = (id: number, content: string) => {
     return supabase
-      .from("diary_entry")
+      .from("diary_entries")
       .update({ content: content })
       .eq("id", id)
       .select()
@@ -30,7 +30,6 @@ export default function Editor({
         if (error) {
           console.error("Error updating content:", error);
         } else {
-          console.log("Content updated successfully:", data);
           setCurrentContent(content); // Update the current content after successful save
         }
       });

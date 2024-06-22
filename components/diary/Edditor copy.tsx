@@ -20,7 +20,7 @@ export default function EditorCopy({
 
   const updateContentField = (id: number, content: string) => {
     return supabase
-      .from("diary_entry")
+      .from("diary_entries")
       .update({ content: content })
       .eq("id", id)
       .select()
