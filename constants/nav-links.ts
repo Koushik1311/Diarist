@@ -5,10 +5,10 @@ export const Navlinks = [
   },
   {
     name: "Pricing",
-    link: "/pricing",
+    link: "/pricing/bundle",
   },
   {
-    name: "Fratures",
+    name: "Features",
     link: "/fratures",
   },
   {
