@@ -18,7 +18,10 @@ import { getLocalMonth, getLocalYear } from "@/utils/local-day";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { browserClient } from "@/utils/supabase/client";
-import { RealtimePostgresInsertPayload } from "@supabase/supabase-js";
+import {
+  RealtimePostgresInsertPayload,
+  RealtimePostgresUpdatePayload,
+} from "@supabase/supabase-js";
 
 export default function EntryList() {
   const [year, setYear] = useState<number>();
@@ -35,12 +38,27 @@ export default function EntryList() {
       .on(
         "postgres_changes",
         {
-          event: "INSERT",
+          event: "INSERT" || "UPDATE",
           schema: "public",
-          table: "diary_entry",
+          table: "diary_entries",
         },
         (payload: RealtimePostgresInsertPayload<DiaryTypes>) => {
           setEntryRecords((prevRecords) => [payload.new, ...prevRecords]);
+        }
+      )
+      .on(
+        "postgres_changes",
+        {
+          event: "UPDATE",
+          schema: "public",
+          table: "diary_entries",
+        },
+        (payload: RealtimePostgresUpdatePayload<DiaryTypes>) => {
+          setEntryRecords((prevRecords) =>
+            prevRecords.map((record) =>
+              record.id === payload.new.id ? payload.new : record
+            )
+          );
         }
       )
       .subscribe();
@@ -110,7 +128,7 @@ export default function EntryList() {
         {/* Month & Year */}
         <DropdownMenu>
           <DropdownMenuTrigger className="border-none ring-0 focus:outline-none">
-            <div className="h-8 px-2 rounded-sm transition-colors">
+            <div className="h-8 flex items-center px-2 rounded-sm transition-colors">
               <div className="flex items-center gap-1">
                 <span>
                   {!month ? getMonthName(getLocalMonth()) : getMonthName(month)}

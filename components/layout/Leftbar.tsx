@@ -13,6 +13,7 @@ import {
 import Link from "next/link";
 import EntryList from "./EntryList";
 import { signOut } from "@/actions/auth";
+import { getLocalYear } from "@/utils/local-day";
 
 export default async function Leftbar() {
   const user = await getUser();
@@ -85,7 +86,7 @@ export default async function Leftbar() {
           </AddEntryButton>
         </div>
         <Link
-          href="/diary"
+          href={`/diary/${getLocalYear()}`}
           className="flex items-center gap-2 px-4 h-8 mt-2 hover:bg-zinc-200 rounded-sm"
         >
           <Home className="w-4 h-4" />

@@ -1,31 +1,54 @@
-import { createClient } from "@/utils/supabase/server";
-import { headers } from "next/headers";
-import { redirect } from "next/navigation";
+"use client";
 
-export default function page() {
-  const socialAuthentication = async () => {
-    "use server";
+import { getRecordTitle } from "@/data/diary";
+import { useCookies } from "next-client-cookies";
+import { useState, useEffect } from "react";
 
-    const origin = headers().get("origin");
-    const supabase = createClient();
+export default function Page() {
+  const [userId, setUserId] = useState("");
+  const [userEmail, setUserEmail] = useState("");
 
-    const { error, data } = await supabase.auth.signInWithOAuth({
-      provider: "github",
-      options: {
-        redirectTo: `${origin}/auth/callback`,
-      },
-    });
+  const cookies = useCookies();
+  const authToken = cookies.get();
 
-    if (error) {
-      console.log(error.message);
-    } else {
-      return redirect(data.url);
+  useEffect(() => {
+    if (authToken) {
+      for (const token in authToken) {
+        // Check if cookie value contains 'user'
+        if (authToken[token].includes("user")) {
+          const sbToken = JSON.parse(authToken[token]);
+          if (
+            sbToken &&
+            sbToken.user &&
+            sbToken.user.id &&
+            sbToken.user.email
+          ) {
+            setUserId(sbToken.user.id);
+            setUserEmail(sbToken.user.email);
+          }
+        }
+      }
     }
-  };
+  }, [authToken]);
+
+  useEffect(() => {
+    const fetchTitle = async () => {
+      try {
+        const record = await getRecordTitle(3);
+        console.log(record?.title);
+      } catch (error) {
+        console.error("Error fetching record title:", error);
+      }
+    };
+
+    fetchTitle();
+  });
 
   return (
-    <form action={socialAuthentication}>
-      <button>github</button>
-    </form>
+    <div>
+      <h1>Hello World!</h1>
+      <p>Email: {userEmail}</p>
+      <p>User ID: {userId}</p>
+    </div>
   );
 }

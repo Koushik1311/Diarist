@@ -1,15 +1,17 @@
-import { createClient } from "@/utils/supabase/server";
 import GetStartedBtn from "@/components/global/GetStartedBtn";
 import Image from "next/image";
 import Features from "@/components/home/Features";
 import BundlePricing from "@/components/subscription/BundlePricing";
 import FAQ from "@/components/global/FAQ";
 import { getUser } from "@/data/User";
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
+import { redirect } from "next/navigation";
 
 export default async function Index() {
   const user = await getUser();
+
+  if (user) {
+    redirect("/diary");
+  }
 
   return (
     // <div className="flex-1 w-full flex flex-col gap-20 items-center">
@@ -40,15 +42,8 @@ export default async function Index() {
         </div>
 
         {/* Button */}
-        {user ? (
-          <Link href="/diary">
-            <Button className="mt-6 md:mt-8 flex mx-auto px-7 py-6">
-              My diary
-            </Button>
-          </Link>
-        ) : (
-          <GetStartedBtn className="mt-6 md:mt-8 flex mx-auto px-7 py-6" />
-        )}
+
+        <GetStartedBtn className="mt-6 md:mt-8 flex mx-auto px-7 py-6" />
       </section>
 
       <section className="flex items-center justify-center mt-12">

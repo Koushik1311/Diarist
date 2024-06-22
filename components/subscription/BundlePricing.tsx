@@ -2,14 +2,10 @@ import React from "react";
 import { Check } from "lucide-react";
 import GetStartedBtn from "../global/GetStartedBtn";
 import { cn } from "@/lib/utils";
-import { getUser } from "@/data/User";
-import Link from "next/link";
-import { Button } from "../ui/button";
 import { getLSSingleProduct } from "@/data/lemonsqueezy/getProducts";
 import { notFound } from "next/navigation";
 
 export default async function BundlePricing() {
-  const user = await getUser();
   const get10BundleProduct = await getLSSingleProduct(
     Number(process.env.LEMONSQUEEZY_10ENTRY_PRODUCT_ID)
   );
@@ -97,31 +93,15 @@ export default async function BundlePricing() {
                 <p className="text-4xl font-bold">${bundle.price.toFixed(2)}</p>
               </div>
             </div>
-            {!user ? (
-              <GetStartedBtn
-                className={cn(
-                  "w-full mt-5 px-7 py-4",
-                  index === 1
-                    ? "text-violet-600 hover:text-violet-600"
-                    : "text-white"
-                )}
-                variantName={index === 1 ? "outline" : "default"} // Set variantName based on index
-              />
-            ) : (
-              <Link href={bundle.url!} className="w-full">
-                <Button
-                  className={cn(
-                    "w-full mt-5 px-7 py-4",
-                    index === 1
-                      ? "text-violet-600 hover:text-violet-600"
-                      : "text-white"
-                  )}
-                  variant={index === 1 ? "outline" : "default"}
-                >
-                  Buy now
-                </Button>
-              </Link>
-            )}
+            <GetStartedBtn
+              className={cn(
+                "w-full mt-5 px-7 py-4",
+                index === 1
+                  ? "text-violet-600 hover:text-violet-600"
+                  : "text-white"
+              )}
+              variantName={index === 1 ? "outline" : "default"} // Set variantName based on index
+            />
           </div>
         ))}
       </div>

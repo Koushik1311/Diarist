@@ -23,7 +23,7 @@ export const getAllRecords = async (year?: number, month?: number) => {
   const formattedEndOfMonth = endDate.toISOString();
 
   const { data, error } = await supabase
-    .from("diary_entry")
+    .from("diary_entries")
     .select("*")
     .gte("created_at", formattedStartOfMonth)
     .lte("created_at", formattedEndOfMonth);
