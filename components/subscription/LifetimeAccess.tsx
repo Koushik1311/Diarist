@@ -1,18 +1,12 @@
 import React from "react";
 import { Check } from "lucide-react";
-import Checkout from "./Checkout";
-import { getUser } from "@/data/User";
 import GetStartedBtn from "../global/GetStartedBtn";
-import Link from "next/link";
-import { Button } from "../ui/button";
 import { getLSSingleProduct } from "@/data/lemonsqueezy/getProducts";
 import { notFound } from "next/navigation";
 
 const productId = Number(process.env.LEMONSQUEEZY_LIFETIME_PRODUCT_ID);
 
 export default async function LifetimeAccess() {
-  const user = await getUser();
-
   const lifetimeProduct = await getLSSingleProduct(productId);
 
   const price = {
@@ -55,24 +49,11 @@ export default async function LifetimeAccess() {
             <p className="text-4xl font-bold">{price.amount}</p>
           </div>
         </div>
-        {!user ? (
-          <GetStartedBtn
-            className="w-full mt-5 px-7 py-4 text-violet-600 hover:text-violet-600"
-            variantName="outline"
-          />
-        ) : (
-          <Link
-            href={lifetimeProduct.attributes.buy_now_url}
-            className="w-full"
-          >
-            <Button
-              className="w-full mt-5 px-7 py-4 text-violet-600 hover:text-violet-600"
-              variant="outline"
-            >
-              Buy now
-            </Button>
-          </Link>
-        )}
+
+        <GetStartedBtn
+          className="w-full mt-5 px-7 py-4 text-violet-600 hover:text-violet-600"
+          variantName="outline"
+        />
       </div>
     </section>
   );
