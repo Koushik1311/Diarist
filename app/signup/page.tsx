@@ -97,7 +97,7 @@ export default async function SignUp({
             className="h-9 px-3 text-sm rounded-[6px] border border-slate-200 focus:outline-purple-400"
           />
           <AuthButton
-            className="w-full h-9 rounded-[6px] bg-purple-500 hover:bg-fuchsia-500 transition-all duration-150 text-sm font-semibold text-white mt-6"
+            className="w-full flex items-center justify-center h-9 rounded-[6px] bg-purple-500 hover:bg-fuchsia-500 transition-all duration-150 text-sm font-semibold text-white mt-6"
             formAction={signUp}
             pendingText="Signing Up..."
           >
