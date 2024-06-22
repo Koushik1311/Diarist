@@ -9,7 +9,7 @@ export const Navlinks = [
   },
   {
     name: "Features",
-    link: "/fratures",
+    link: "/features",
   },
   {
     name: "Contact",
