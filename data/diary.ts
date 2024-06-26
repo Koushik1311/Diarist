@@ -119,5 +119,23 @@ const getRecordTitle = async (id: number) => {
   return data;
 };
 
+const setIsLocked = (id: number, isLocked: boolean) => {
+  const supabase = browserClient();
+  console.log("clicked");
+  supabase
+    .from("diary_entries")
+    .update({
+      is_locked: isLocked,
+    })
+    .eq("id", id)
+    .select()
+    .then(({ data, error }) => {
+      if (error) {
+        console.error("Error updating content:", error.message);
+      } else {
+      }
+    });
+};
+
 // Exports
-export { insertRecord, getRecordTitle };
+export { insertRecord, getRecordTitle, setIsLocked };
