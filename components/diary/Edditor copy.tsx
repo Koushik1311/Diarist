@@ -3,20 +3,26 @@
 import Placeholder from "@tiptap/extension-placeholder";
 import { BubbleMenu, EditorContent, Extension, useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
-import { Bold, Italic, List } from "lucide-react";
+import { Bold, Italic, List, Save } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import { debounce } from "lodash";
 import { browserClient } from "@/utils/supabase/client";
+import { motion } from "framer-motion";
+import { RealtimePostgresUpdatePayload } from "@supabase/supabase-js";
+import { useAppSelector } from "@/redux/store";
 
-export default function EditorCopy({
-  id,
-  content,
-}: {
+type Props = {
   id: number;
   content: string;
-}) {
+  locked: boolean;
+};
+
+export default function EditorCopy({ id, content, locked }: Props) {
   const supabase = browserClient();
   const [currentContent, setCurrentContent] = useState(content);
+  const lockedState = useAppSelector(
+    (state) => state.lockedPageReducer.is_locked
+  );
 
   const updateContentField = (id: number, content: string) => {
     return supabase
@@ -28,20 +34,10 @@ export default function EditorCopy({
         if (error) {
           console.error("Error updating content:", error);
         } else {
-          console.log("Content updated successfully:", data);
           setCurrentContent(content); // Update the current content after successful save
         }
       });
   };
-
-  // const debouncedUpdate = debounce((content: string) => {
-  //   if (editor) {
-  //     const newContent = editor.getHTML();
-  //     if (newContent !== currentContent) {
-  //       updateContentField(id, content);
-  //     }
-  //   }
-  // }, 300000);
 
   const CustomTabExtension = Extension.create({
     addKeyboardShortcuts() {
@@ -71,13 +67,18 @@ export default function EditorCopy({
       },
     },
     content: currentContent,
-    // onUpdate: ({ editor }) => {
-    //   debouncedUpdate(editor.getHTML());
-    // },
   });
 
   useEffect(() => {
-    const handleMouseMove = debounce(() => {
+    if (lockedState) {
+      editor?.setOptions({ editable: false });
+    } else {
+      editor?.setOptions({ editable: true });
+    }
+  }, [editor, lockedState]);
+
+  useEffect(() => {
+    const handleContentUpdate = debounce(() => {
       if (editor) {
         const newContent = editor.getHTML();
         if (newContent !== currentContent) {
@@ -86,23 +87,17 @@ export default function EditorCopy({
       }
     }, 1000);
 
-    window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("mousemove", handleContentUpdate);
 
     return () => {
-      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("mousemove", handleContentUpdate);
     };
   }, [editor, currentContent]);
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (editor) {
-      const currentContent = editor.getHTML();
-      updateContentField(id, currentContent);
-    }
-  };
+  const newContent = editor?.getHTML();
 
   return (
-    <form onSubmit={handleSubmit}>
+    <>
       {editor && (
         <BubbleMenu editor={editor} tippyOptions={{ duration: 100 }}>
           <button
@@ -136,12 +131,21 @@ export default function EditorCopy({
         </BubbleMenu>
       )}
       <EditorContent editor={editor} className="flex-1 w-full" />
-      <button
-        type="submit"
-        className="mt-4 px-4 py-2 bg-blue-500 text-white rounded"
+
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{
+          opacity: newContent !== currentContent ? 1 : 0,
+          transition: { duration: 0.9 },
+        }}
+        style={{
+          cursor: newContent !== currentContent ? "pointer" : "none",
+          zIndex: newContent !== currentContent ? 1 : -5,
+        }}
+        className="fixed bottom-5 right-7 md:bottom-12 md:right-16 w-14 h-14 bg-zinc-200 hover:bg-zinc-300 transition-colors flex items-center justify-center rounded-full"
       >
-        Save
-      </button>
-    </form>
+        <Save className="text-zinc-800" />
+      </motion.div>
+    </>
   );
 }
