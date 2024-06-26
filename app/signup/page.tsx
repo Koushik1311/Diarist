@@ -51,7 +51,7 @@ export default async function SignUp({
       <div className="w-[320px] mt-24">
         <p className="text-xl font-semibold mb-6 flex flex-col">
           <span className="text-slate-700">Make it. Write it.</span>
-          <span className="text-purple-400">Create your Diarist account</span>
+          <span className="text-violet-500">Create your Diarist account</span>
         </p>
 
         <SocialAuthentication />
@@ -68,7 +68,7 @@ export default async function SignUp({
             name="display_name"
             placeholder="Enter your full name"
             required
-            className="h-9 px-3 text-sm rounded-[6px] border border-slate-200 focus:outline-purple-400"
+            className="h-9 px-3 text-sm rounded-[6px] border border-slate-200 focus:outline-violet-400"
           />
           <label
             htmlFor="email"
@@ -81,7 +81,7 @@ export default async function SignUp({
             name="email"
             placeholder="Enter your email id"
             required
-            className="h-9 px-3 text-sm rounded-[6px] border border-slate-200 focus:outline-purple-400"
+            className="h-9 px-3 text-sm rounded-[6px] border border-slate-200 focus:outline-violet-400"
           />
           <label
             htmlFor="password"
@@ -94,10 +94,10 @@ export default async function SignUp({
             name="password"
             placeholder="Enter your password"
             required
-            className="h-9 px-3 text-sm rounded-[6px] border border-slate-200 focus:outline-purple-400"
+            className="h-9 px-3 text-sm rounded-[6px] border border-slate-200 focus:outline-violet-400"
           />
           <AuthButton
-            className="w-full flex items-center justify-center h-9 rounded-[6px] bg-purple-500 hover:bg-fuchsia-500 transition-all duration-150 text-sm font-semibold text-white mt-6"
+            className="w-full flex items-center justify-center h-9 rounded-[6px] bg-violet-600 hover:bg-violet-500 transition-all duration-150 text-sm font-semibold text-white mt-6"
             formAction={signUp}
             pendingText="Signing Up..."
           >
@@ -105,9 +105,19 @@ export default async function SignUp({
           </AuthButton>
         </form>
 
+        {searchParams.message === "Could not authenticate user" ? (
+          <p className="text-xs text-center font-medium mt-5 text-red-500">
+            {searchParams.message}
+          </p>
+        ) : (
+          <p className="text-xs text-center font-medium mt-5 text-green-500">
+            {searchParams.message}
+          </p>
+        )}
+
         <p className="text-xs text-center mt-6">
           Already have an Account?{" "}
-          <Link href="/login" className="text-purple-400 font-medium">
+          <Link href="/login" className="text-violet-400 font-medium">
             Log In Now
           </Link>
         </p>
@@ -116,14 +126,14 @@ export default async function SignUp({
           By continuing, you acknowledge that you understand and agree to the{" "}
           <Link
             href="/terms&conditions"
-            className="text-purple-400 font-medium"
+            className="text-violet-400 font-medium"
           >
             Terms & Conditions
           </Link>{" "}
           and{" "}
           <Link
             href="/terms&conditions"
-            className="text-purple-400 font-medium"
+            className="text-violet-400 font-medium"
           >
             Privacy Policy
           </Link>
