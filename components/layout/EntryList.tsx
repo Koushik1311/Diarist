@@ -38,7 +38,7 @@ export default function EntryList() {
       .on(
         "postgres_changes",
         {
-          event: "INSERT" || "UPDATE",
+          event: "INSERT",
           schema: "public",
           table: "diary_entries",
         },
