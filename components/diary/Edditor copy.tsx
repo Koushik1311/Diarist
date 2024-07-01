@@ -8,7 +8,6 @@ import React, { useEffect, useState } from "react";
 import { debounce } from "lodash";
 import { browserClient } from "@/utils/supabase/client";
 import { motion } from "framer-motion";
-import { RealtimePostgresUpdatePayload } from "@supabase/supabase-js";
 import { useAppSelector } from "@/redux/store";
 
 type Props = {
