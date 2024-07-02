@@ -11,8 +11,6 @@ export async function getCheckoutURL(variantId: number, embed = true) {
     throw new Error("User is not authenticated.");
   }
 
-  console.log("Product Id: ", variantId);
-
   const checkout = await createCheckout(
     process.env.LEMONSQUEEZY_STORE_ID!,
     variantId,
@@ -34,14 +32,14 @@ export async function getCheckoutURL(variantId: number, embed = true) {
       },
       productOptions: {
         enabledVariants: [variantId],
-        redirectUrl: `${process.env.NEXT_PUBLIC_APP_URL}/billing/`,
+        redirectUrl: `${process.env.NEXT_PUBLIC_APP_URL}/diary`,
         // receiptButtonText: "Go to Dashboard",
         // receiptThankYouNote: "Thank you for signing up to Lemon Stand!",
       },
     }
   );
 
-  console.log(checkout.data?.data);
+  // console.log(checkout.data?.data.attributes.url);
 
-  //   return checkout.data?.data.attributes.url;
+  return checkout.data?.data.attributes.url;
 }
