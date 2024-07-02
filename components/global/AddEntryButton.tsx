@@ -2,6 +2,7 @@
 
 import { insertRecord } from "@/data/diary";
 import { getLocalYear } from "@/utils/local-day";
+import { revalidatePath } from "next/cache";
 import { useRouter } from "next/navigation";
 import React from "react";
 import { Toaster, toast } from "sonner";

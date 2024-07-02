@@ -24,7 +24,8 @@ export default function Login({
     });
 
     if (error) {
-      return redirect("/login?message=Could not authenticate user");
+      // return redirect("/login?message=Could not authenticate user");
+      return redirect(`/login?message=${error.message}`);
     }
 
     return redirect("/diary");
@@ -42,7 +43,7 @@ export default function Login({
       <div className="w-[320px] mt-24">
         <p className="text-xl font-semibold mb-6 flex flex-col">
           <span className="text-slate-700">Make it. Write it.</span>
-          <span className="text-purple-400">
+          <span className="text-violet-500">
             Log in to your Diarist account
           </span>
         </p>
@@ -60,7 +61,7 @@ export default function Login({
             name="email"
             placeholder="Enter your email id"
             required
-            className="h-9 px-3 text-sm rounded-[6px] border border-slate-200 focus:outline-purple-400"
+            className="h-9 px-3 text-sm rounded-[6px] border border-slate-200 focus:outline-violet-400"
           />
           <label
             htmlFor="password"
@@ -73,10 +74,10 @@ export default function Login({
             name="password"
             placeholder="Enter your password"
             required
-            className="h-9 px-3 text-sm rounded-[6px] border border-slate-200 focus:outline-purple-400"
+            className="h-9 px-3 text-sm rounded-[6px] border border-slate-200 focus:outline-violet-400"
           />
           <AuthButton
-            className="w-full flex items-center justify-center h-9 rounded-[6px] bg-purple-500 hover:bg-fuchsia-500 transition-all duration-150 text-sm font-semibold text-white mt-6"
+            className="w-full flex items-center justify-center h-9 rounded-[6px] bg-violet-600 hover:bg-violet-500 transition-all duration-150 text-sm font-semibold text-white mt-6"
             formAction={signIn}
             pendingText="Signing Up..."
           >
@@ -84,9 +85,15 @@ export default function Login({
           </AuthButton>
         </form>
 
+        {searchParams && (
+          <p className="text-xs text-center font-medium mt-5 text-red-500">
+            {searchParams.message}
+          </p>
+        )}
+
         <p className="text-xs text-center mt-6">
           Don&apos;t have an Account?{" "}
-          <Link href="/signup" className="text-purple-400 font-medium">
+          <Link href="/signup" className="text-violet-400 font-medium">
             Sign Up Now
           </Link>
         </p>
@@ -95,14 +102,14 @@ export default function Login({
           By continuing, you acknowledge that you understand and agree to the{" "}
           <Link
             href="/terms&conditions"
-            className="text-purple-400 font-medium"
+            className="text-violet-400 font-medium"
           >
             Terms & Conditions
           </Link>{" "}
           and{" "}
           <Link
             href="/terms&conditions"
-            className="text-purple-400 font-medium"
+            className="text-violet-400 font-medium"
           >
             Privacy Policy
           </Link>

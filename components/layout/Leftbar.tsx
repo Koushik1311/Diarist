@@ -63,10 +63,12 @@ export default async function Leftbar() {
               <DropdownMenuSeparator />
               <DropdownMenuSeparator />
               <form action={signOut}>
-                <DropdownMenuItem className="cursor-pointer flex items-center gap-2 w-full">
-                  <CreditCard className="w-4 h-4 text-zinc-700" />
-                  <span>Purchase entry</span>
-                </DropdownMenuItem>
+                <Link href="/pricing/bundle">
+                  <DropdownMenuItem className="cursor-pointer flex items-center gap-2 w-full">
+                    <CreditCard className="w-4 h-4 text-zinc-700" />
+                    <span>Purchase entry</span>
+                  </DropdownMenuItem>
+                </Link>
                 <button className="w-full cursor-pointer">
                   <DropdownMenuItem className="cursor-pointer flex items-center gap-2 w-full">
                     <LogOut className="w-4 h-4 text-zinc-700" />
