@@ -1,0 +1,23 @@
+export type TransactionTypes = {
+  order_id: string;
+  order_number: string;
+  status: string;
+  created_at: string;
+  updated_at: string;
+  user_name: string;
+  user_email: string;
+  total: number;
+  subtotal: number;
+  currency: string;
+  tax: number;
+  tax_formatted: string;
+  discount_total: number;
+  total_formatted: string;
+  subtotal_formatted: string;
+  tax_usd: number;
+  total_usd: number;
+  subtotal_usd: number;
+  product_name: string;
+  price: number;
+  receipt_url: string;
+};

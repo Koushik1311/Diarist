@@ -5,16 +5,19 @@ import { getLSSingleProduct } from "@/data/lemonsqueezy/getProducts";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { Button } from "../ui/button";
+import { getCheckoutURL } from "@/actions/lsCheckout";
 
 const productId = Number(process.env.LEMONSQUEEZY_LIFETIME_PRODUCT_ID);
+const varientId = Number(process.env.LEMONSQUEEZY_LIFETIME_VARIENT_ID);
 
 export default async function LifetimeAccess({ isUser }: { isUser: boolean }) {
   const lifetimeProduct = await getLSSingleProduct(productId);
+  const url = await getCheckoutURL(varientId);
 
   const lifetime = {
     title: "Lifetime Access",
     price: 49,
-    url: lifetimeProduct?.attributes.buy_now_url || "#",
+    url: url || "#",
     benefits: [
       "Access from anywhere",
       "Track your daily activity",

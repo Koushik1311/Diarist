@@ -7,18 +7,21 @@ import { Bold, Italic, List, Save } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import { debounce } from "lodash";
 import { browserClient } from "@/utils/supabase/client";
-import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
+import { useAppSelector } from "@/redux/store";
 
-export default function Editor({
-  id,
-  content,
-}: {
+type Props = {
   id: number;
   content: string;
-}) {
+  locked: boolean;
+};
+
+export default function Editor({ id, content, locked }: Props) {
   const supabase = browserClient();
   const [currentContent, setCurrentContent] = useState(content);
+  const lockedState = useAppSelector(
+    (state) => state.lockedPageReducer.is_locked
+  );
 
   const updateContentField = (id: number, content: string) => {
     return supabase
@@ -34,15 +37,6 @@ export default function Editor({
         }
       });
   };
-
-  // debounce((content: string) => {
-  //   if (editor) {
-  //     const newContent = editor.getHTML();
-  //     if (newContent !== currentContent) {
-  //       updateContentField(id, content);
-  //     }
-  //   }
-  // }, 20000);
 
   const CustomTabExtension = Extension.create({
     addKeyboardShortcuts() {
@@ -72,13 +66,18 @@ export default function Editor({
       },
     },
     content: currentContent,
-    // onUpdate: ({ editor }) => {
-    //   debouncedUpdate(editor.getHTML());
-    // },
   });
 
   useEffect(() => {
-    const handleMouseMove = debounce(() => {
+    if (lockedState) {
+      editor?.setOptions({ editable: false });
+    } else {
+      editor?.setOptions({ editable: true });
+    }
+  }, [editor, lockedState]);
+
+  useEffect(() => {
+    const handleContentUpdate = debounce(() => {
       if (editor) {
         const newContent = editor.getHTML();
         if (newContent !== currentContent) {
@@ -87,10 +86,10 @@ export default function Editor({
       }
     }, 1000);
 
-    window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("mousemove", handleContentUpdate);
 
     return () => {
-      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("mousemove", handleContentUpdate);
     };
   }, [editor, currentContent]);
 
