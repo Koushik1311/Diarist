@@ -6,6 +6,7 @@ import { getLSSingleProduct } from "@/data/lemonsqueezy/getProducts";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { Button } from "../ui/button";
+import { getCheckoutURL } from "@/actions/lsCheckout";
 
 export default async function BundlePricing({ isUser }: { isUser?: boolean }) {
   const get10BundleProduct = await getLSSingleProduct(
@@ -18,11 +19,21 @@ export default async function BundlePricing({ isUser }: { isUser?: boolean }) {
     Number(process.env.LEMONSQUEEZY_50ENTRY_PRODUCT_ID)
   );
 
+  const urlEntry10 = await getCheckoutURL(
+    Number(process.env.LEMONSQUEEZY_10ENTRY_VARIENT_ID)
+  );
+  const urlEntry25 = await getCheckoutURL(
+    Number(process.env.LEMONSQUEEZY_25ENTRY_VARIENT_ID)
+  );
+  const urlEntry50 = await getCheckoutURL(
+    Number(process.env.LEMONSQUEEZY_50ENTRY_VARIENT_ID)
+  );
+
   const bundles = [
     {
       entries: 10,
       amount: get10BundleProduct?.attributes.price_formatted,
-      url: get10BundleProduct?.attributes.buy_now_url || "#",
+      url: urlEntry10 || "#",
       benefits: [
         "Get 10 entries",
         "Track daily activities",
@@ -32,7 +43,7 @@ export default async function BundlePricing({ isUser }: { isUser?: boolean }) {
     {
       entries: 25,
       amount: get25BundleProduct?.attributes.price_formatted,
-      url: get25BundleProduct?.attributes.buy_now_url || "#",
+      url: urlEntry25 || "#",
       benefits: [
         "Get 25 entries",
         "Track daily activities",
@@ -42,7 +53,7 @@ export default async function BundlePricing({ isUser }: { isUser?: boolean }) {
     {
       entries: 50,
       amount: get50BundleProduct?.attributes.price_formatted,
-      url: get50BundleProduct?.attributes.buy_now_url || "#",
+      url: urlEntry50 || "#",
       benefits: [
         "Get 50 entries",
         "Track daily activities",
