@@ -8,7 +8,7 @@ export async function getCheckoutURL(variantId: number, embed = true) {
   const user = await getUser();
 
   if (!user) {
-    throw new Error("User is not authenticated.");
+    return "";
   }
 
   const checkout = await createCheckout(
