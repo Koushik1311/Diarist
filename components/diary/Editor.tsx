@@ -8,20 +8,15 @@ import React, { useEffect, useState } from "react";
 import { debounce } from "lodash";
 import { browserClient } from "@/utils/supabase/client";
 import { motion } from "framer-motion";
-import { useAppSelector } from "@/redux/store";
 
 type Props = {
   id: number;
   content: string;
-  locked: boolean;
 };
 
-export default function Editor({ id, content, locked }: Props) {
+export default function Editor({ id, content }: Props) {
   const supabase = browserClient();
   const [currentContent, setCurrentContent] = useState(content);
-  const lockedState = useAppSelector(
-    (state) => state.lockedPageReducer.is_locked
-  );
 
   const updateContentField = (id: number, content: string) => {
     return supabase
@@ -68,13 +63,13 @@ export default function Editor({ id, content, locked }: Props) {
     content: currentContent,
   });
 
-  useEffect(() => {
-    if (lockedState) {
-      editor?.setOptions({ editable: false });
-    } else {
-      editor?.setOptions({ editable: true });
-    }
-  }, [editor, lockedState]);
+  // useEffect(() => {
+  //   if (lockedState) {
+  //     editor?.setOptions({ editable: false, });
+  //   } else {
+  //     editor?.setOptions({ editable: true });
+  //   }
+  // }, [editor, lockedState]);
 
   useEffect(() => {
     const handleContentUpdate = debounce(() => {
