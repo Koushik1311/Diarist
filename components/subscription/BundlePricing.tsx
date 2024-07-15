@@ -9,15 +9,15 @@ import { Button } from "../ui/button";
 import { getCheckoutURL } from "@/actions/lsCheckout";
 
 export default async function BundlePricing({ isUser }: { isUser?: boolean }) {
-  // const urlEntry10 = await getCheckoutURL(
-  //   Number(process.env.LEMONSQUEEZY_10ENTRY_VARIENT_ID)
-  // );
-  // const urlEntry25 = await getCheckoutURL(
-  //   Number(process.env.LEMONSQUEEZY_25ENTRY_VARIENT_ID)
-  // );
-  // const urlEntry50 = await getCheckoutURL(
-  //   Number(process.env.LEMONSQUEEZY_50ENTRY_VARIENT_ID)
-  // );
+  const urlEntry10 = await getCheckoutURL(
+    Number(process.env.LEMONSQUEEZY_10ENTRY_VARIENT_ID)
+  );
+  const urlEntry25 = await getCheckoutURL(
+    Number(process.env.LEMONSQUEEZY_25ENTRY_VARIENT_ID)
+  );
+  const urlEntry50 = await getCheckoutURL(
+    Number(process.env.LEMONSQUEEZY_50ENTRY_VARIENT_ID)
+  );
 
   const bundles = [
     {
