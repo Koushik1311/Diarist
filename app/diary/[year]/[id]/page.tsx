@@ -43,7 +43,7 @@ export default async function DiaryPage({
           {/* <TagsInput /> */}
           {/* <CategoryInput id={id} /> */}
           {/* <Edditor id={id} content={record.content} /> */}
-          <Editor id={id} content={record.content} locked={record.is_locked} />
+          <Editor id={id} content={record.content} />
           {/* <EditorCopy
             id={id}
             content={record.content}
