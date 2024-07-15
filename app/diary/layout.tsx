@@ -9,10 +9,13 @@ export default async function DiaryRootLayout({
   children: React.ReactNode;
 }) {
   const user = await getUser();
+  if (!user) {
+    return redirect("/login");
+  }
   const subscriptionData = await getSubscription(user?.id!);
 
   if (!subscriptionData) {
-    redirect("/onboarding");
+    return redirect("/onboarding");
   }
 
   return <>{children}</>;

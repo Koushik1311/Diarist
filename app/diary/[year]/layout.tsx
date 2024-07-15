@@ -18,7 +18,7 @@ export default async function DiaryLayout({
 }) {
   const user = await getUser();
   if (!user) {
-    redirect("/login");
+    return redirect("/login");
   }
 
   return (
