@@ -9,21 +9,22 @@ import { Button } from "../ui/button";
 import { getCheckoutURL } from "@/actions/lsCheckout";
 
 export default async function BundlePricing({ isUser }: { isUser?: boolean }) {
-  const urlEntry10 = await getCheckoutURL(
-    Number(process.env.LEMONSQUEEZY_10ENTRY_VARIENT_ID)
-  );
-  const urlEntry25 = await getCheckoutURL(
-    Number(process.env.LEMONSQUEEZY_25ENTRY_VARIENT_ID)
-  );
-  const urlEntry50 = await getCheckoutURL(
-    Number(process.env.LEMONSQUEEZY_50ENTRY_VARIENT_ID)
-  );
+  // const urlEntry10 = await getCheckoutURL(
+  //   Number(process.env.LEMONSQUEEZY_10ENTRY_VARIENT_ID)
+  // );
+  // const urlEntry25 = await getCheckoutURL(
+  //   Number(process.env.LEMONSQUEEZY_25ENTRY_VARIENT_ID)
+  // );
+  // const urlEntry50 = await getCheckoutURL(
+  //   Number(process.env.LEMONSQUEEZY_50ENTRY_VARIENT_ID)
+  // );
 
   const bundles = [
     {
       entries: 10,
       amount: "$0.50",
-      url: urlEntry10 || "#",
+      // url: urlEntry10 || "#",
+      url: "#",
       benefits: [
         "Get 10 entries",
         "Track daily activities",
@@ -33,7 +34,8 @@ export default async function BundlePricing({ isUser }: { isUser?: boolean }) {
     {
       entries: 25,
       amount: "$1.20",
-      url: urlEntry25 || "#",
+      // url: urlEntry25 || "#",
+      url: "#",
       benefits: [
         "Get 25 entries",
         "Track daily activities",
@@ -43,7 +45,8 @@ export default async function BundlePricing({ isUser }: { isUser?: boolean }) {
     {
       entries: 50,
       amount: "$2.40",
-      url: urlEntry50 || "#",
+      // url: urlEntry50 || "#",
+      url: "#",
       benefits: [
         "Get 50 entries",
         "Track daily activities",
