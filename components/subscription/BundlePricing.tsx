@@ -23,8 +23,7 @@ export default async function BundlePricing({ isUser }: { isUser?: boolean }) {
     {
       entries: 10,
       amount: "$0.50",
-      // url: urlEntry10 || "#",
-      url: "#",
+      url: urlEntry10 || "#",
       benefits: [
         "Get 10 entries",
         "Track daily activities",
@@ -34,8 +33,7 @@ export default async function BundlePricing({ isUser }: { isUser?: boolean }) {
     {
       entries: 25,
       amount: "$1.20",
-      // url: urlEntry25 || "#",
-      url: "#",
+      url: urlEntry25 || "#",
       benefits: [
         "Get 25 entries",
         "Track daily activities",
@@ -45,8 +43,7 @@ export default async function BundlePricing({ isUser }: { isUser?: boolean }) {
     {
       entries: 50,
       amount: "$2.40",
-      // url: urlEntry50 || "#",
-      url: "#",
+      url: urlEntry50 || "#",
       benefits: [
         "Get 50 entries",
         "Track daily activities",

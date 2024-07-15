@@ -39,7 +39,7 @@ export async function getCheckoutURL(variantId: number, embed = true) {
     }
   );
 
-  console.log(checkout.data?.data.attributes.url);
+  // console.log(checkout.data?.data.attributes.url);
 
-  // return checkout.data?.data.attributes.url;
+  return checkout.data?.data.attributes.url;
 }

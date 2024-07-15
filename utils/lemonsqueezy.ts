@@ -21,8 +21,7 @@ export function configureLemonSqueezy() {
     apiKey: process.env.LEMONSQUEEZY_API_KEY,
     onError: (error) => {
       console.error(`Lemon Squeezy API error: ${error.message}`);
-      console.error(`Lemon Squeezy API error: ${error}`);
-      //   throw new Error(`Lemon Squeezy API error: ${error.message}`);
+      throw new Error(`Lemon Squeezy API error: ${error.message}`);
     },
   });
 }
