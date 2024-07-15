@@ -20,15 +20,11 @@ export default async function DiaryLayout({
   if (!user) {
     redirect("/login");
   }
-  const first_letter =
-    user?.user_metadata.display_name?.charAt(0) ??
-    user?.user_metadata.full_name?.charAt(0) ??
-    "";
 
   return (
     <main className="flex">
       <div className="absolute top-0 left-0 lg:hidden">
-        <SmallDeviceLeftBar user={user} firstLetter={first_letter} />
+        <SmallDeviceLeftBar user={user} />
       </div>
       <div className="hidden lg:block">
         <Leftbar />
