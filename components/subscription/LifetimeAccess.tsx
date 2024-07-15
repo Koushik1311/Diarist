@@ -11,12 +11,10 @@ const productId = Number(process.env.LEMONSQUEEZY_LIFETIME_PRODUCT_ID);
 const varientId = Number(process.env.LEMONSQUEEZY_LIFETIME_VARIENT_ID);
 
 export default async function LifetimeAccess({ isUser }: { isUser: boolean }) {
-  const lifetimeProduct = await getLSSingleProduct(productId);
   const url = await getCheckoutURL(varientId);
 
   const lifetime = {
     title: "Lifetime Access",
-    price: 49,
     url: url || "#",
     benefits: [
       "Access from anywhere",
@@ -25,13 +23,9 @@ export default async function LifetimeAccess({ isUser }: { isUser: boolean }) {
       "Single diary entry everyday",
       "Update your entry on the go",
     ],
-    amount: lifetimeProduct?.attributes.price_formatted,
+    amount: "$49",
     priceId: "price_1PLIILSFtb4t8pCU8nnVHMqD",
   };
-
-  if (!lifetimeProduct) {
-    return notFound();
-  }
 
   return (
     <section className="flex flex-col items-center mt-24">
