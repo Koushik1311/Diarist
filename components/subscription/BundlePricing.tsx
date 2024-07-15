@@ -9,16 +9,6 @@ import { Button } from "../ui/button";
 import { getCheckoutURL } from "@/actions/lsCheckout";
 
 export default async function BundlePricing({ isUser }: { isUser?: boolean }) {
-  const get10BundleProduct = await getLSSingleProduct(
-    Number(process.env.LEMONSQUEEZY_10ENTRY_PRODUCT_ID)
-  );
-  const get25BundleProduct = await getLSSingleProduct(
-    Number(process.env.LEMONSQUEEZY_25ENTRY_PRODUCT_ID)
-  );
-  const get50BundleProduct = await getLSSingleProduct(
-    Number(process.env.LEMONSQUEEZY_50ENTRY_PRODUCT_ID)
-  );
-
   const urlEntry10 = await getCheckoutURL(
     Number(process.env.LEMONSQUEEZY_10ENTRY_VARIENT_ID)
   );
@@ -32,7 +22,7 @@ export default async function BundlePricing({ isUser }: { isUser?: boolean }) {
   const bundles = [
     {
       entries: 10,
-      amount: get10BundleProduct?.attributes.price_formatted || "$0.50",
+      amount: "$0.50",
       url: urlEntry10 || "#",
       benefits: [
         "Get 10 entries",
@@ -42,7 +32,7 @@ export default async function BundlePricing({ isUser }: { isUser?: boolean }) {
     },
     {
       entries: 25,
-      amount: get25BundleProduct?.attributes.price_formatted || "$1.20",
+      amount: "$1.20",
       url: urlEntry25 || "#",
       benefits: [
         "Get 25 entries",
@@ -52,7 +42,7 @@ export default async function BundlePricing({ isUser }: { isUser?: boolean }) {
     },
     {
       entries: 50,
-      amount: get50BundleProduct?.attributes.price_formatted || "$2.40",
+      amount: "$2.40",
       url: urlEntry50 || "#",
       benefits: [
         "Get 50 entries",
