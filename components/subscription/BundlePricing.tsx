@@ -32,7 +32,7 @@ export default async function BundlePricing({ isUser }: { isUser?: boolean }) {
   const bundles = [
     {
       entries: 10,
-      amount: get10BundleProduct?.attributes.price_formatted,
+      amount: get10BundleProduct?.attributes.price_formatted || "$0.50",
       url: urlEntry10 || "#",
       benefits: [
         "Get 10 entries",
@@ -42,7 +42,7 @@ export default async function BundlePricing({ isUser }: { isUser?: boolean }) {
     },
     {
       entries: 25,
-      amount: get25BundleProduct?.attributes.price_formatted,
+      amount: get25BundleProduct?.attributes.price_formatted || "$1.20",
       url: urlEntry25 || "#",
       benefits: [
         "Get 25 entries",
@@ -52,7 +52,7 @@ export default async function BundlePricing({ isUser }: { isUser?: boolean }) {
     },
     {
       entries: 50,
-      amount: get50BundleProduct?.attributes.price_formatted,
+      amount: get50BundleProduct?.attributes.price_formatted || "$2.40",
       url: urlEntry50 || "#",
       benefits: [
         "Get 50 entries",
@@ -61,10 +61,6 @@ export default async function BundlePricing({ isUser }: { isUser?: boolean }) {
       ],
     },
   ];
-
-  if (!get10BundleProduct && !get25BundleProduct && !get50BundleProduct) {
-    return notFound();
-  }
 
   return (
     <div className="flex flex-col items-center">
