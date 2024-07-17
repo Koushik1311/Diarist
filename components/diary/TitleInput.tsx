@@ -7,7 +7,6 @@ import {
   DropdownMenuTrigger,
 } from "@radix-ui/react-dropdown-menu";
 import { browserClient } from "@/utils/supabase/client";
-import { HardDriveUpload } from "lucide-react";
 
 export default function TitleInput({
   id,
@@ -17,6 +16,7 @@ export default function TitleInput({
   title: string;
 }) {
   const [inputTitle, setInputTitle] = useState(title);
+  const [checkTitle, setCheckTitle] = useState(title);
   const inputRef = useRef<HTMLInputElement>(null);
 
   const supabase = browserClient();
@@ -31,10 +31,15 @@ export default function TitleInput({
       .from("diary_entries")
       .update({ title: inputTitle })
       .eq("id", id)
-      .select();
+      .select()
+      .single();
 
     if (error) {
       console.error("Error updating content:", error);
+    }
+
+    if (data) {
+      setCheckTitle(data?.title);
     }
   };
 
@@ -46,7 +51,7 @@ export default function TitleInput({
 
   useEffect(() => {
     const handleClickOutside = () => {
-      if (!inputRef.current) {
+      if (!inputRef.current && inputTitle !== checkTitle) {
         handleSave();
       }
     };
@@ -55,12 +60,12 @@ export default function TitleInput({
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [inputRef, inputTitle, id]);
+  }, [inputRef, inputTitle, checkTitle, id]);
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger className="relative border-none ring-0 focus:outline-none px-2 rounded-sm hover:bg-zinc-200">
-        {inputTitle}
+      <DropdownMenuTrigger className="relative border-none ring-0 focus:outline-none px-2 rounded-sm hover:bg-zinc-200 text-left">
+        <p className="text-wrap">{inputTitle}</p>
       </DropdownMenuTrigger>
       <DropdownMenuContent
         align="start"
@@ -74,12 +79,6 @@ export default function TitleInput({
             // onKeyDown={handleKeyDown}
             className="h-9 px-3 text-sm rounded-[6px] border border-zinc-300 focus:outline-none w-full"
           />
-          {/* <button
-            onClick={handleSave}
-            className="mt-2 bg-zinc-300 w-12 h-12 rounded-full flex items-center justify-center"
-          >
-            <HardDriveUpload />
-          </button> */}
         </>
       </DropdownMenuContent>
     </DropdownMenu>

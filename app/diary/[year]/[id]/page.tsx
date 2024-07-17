@@ -6,6 +6,7 @@ import { getSingleRecord } from "@/data/action/diary_entry";
 import { getDay, getWeekday } from "@/utils/local-date-&-time";
 import TitleInput from "@/components/diary/TitleInput";
 import { NotebookPen } from "lucide-react";
+import OptionBtn from "@/components/diary/OptionBtn";
 
 const dancing_script = Dancing_Script({ subsets: ["latin"] });
 
@@ -18,12 +19,15 @@ export default async function DiaryPage({
 
   return (
     <div className="flex flex-col h-screen">
-      <div>
-        <div className="flex justify-between w-full px-3 md:px-6 py-2">
-          <div className="text-base font-normal flex items-center">
-            <NotebookPen className={`w-4 h-4`} />
-            <TitleInput id={id} title={record.title} />
+      <div className="flex justify-between pl-10 md:px-6 py-2">
+        <div className="flex items-start">
+          <div className="w-4 h-4">
+            <NotebookPen className="w-4 h-4 mr-1 mt-1" />
           </div>
+          <TitleInput id={id} title={record.title} />
+        </div>
+        <div className="">
+          <OptionBtn />
         </div>
       </div>
 
@@ -40,15 +44,7 @@ export default async function DiaryPage({
           </div>
           <div className="border-b border-zinc-200 mt-3" />
 
-          {/* <TagsInput /> */}
-          {/* <CategoryInput id={id} /> */}
-          {/* <Edditor id={id} content={record.content} /> */}
           <Editor id={id} content={record.content} />
-          {/* <EditorCopy
-            id={id}
-            content={record.content}
-            locked={record.is_locked}
-          /> */}
         </div>
       </div>
     </div>

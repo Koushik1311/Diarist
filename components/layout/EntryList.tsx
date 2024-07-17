@@ -99,27 +99,6 @@ export default function EntryList() {
     return month ? month.name : "";
   };
 
-  const colorClasses = [
-    "text-emerald-400",
-    "text-teal-400",
-    "text-cyan-400",
-    "text-indigo-400",
-    "text-violet-400",
-    "text-purple-400",
-    "text-fuchsia-400",
-    "text-pink-400",
-    "text-rose-400",
-    "text-rose-600",
-    "text-pink-600",
-    "text-fuchsia-600",
-    "text-purple-600",
-    "text-violet-600",
-    "text-indigo-600",
-    "text-cyan-600",
-    "text-teal-600",
-    "text-emerald-600",
-  ];
-
   return (
     <>
       <div className="pl-3 pr-1 text-xs font-medium text-zinc-400 mt-2 h-8 flex items-center justify-between rounded-sm">
@@ -168,27 +147,31 @@ export default function EntryList() {
             `/diary/${getLocalYear()}/${entry.id}`
           );
 
-          const color = colorClasses[index % colorClasses.length];
           return (
-            <Link
-              key={index}
-              href={`/diary/${getLocalYear()}/${entry.id}`}
-              className={cn(
-                "h-8 hover:bg-zinc-200 flex items-center px-3 rounded-sm",
-                isActive && "bg-zinc-200"
-              )}
-            >
-              <div className="">
-                <p className="text-sm font-medium flex items-center gap-2">
-                  <NotebookPen className={`w-4 h-4 ${color}`} />
-                  <span>{entry.title}</span>
-                  <span> - </span>
-                  <span>{getMonth(entry.created_at)}</span>
-                  <span>{getDay(entry.created_at)},</span>
-                  <span>{getYear(entry.created_at)}</span>
-                </p>
-              </div>
-            </Link>
+            <>
+              <Link
+                key={index}
+                href={`/diary/${getLocalYear()}/${entry.id}`}
+                className={cn(
+                  "h-14 hover:bg-zinc-200 flex items-center px-3 rounded-sm w-full",
+                  isActive && "bg-zinc-200/60"
+                )}
+              >
+                <div className="text-sm font-medium w-full">
+                  <div className="flex items-center gap-1 font-bold">
+                    <NotebookPen className={`w-[14px] h-[14px]`} />
+                    <p className="flex-1 truncate">{entry.title}</p>
+                  </div>
+                  <div className="text-xs mt-1">
+                    <p className="truncate">
+                      {getMonth(entry.created_at)} {getDay(entry.created_at)},{" "}
+                      {getYear(entry.created_at)}
+                    </p>
+                  </div>
+                </div>
+              </Link>
+              {!isActive && <div className="border-b border-zinc-200" />}
+            </>
           );
         })}
       </div>

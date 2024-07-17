@@ -1,7 +1,5 @@
 import Leftbar from "@/components/layout/Leftbar";
-import SmallDeviceLeftBar from "@/components/layout/SmallDeviceLeftBar";
 import { getUser } from "@/data/User";
-import { AlignLeft } from "lucide-react";
 import { Metadata } from "next";
 import { redirect } from "next/navigation";
 import React from "react";
@@ -23,12 +21,7 @@ export default async function DiaryLayout({
 
   return (
     <main className="flex">
-      <div className="absolute top-0 left-0 lg:hidden">
-        <SmallDeviceLeftBar user={user} />
-      </div>
-      <div className="hidden lg:block">
-        <Leftbar />
-      </div>
+      <Leftbar />
       <div className="border-r-[1.6px] border-violet-100 h-screen" />
 
       <div className="flex-1">{children}</div>
