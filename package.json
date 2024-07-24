@@ -64,6 +64,6 @@
     "@types/react-dom": "18.2.18",
     "encoding": "^0.1.13",
     "postcss-nesting": "^12.1.5",
-    "supabase": "^1.178.2"
+    "supabase": "^1.187.3"
   }
 }
