@@ -832,6 +832,11 @@
   resolved "https://registry.yarnpkg.com/@tiptap/extension-text/-/extension-text-2.4.0.tgz#a3a5f45a9856d513e574f24e2c9b6028273f8eb3"
   integrity sha512-LV0bvE+VowE8IgLca7pM8ll7quNH+AgEHRbSrsI3SHKDCYB9gTHMjWaAkgkUVaO1u0IfCrjnCLym/PqFKa+vvg==
 
+"@tiptap/extension-underline@^2.5.5":
+  version "2.5.5"
+  resolved "https://registry.yarnpkg.com/@tiptap/extension-underline/-/extension-underline-2.5.5.tgz#6700a2b5fead3b0dbc87f7e8f7dfd0362eb4d810"
+  integrity sha512-3uog8d4G/AdqaJC8qutIIgkYnU2TfXW3QbtEy0Yg2WdjCz97bWXkFkNhhVZM/hvXjFCbYboRN5HLcIHl8+Zgmg==
+
 "@tiptap/pm@^2.4.0":
   version "2.4.0"
   resolved "https://registry.yarnpkg.com/@tiptap/pm/-/pm-2.4.0.tgz#f6fe81d24569da584658d2e8a3a378aea3619fb3"
@@ -2416,10 +2421,10 @@ sucrase@^3.32.0:
     pirates "^4.0.1"
     ts-interface-checker "^0.1.9"
 
-supabase@^1.178.2:
-  version "1.178.2"
-  resolved "https://registry.yarnpkg.com/supabase/-/supabase-1.178.2.tgz#f7efaed43031258f9770f7a287cf26becd8f5083"
-  integrity sha512-JdjNY56cF5PbuhFdhgdYah5qXOPRsLQn0kXaY7uapTFopdIFX4tRiFXqKSig8S0SdznF/y/f6vLdq30Sek1ZZQ==
+supabase@^1.187.3:
+  version "1.187.3"
+  resolved "https://registry.yarnpkg.com/supabase/-/supabase-1.187.3.tgz#67cfcf2e3a8804a8f818c65125652cfd42747c23"
+  integrity sha512-44yzHpxMrd88cUKWw3GVPPIUx6oCqgfqmN4Mlxp7a7GeNNZSTe433vmKBcj+ue3E7K08XcIyEX6G1TjhVyto+g==
   dependencies:
     bin-links "^4.0.3"
     https-proxy-agent "^7.0.2"

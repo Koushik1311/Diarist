@@ -20,14 +20,6 @@ import EntryList from "./EntryList";
 import { signOut } from "@/actions/auth";
 import { getLocalYear } from "@/utils/local-day";
 import { getSubscription } from "@/data/subscription";
-import {
-  Sheet,
-  SheetContent,
-  SheetDescription,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from "@/components/ui/sheet";
 import { getUser } from "@/data/User";
 
 export default async function LeftbarMenu() {

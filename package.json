@@ -30,6 +30,7 @@
     "@supabase/ssr": "latest",
     "@supabase/supabase-js": "latest",
     "@tiptap/extension-placeholder": "^2.4.0",
+    "@tiptap/extension-underline": "^2.5.5",
     "@tiptap/pm": "^2.4.0",
     "@tiptap/react": "^2.4.0",
     "@tiptap/starter-kit": "^2.4.0",
@@ -64,6 +65,6 @@
     "@types/react-dom": "18.2.18",
     "encoding": "^0.1.13",
     "postcss-nesting": "^12.1.5",
-    "supabase": "^1.178.2"
+    "supabase": "^1.187.3"
   }
 }
