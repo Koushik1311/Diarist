@@ -2,12 +2,21 @@
 
 import Placeholder from "@tiptap/extension-placeholder";
 import { BubbleMenu, EditorContent, Extension, useEditor } from "@tiptap/react";
+import Underline from "@tiptap/extension-underline";
 import StarterKit from "@tiptap/starter-kit";
-import { Bold, Italic, List, Save } from "lucide-react";
+import {
+  Bold,
+  Italic,
+  List,
+  ListOrdered,
+  Save,
+  Underline as UnderlineIcon,
+} from "lucide-react";
 import React, { useEffect, useState } from "react";
 import { debounce } from "lodash";
 import { browserClient } from "@/utils/supabase/client";
 import { motion } from "framer-motion";
+import { useAppSelector } from "@/redux/store";
 
 type Props = {
   id: number;
@@ -17,6 +26,7 @@ type Props = {
 export default function Editor({ id, content }: Props) {
   const supabase = browserClient();
   const [currentContent, setCurrentContent] = useState(content);
+  const textSize = useAppSelector((state) => state.textStyleReducer.text_size);
 
   const updateContentField = (id: number, content: string) => {
     return supabase
@@ -50,6 +60,7 @@ export default function Editor({ id, content }: Props) {
   const editor = useEditor({
     extensions: [
       StarterKit,
+      Underline,
       Placeholder.configure({
         placeholder: "Write something …",
       }),
@@ -93,38 +104,67 @@ export default function Editor({ id, content }: Props) {
   return (
     <>
       {editor && (
-        <BubbleMenu editor={editor} tippyOptions={{ duration: 100 }}>
+        <BubbleMenu
+          editor={editor}
+          tippyOptions={{ duration: 100 }}
+          className="bg-zinc-800 text-zinc-100 border border-zinc-600 rounded-lg shadow-lg p-2"
+        >
           <button
             type="button"
             onClick={() => editor.chain().focus().toggleBold().run()}
-            className={editor.isActive("bold") ? "is-active" : ""}
+            className={`p-1 rounded ${
+              editor.isActive("bold") ? "bg-zinc-600" : "hover:bg-zinc-700"
+            }`}
           >
-            <Bold />
+            <Bold className="text-zinc-100" />
           </button>
           <button
             type="button"
             onClick={() => editor.chain().focus().toggleItalic().run()}
-            className={editor.isActive("italic") ? "is-active" : ""}
+            className={`p-1 rounded ${
+              editor.isActive("italic") ? "bg-zinc-600" : "hover:bg-zinc-700"
+            }`}
           >
-            <Italic />
+            <Italic className="text-zinc-100" />
           </button>
           <button
             type="button"
-            onClick={() => editor.chain().focus().toggleStrike().run()}
-            className={editor.isActive("strike") ? "is-active" : ""}
+            onClick={() => editor.chain().focus().toggleMark("underline").run()}
+            className={`p-1 rounded ${
+              editor.isActive("underline") ? "bg-zinc-600" : "hover:bg-zinc-700"
+            }`}
           >
-            strike
+            <UnderlineIcon className="text-zinc-100" />
           </button>
           <button
             type="button"
             onClick={() => editor.chain().focus().toggleBulletList().run()}
-            className={editor.isActive("bulletList") ? "is-active" : ""}
+            className={`p-1 rounded ${
+              editor.isActive("bulletList")
+                ? "bg-zinc-600"
+                : "hover:bg-zinc-700"
+            }`}
           >
-            <List />
+            <List className="text-zinc-100" />
+          </button>
+          <button
+            type="button"
+            onClick={() => editor.chain().focus().toggleOrderedList().run()}
+            className={`p-1 rounded ${
+              editor.isActive("orderedList")
+                ? "bg-zinc-600"
+                : "hover:bg-zinc-700"
+            }`}
+          >
+            <ListOrdered className="text-zinc-100" />
           </button>
         </BubbleMenu>
       )}
-      <EditorContent editor={editor} className="flex-1 w-full" />
+      <EditorContent
+        editor={editor}
+        style={{ fontSize: `${textSize}px` }}
+        className="flex-1 w-full"
+      />
 
       <motion.div
         initial={{ opacity: 0 }}
