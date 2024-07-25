@@ -19,6 +19,7 @@ import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { browserClient } from "@/utils/supabase/client";
 import {
+  RealtimePostgresDeletePayload,
   RealtimePostgresInsertPayload,
   RealtimePostgresUpdatePayload,
 } from "@supabase/supabase-js";
@@ -58,6 +59,19 @@ export default function EntryList() {
             prevRecords.map((record) =>
               record.id === payload.new.id ? payload.new : record
             )
+          );
+        }
+      )
+      .on(
+        "postgres_changes",
+        {
+          event: "DELETE",
+          schema: "public",
+          table: "diary_entries",
+        },
+        (payload: RealtimePostgresDeletePayload<DiaryTypes>) => {
+          setEntryRecords((prevRecords) =>
+            prevRecords.filter((record) => record.id !== payload.old.id)
           );
         }
       )
