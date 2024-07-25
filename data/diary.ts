@@ -114,28 +114,23 @@ const getRecordTitle = async (id: number) => {
     console.log("Error fetching diary record: ", error.message);
   }
 
-  console.log(data);
-
   return data;
 };
 
-const setIsLocked = (id: number, isLocked: boolean) => {
+const deleteRecord = async (id: number) => {
   const supabase = browserClient();
-  console.log("clicked");
-  supabase
+  const { data, error } = await supabase
     .from("diary_entries")
-    .update({
-      is_locked: isLocked,
-    })
-    .eq("id", id)
-    .select()
-    .then(({ data, error }) => {
-      if (error) {
-        console.error("Error updating content:", error.message);
-      } else {
-      }
-    });
+    .delete()
+    .eq("id", id);
+
+  if (error) {
+    console.log("Error deleting diary record: ", error.message);
+    return { error: error.message };
+  }
+
+  return { data };
 };
 
 // Exports
-export { insertRecord, getRecordTitle, setIsLocked };
+export { insertRecord, getRecordTitle, deleteRecord };
