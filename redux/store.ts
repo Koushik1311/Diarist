@@ -1,9 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 import lockedPageReducer from "./features/isLocked.slice";
+import textStyleReducer from "./features/textStyle.slice";
 
 export const store = configureStore({
-  reducer: { lockedPageReducer },
+  reducer: { lockedPageReducer, textStyleReducer },
 });
 
 export type RootState = ReturnType<typeof store.getState>;
