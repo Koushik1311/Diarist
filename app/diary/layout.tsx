@@ -2,6 +2,7 @@ import { getUser } from "@/data/User";
 import { getSubscription } from "@/data/subscription";
 import { redirect } from "next/navigation";
 import React from "react";
+import { Toaster } from "sonner";
 
 export default async function DiaryRootLayout({
   children,
@@ -18,5 +19,10 @@ export default async function DiaryRootLayout({
     return redirect("/onboarding");
   }
 
-  return <>{children}</>;
+  return (
+    <>
+      <Toaster position="top-right" duration={2000} />
+      {children}
+    </>
+  );
 }
