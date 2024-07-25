@@ -2,10 +2,9 @@
 
 import { insertRecord } from "@/data/diary";
 import { getLocalYear } from "@/utils/local-day";
-import { revalidatePath } from "next/cache";
 import { useRouter } from "next/navigation";
 import React from "react";
-import { Toaster, toast } from "sonner";
+import { toast } from "sonner";
 
 type Props = {
   children: React.ReactNode;
@@ -28,8 +27,6 @@ export default function AddEntryButton({ children, className, userId }: Props) {
         toast.info(error, { id: loadingToastId });
       }
 
-      console.log(data);
-
       if (data) {
         const lastRecord = data[data.length - 1];
         router.push(`/diary/${getLocalYear()}/${lastRecord.id}`);
@@ -45,7 +42,6 @@ export default function AddEntryButton({ children, className, userId }: Props) {
       <button className={className} onClick={insertEntry}>
         {children}
       </button>
-      <Toaster position="top-right" />
     </form>
   );
 }
