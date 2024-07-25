@@ -27,7 +27,7 @@ export default async function DiaryPage({
           <TitleInput id={id} title={record.title} />
         </div>
         <div className="">
-          <OptionBtn />
+          <OptionBtn id={id} />
         </div>
       </div>
 
