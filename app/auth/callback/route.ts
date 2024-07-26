@@ -11,6 +11,9 @@ export async function GET(request: NextRequest) {
 
     const { error } = await supabase.auth.exchangeCodeForSession(code);
 
+    console.log("I am alive");
+    console.log(error);
+
     if (error) {
       return NextResponse.redirect(`${requestUrl.origin}/login`);
     }
