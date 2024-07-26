@@ -33,13 +33,14 @@ export async function getCheckoutURL(variantId: number, embed = true) {
       productOptions: {
         enabledVariants: [variantId],
         redirectUrl: `${process.env.NEXT_PUBLIC_APP_URL}/diary`,
-        receiptButtonText: "Go to Dashboard",
-        receiptThankYouNote: "Thank you for signing up to Lemon Stand!",
+        // receiptButtonText: "Go to Dashboard",
+        // receiptThankYouNote: "Thank you for signing up to Lemon Stand!",
       },
     }
   );
 
   // console.log(checkout.data?.data.attributes.url);
+  // console.log("Check: ", `${process.env.NEXT_PUBLIC_APP_URL}/diary`);
 
   return checkout.data?.data.attributes.url;
 }
