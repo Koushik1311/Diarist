@@ -2,7 +2,6 @@ import React from "react";
 import { Check } from "lucide-react";
 import GetStartedBtn from "../global/GetStartedBtn";
 import { cn } from "@/lib/utils";
-import { getLSSingleProduct } from "@/data/lemonsqueezy/getProducts";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { Button } from "../ui/button";
@@ -51,6 +50,14 @@ export default async function BundlePricing({ isUser }: { isUser?: boolean }) {
       ],
     },
   ];
+
+  if (
+    urlEntry10 === undefined ||
+    urlEntry25 === undefined ||
+    urlEntry50 === undefined
+  ) {
+    return notFound();
+  }
 
   return (
     <div className="flex flex-col items-center">

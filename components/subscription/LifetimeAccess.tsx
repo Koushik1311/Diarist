@@ -1,13 +1,11 @@
 import React from "react";
 import { Check } from "lucide-react";
 import GetStartedBtn from "../global/GetStartedBtn";
-import { getLSSingleProduct } from "@/data/lemonsqueezy/getProducts";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { Button } from "../ui/button";
 import { getCheckoutURL } from "@/actions/lsCheckout";
 
-const productId = Number(process.env.LEMONSQUEEZY_LIFETIME_PRODUCT_ID);
 const varientId = Number(process.env.LEMONSQUEEZY_LIFETIME_VARIENT_ID);
 
 export default async function LifetimeAccess({ isUser }: { isUser: boolean }) {
@@ -26,6 +24,10 @@ export default async function LifetimeAccess({ isUser }: { isUser: boolean }) {
     amount: "$49",
     priceId: "price_1PLIILSFtb4t8pCU8nnVHMqD",
   };
+
+  if (url === undefined) {
+    return notFound();
+  }
 
   return (
     <section className="flex flex-col items-center mt-24">
