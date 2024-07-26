@@ -7,9 +7,10 @@ import { Button } from "../ui/button";
 import { getCheckoutURL } from "@/actions/lsCheckout";
 
 const varientId = Number(process.env.LEMONSQUEEZY_LIFETIME_VARIENT_ID);
+const checkoutCode = process.env.LEMONSQUEEZY_DISCOUNT_CODE;
 
 export default async function LifetimeAccess({ isUser }: { isUser: boolean }) {
-  const url = await getCheckoutURL(varientId);
+  const url = await getCheckoutURL(varientId, checkoutCode);
 
   const lifetime = {
     title: "Lifetime Access",
