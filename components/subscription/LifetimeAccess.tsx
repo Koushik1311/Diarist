@@ -19,7 +19,7 @@ export default async function LifetimeAccess({ isUser }: { isUser: boolean }) {
       "Access from anywhere",
       "Track your daily activity",
       "Reflect on your action",
-      "Single diary entry everyday",
+      "Single diary entry every day",
       "Update your entry on the go",
     ],
     amount: "$49",
