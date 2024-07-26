@@ -40,6 +40,7 @@ export async function getCheckoutURL(variantId: number, embed = true) {
   );
 
   // console.log(checkout.data?.data.attributes.url);
+  // console.log("Check: ", `${process.env.NEXT_PUBLIC_APP_URL}/diary`);
 
   return checkout.data?.data.attributes.url;
 }
