@@ -4,7 +4,7 @@ export function configureLemonSqueezy() {
   const requiredVars = [
     "LEMONSQUEEZY_API_KEY",
     "LEMONSQUEEZY_STORE_ID",
-    "LEMONSQUEEZY_WEBHOOK_SIGNATURE",
+    "LEMONSQUEEZY_WEBHOOK_SECRET",
   ];
 
   const missingVars = requiredVars.filter((varName) => !process.env[varName]);
@@ -20,7 +20,6 @@ export function configureLemonSqueezy() {
   lemonSqueezySetup({
     apiKey: process.env.LEMONSQUEEZY_API_KEY,
     onError: (error) => {
-      console.error(`Lemon Squeezy API error: ${error.message}`);
       throw new Error(`Lemon Squeezy API error: ${error.message}`);
     },
   });
