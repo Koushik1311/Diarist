@@ -6,7 +6,6 @@ import Link from "next/link";
 import { Button } from "../ui/button";
 import { getCheckoutURL } from "@/actions/lsCheckout";
 
-const productId = Number(process.env.LEMONSQUEEZY_LIFETIME_PRODUCT_ID);
 const varientId = Number(process.env.LEMONSQUEEZY_LIFETIME_VARIENT_ID);
 
 export default async function LifetimeAccess({ isUser }: { isUser: boolean }) {
