@@ -22,7 +22,7 @@ export async function POST(req: Request) {
     const body = await req.json();
 
     // Check signature
-    const secret = process.env.LEMONSQUEEZY_WEBHOOK_SIGNATURE as string;
+    const secret = process.env.LEMONSQUEEZY_WEBHOOK_SECRET as string;
     const hmac = crypto.createHmac("sha256", secret);
     const digest = Buffer.from(
       hmac.update(await clonedReq.text()).digest("hex"),
