@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 
 export default function PrivacyPolicy() {
@@ -17,7 +18,14 @@ export default function PrivacyPolicy() {
           Welcome to Diarist. We are committed to protecting your personal
           information and your right to privacy. If you have any questions or
           concerns about this Privacy Policy or our practices with regard to
-          your personal information, please contact us at [contact email].
+          your personal information, please{" "}
+          <Link
+            href="/contact"
+            className="text-violet-400 hover:text-violet-600 transition-colors"
+          >
+            contact us
+          </Link>
+          .
         </p>
       </section>
 
@@ -117,8 +125,14 @@ export default function PrivacyPolicy() {
         <p className="text-zinc-600">
           You have certain rights regarding your personal information, including
           the right to access, correct, or delete the personal information we
-          hold about you. To exercise these rights, please contact us at
-          [contact email].
+          hold about you. To exercise these rights, please{" "}
+          <Link
+            href="/contact"
+            className="text-violet-400 hover:text-violet-600 transition-colors"
+          >
+            contact us
+          </Link>
+          .
         </p>
       </section>
 
@@ -138,10 +152,16 @@ export default function PrivacyPolicy() {
           8. Contact Us
         </h2>
         <p className="text-zinc-600">
-          If you have any questions about this Privacy Policy, please contact us
-          at:
+          If you have any questions about this Privacy Policy, please{" "}
+          <Link
+            href="/contact"
+            className="text-violet-400 hover:text-violet-600 transition-colors"
+          >
+            contact us
+          </Link>
+          .
         </p>
-        <p className="text-zinc-600">[Your Contact Information]</p>
+        {/* <p className="text-zinc-600">[Your Contact Information]</p> */}
       </section>
     </div>
   );

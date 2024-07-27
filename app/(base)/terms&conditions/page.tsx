@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 
 export default function TermsAndConditions() {
@@ -131,9 +132,15 @@ export default function TermsAndConditions() {
           9. Contact Us
         </h2>
         <p className="text-zinc-600">
-          If you have any questions about these Terms, please contact us at:
+          If you have any questions about these Terms, please{" "}
+          <Link
+            href="/contact"
+            className="text-violet-400 hover:text-violet-600 transition-colors"
+          >
+            contact us
+          </Link>
         </p>
-        <p>[Your Contact Information]</p>
+        {/* <p>[Your Contact Information]</p> */}
       </section>
     </div>
   );
