@@ -1,8 +1,13 @@
 import { getUser } from "@/data/User";
 import { getSubscription } from "@/data/subscription";
+import { Metadata } from "next";
 import { redirect } from "next/navigation";
 import React from "react";
 import { Toaster } from "sonner";
+
+export const metadata: Metadata = {
+  title: "Diarist - My Diary",
+};
 
 export default async function DiaryRootLayout({
   children,
