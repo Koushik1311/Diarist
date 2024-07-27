@@ -22,14 +22,14 @@ const googleAuth = async () => {
   }
 };
 
-const appleAuth = async () => {
+const twitterAuth = async () => {
   "use server";
 
   const origin = headers().get("origin");
   const supabase = createClient();
 
   const { error, data } = await supabase.auth.signInWithOAuth({
-    provider: "apple",
+    provider: "twitter",
     options: {
       redirectTo: `${origin}/auth/callback`,
     },
@@ -42,4 +42,4 @@ const appleAuth = async () => {
   }
 };
 
-export { googleAuth };
+export { googleAuth, twitterAuth };
