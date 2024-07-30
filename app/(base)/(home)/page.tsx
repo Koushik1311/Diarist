@@ -73,10 +73,10 @@ export default async function Index() {
           {/* Lifetime Discount */}
           <div className="discount-box bg-violet-100 p-8 rounded-lg shadow-lg text-center max-w-md">
             <h3 className="text-2xl md:text-3xl font-semibold text-violet-700">
-              $10 Off for the First 1000 Lifetime Users
+              $100 Off for the First 1000 Lifetime Users
             </h3>
             <p className="text-lg font-normal text-slate-500 mt-4">
-              Get a lifetime subscription for just $39 instead of $49. Limited
+              Get a lifetime subscription for just $139 instead of $239. Limited
               time offer for the first 1,000 users.
             </p>
             <ul className="text-left text-lg font-normal text-slate-500 mt-4 list-disc list-inside">

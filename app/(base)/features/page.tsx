@@ -1,15 +1,5 @@
 import React from "react";
-import {
-  Book,
-  Layout,
-  Globe,
-  Shield,
-  Brush,
-  Smile,
-  Bell,
-  FileText,
-  Tag,
-} from "lucide-react";
+import { Book, Layout, Globe, Shield, Smile, Tag } from "lucide-react";
 
 export default function FeaturesPage() {
   return (
@@ -114,11 +104,9 @@ export default function FeaturesPage() {
         <div className="p-6 rounded-lg flex flex-col items-start justify-start">
           <Tag className="text-violet-700 w-8 h-8 mb-4" />
           <div className="text-start">
-            <h3 className="text-2xl font-semibold text-violet-700">
-              Tagging and Categorization
-            </h3>
+            <h3 className="text-2xl font-semibold text-violet-700">Tagging</h3>
             <p className="text-lg font-normal text-slate-500 mt-2">
-              Tag and categorize your entries for easy reference.
+              Tag your entries for easy reference.
             </p>
           </div>
         </div>

@@ -110,7 +110,7 @@ export default async function SignUp({
             {searchParams.message}
           </p>
         ) : (
-          <p className="text-xs text-center font-medium mt-5 text-green-500">
+          <p className="text-xs text-center font-medium mt-5 text-violet-600">
             {searchParams.message}
           </p>
         )}

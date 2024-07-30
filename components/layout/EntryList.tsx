@@ -162,7 +162,7 @@ export default function EntryList() {
           );
 
           return (
-            <>
+            <div key={index}>
               <Link
                 key={index}
                 href={`/diary/${getLocalYear()}/${entry.id}`}
@@ -185,7 +185,7 @@ export default function EntryList() {
                 </div>
               </Link>
               {!isActive && <div className="border-b border-zinc-200" />}
-            </>
+            </div>
           );
         })}
       </div>
