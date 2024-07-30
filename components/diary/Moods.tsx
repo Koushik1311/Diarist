@@ -57,7 +57,7 @@ export default function Moods({ id }: Props) {
           <span>Add moods</span>
           <ChevronDown className="w-4 h-4" />
         </DropdownMenuTrigger>
-        <DropdownMenuContent>
+        <DropdownMenuContent className="h-80 overflow-auto">
           {moods.map((mood, index) => (
             <DropdownMenuItem key={index}>
               <button
