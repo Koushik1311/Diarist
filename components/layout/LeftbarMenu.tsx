@@ -4,6 +4,7 @@ import {
   Home,
   LogOut,
   Menu,
+  MessageCircle,
   Plus,
 } from "lucide-react";
 import AddEntryButton from "../global/AddEntryButton";
@@ -77,6 +78,12 @@ export default async function LeftbarMenu() {
                   <span>Purchase entry</span>
                 </DropdownMenuItem>
               </Link>
+              <a href="https://insigh.to/b/diarist" target="_blank">
+                <DropdownMenuItem className="cursor-pointer flex items-center gap-2 w-full">
+                  <MessageCircle className="w-4 h-4 text-zinc-700" />
+                  <span>Suggest & Explore Features</span>
+                </DropdownMenuItem>
+              </a>
               <button className="w-full cursor-pointer">
                 <DropdownMenuItem className="cursor-pointer flex items-center gap-2 w-full">
                   <LogOut className="w-4 h-4 text-zinc-700" />
