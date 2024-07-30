@@ -56,8 +56,6 @@ export default function ListedMoods({ id }: { id: number }) {
     };
   }, [supabase]);
 
-  console.log(moods);
-
   async function fetchMood() {
     const { data, error } = await getMoodId(id);
 
@@ -120,7 +118,10 @@ export default function ListedMoods({ id }: { id: number }) {
       {moods.map((mood) => (
         <div key={mood.id} className="group flex items-center gap-1">
           <span>{mood.name}</span>
-          <button className="lg:opacity-0 group-hover:opacity-100 transition duration-500">
+          <button
+            onClick={() => deleteMood(mood.id)}
+            className="lg:opacity-0 group-hover:opacity-100 transition duration-500"
+          >
             <X className="w-4 h-4" />
           </button>
         </div>
