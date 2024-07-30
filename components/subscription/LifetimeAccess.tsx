@@ -22,7 +22,8 @@ export default async function LifetimeAccess({ isUser }: { isUser: boolean }) {
       "Single diary entry every day",
       "Update your entry on the go",
     ],
-    amount: "$49",
+    amount: "$239",
+    discountAmount: "$139",
     priceId: "price_1PLIILSFtb4t8pCU8nnVHMqD",
   };
 
@@ -47,9 +48,14 @@ export default async function LifetimeAccess({ isUser }: { isUser: boolean }) {
             </li>
           ))}
         </ul>
-        <div className="flex items-center justify-center">
+        <div className="flex justify-center items-end">
           <div className="flex flex-col items-start justify-center">
-            <p className="text-4xl font-bold">{lifetime.amount}</p>
+            <p className="text-xl font-normal line-through text-violet-100">
+              {lifetime.amount}
+            </p>
+          </div>
+          <div className="flex flex-col items-start justify-center ml-3">
+            <p className="text-4xl font-bold">{lifetime.discountAmount}</p>
           </div>
         </div>
 
