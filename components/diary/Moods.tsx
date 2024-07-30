@@ -43,7 +43,18 @@ export default function Moods({ id }: Props) {
     const error = await insertRecord(id, moodId);
 
     if (error) {
-      toast.error("Error adding mood.");
+      if (
+        error.error &&
+        error.error.includes("duplicate key value violates unique constraint")
+      ) {
+        toast.error("Duplicate mood cannot be added.");
+      } else if (
+        error.error.includes("A diary entry can have a maximum of 5 moods")
+      ) {
+        toast.error(`${error.error}`);
+      } else {
+        toast.error("Error adding mood.");
+      }
       return;
     }
 
