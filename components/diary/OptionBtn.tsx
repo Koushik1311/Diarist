@@ -44,12 +44,11 @@ export default function OptionBtn({ id }: { id: number }) {
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger>
+      <DropdownMenuTrigger className="border-none ring-0 focus:outline-none text-zinc-600 hover:text-zinc-900">
         <Ellipsis />
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56 mr-3">
         {/* Typography */}
-        <DropdownMenuItem>Profile</DropdownMenuItem>
         <DropdownMenuItem className="flex items-center justify-between">
           <button onClick={handleDecrementSize}>
             <Minus />
@@ -65,7 +64,6 @@ export default function OptionBtn({ id }: { id: number }) {
             <span>Delete</span>
           </button>
         </DropdownMenuItem>
-        <DropdownMenuItem>Subscription</DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   );
