@@ -19,7 +19,6 @@ type MoodsIdTypes = {
 };
 
 export default function ListedMoods({ id }: { id: number }) {
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [moods, setMoods] = useState<MoodType[]>([]);
 
   const supabase = browserClient();
@@ -118,22 +117,12 @@ export default function ListedMoods({ id }: { id: number }) {
       }}
       className="relative flex flex-wrap gap-4"
     >
-      {moods.map((mood, index) => (
-        <div
-          key={mood.id}
-          className="flex items-center gap-1"
-          onMouseEnter={() => setHoveredIndex(index)}
-          onMouseLeave={() => setHoveredIndex(null)}
-        >
+      {moods.map((mood) => (
+        <div key={mood.id} className="group flex items-center gap-1">
           <span>{mood.name}</span>
-          <motion.button
-            onClick={() => deleteMood(mood.id)}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: hoveredIndex === index ? 1 : 0 }}
-            transition={{ duration: 0.3 }}
-          >
+          <button className="lg:opacity-0 group-hover:opacity-100 transition duration-500">
             <X className="w-4 h-4" />
-          </motion.button>
+          </button>
         </div>
       ))}
     </motion.div>
