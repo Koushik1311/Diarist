@@ -7,22 +7,7 @@ import { RealtimePostgresInsertPayload } from "@supabase/supabase-js";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { motion } from "framer-motion";
-import {
-  X,
-  Smile,
-  Frown as Sad,
-  Sun,
-  Cloud,
-  Moon,
-  AlertTriangle,
-  Gift,
-  Coffee,
-  Star,
-  CheckCircle,
-  Heart,
-  Frown,
-  Meh,
-} from "lucide-react";
+import { X } from "lucide-react";
 import {
   HoverCard,
   HoverCardContent,
@@ -38,55 +23,9 @@ const gloriaHallelujah = Gloria_Hallelujah({
   subsets: ["latin"],
 });
 
-// Define a type for mood names that match the keys of moodIcons
-type MoodName =
-  | "Happy"
-  | "Sad"
-  | "Excited"
-  | "Anxious"
-  | "Angry"
-  | "Calm"
-  | "Stressed"
-  | "Relaxed"
-  | "Grateful"
-  | "Inspired"
-  | "Bored"
-  | "Tired"
-  | "Confused"
-  | "Motivated"
-  | "Frustrated"
-  | "Lonely"
-  | "Optimistic"
-  | "Pessimistic"
-  | "Surprised"
-  | "Content";
-
-const moodIcons: Record<MoodName, JSX.Element> = {
-  Happy: <Smile className="w-4 h-4" />,
-  Sad: <Sad className="w-4 h-4" />,
-  Excited: <Sun className="w-4 h-4" />,
-  Anxious: <Cloud className="w-4 h-4" />,
-  Angry: <AlertTriangle className="w-4 h-4" />,
-  Calm: <Moon className="w-4 h-4" />,
-  Stressed: <AlertTriangle className="w-4 h-4" />,
-  Relaxed: <Sun className="w-4 h-4" />,
-  Grateful: <Gift className="w-4 h-4" />,
-  Inspired: <Star className="w-4 h-4" />,
-  Bored: <Coffee className="w-4 h-4" />,
-  Tired: <Moon className="w-4 h-4" />,
-  Confused: <Meh className="w-4 h-4" />,
-  Motivated: <CheckCircle className="w-4 h-4" />,
-  Frustrated: <AlertTriangle className="w-4 h-4" />,
-  Lonely: <Frown className="w-4 h-4" />,
-  Optimistic: <Smile className="w-4 h-4" />,
-  Pessimistic: <Frown className="w-4 h-4" />,
-  Surprised: <Star className="w-4 h-4" />,
-  Content: <CheckCircle className="w-4 h-4" />,
-};
-
 type MoodType = {
   id: number;
-  name: MoodName; // Use the MoodName type here
+  name: string;
 };
 
 type MoodsIdTypes = {
@@ -119,7 +58,7 @@ export default function ListedMoods({ id }: { id: number }) {
           if (data) {
             setMoods((prevMoods) => [
               ...prevMoods,
-              { id: data[0].id, name: data[0].name as MoodName }, // Cast to MoodName
+              { id: data[0].id, name: data[0].name },
             ]);
           }
         }
@@ -147,7 +86,7 @@ export default function ListedMoods({ id }: { id: number }) {
           return null;
         }
         return response.data
-          ? { id: response.data[0].id, name: response.data[0].name as MoodName } // Cast to MoodName
+          ? { id: response.data[0].id, name: response.data[0].name }
           : null;
       });
 
@@ -191,8 +130,6 @@ export default function ListedMoods({ id }: { id: number }) {
       className={`relative flex flex-wrap gap-4 ${gloriaHallelujah.className}`}
     >
       {moods.map((mood) => {
-        const icon = moodIcons[mood.name as MoodName];
-
         return (
           <HoverCard key={mood.id}>
             <HoverCardTrigger asChild>
@@ -200,7 +137,6 @@ export default function ListedMoods({ id }: { id: number }) {
                 className="flex items-center gap-1 text-base text-zinc-900 px-[-14px]"
                 variant="link"
               >
-                <span>{icon}</span>
                 <span>{mood.name}</span>
               </Button>
             </HoverCardTrigger>

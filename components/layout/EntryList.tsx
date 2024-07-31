@@ -5,7 +5,7 @@ import { DiaryTypes } from "@/types/diary.types";
 import { getDay, getMonth, getYear } from "@/utils/local-date-&-time";
 import { ChevronDown, NotebookPen } from "lucide-react";
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -32,6 +32,8 @@ export default function EntryList() {
   const [entryRecords, setEntryRecords] = useState<DiaryTypes[]>([]);
   const [filterBox, setFilterBox] = useState<string>("FilterByMood");
   const [moods, setMoods] = useState<MoodTypes[]>([]);
+  const [searchQuery, setSearchQuery] = useState<string>("");
+  const inputRef = useRef<HTMLInputElement | null>(null);
 
   const pathname = usePathname();
 
@@ -140,6 +142,11 @@ export default function EntryList() {
     setEntryRecords(data);
   };
 
+  // Filter moods based on search query
+  const filteredMoods = moods.filter((mood) =>
+    mood.name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   return (
     <>
       <div className="pl-3 pr-1 text-xs font-medium text-zinc-400 mt-2 h-8 flex items-center justify-between rounded-sm">
@@ -151,7 +158,18 @@ export default function EntryList() {
             <ChevronDown className="w-4 h-4" />
           </DropdownMenuTrigger>
           <DropdownMenuContent className="max-h-80 overflow-auto ml-1">
-            {moods.map((mood) => (
+            <div className="p-2">
+              <input
+                type="text"
+                placeholder="Search moods"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                ref={inputRef}
+                onBlur={() => inputRef.current?.focus({ preventScroll: true })}
+                className="h-9 px-3 text-sm rounded-[6px] border border-zinc-300 focus:outline-none w-full"
+              />
+            </div>
+            {filteredMoods.map((mood) => (
               <DropdownMenuItem key={mood.id}>
                 <button onClick={() => filterData(mood.id, mood.name)}>
                   <span>{mood.name}</span>
