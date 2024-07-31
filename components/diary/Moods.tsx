@@ -76,7 +76,7 @@ export default function Moods({ id }: Props) {
           <ChevronDown className="w-4 h-4" />
         </DropdownMenuTrigger>
 
-        <DropdownMenuContent className="h-80 overflow-auto">
+        <DropdownMenuContent className="max-h-80 overflow-auto">
           <div className="p-2">
             <input
               type="text"
