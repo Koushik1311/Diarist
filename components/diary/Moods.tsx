@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { getAllMoods } from "@/data/mood";
 import { ChevronDown } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { toast } from "sonner";
 import ListedMoods from "./ListedMoods";
 import { insertRecord } from "@/data/diaryEntriesMoods";
@@ -24,6 +24,8 @@ type MoodsType = {
 
 export default function Moods({ id }: Props) {
   const [moods, setMoods] = useState<MoodsType[]>([]);
+  const [searchQuery, setSearchQuery] = useState<string>("");
+  const inputRef = useRef<HTMLInputElement | null>(null);
 
   useEffect(() => {
     async function fetchAllMoods() {
@@ -61,6 +63,11 @@ export default function Moods({ id }: Props) {
     toast.success("Mood added successfully.");
   };
 
+  // Filter moods based on search query
+  const filteredMoods = moods.filter((mood) =>
+    mood.name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   return (
     <div className="flex flex-wrap items-center gap-x-5 text-[18px]">
       <DropdownMenu>
@@ -68,8 +75,20 @@ export default function Moods({ id }: Props) {
           <span>How&apos;s your mood today?</span>
           <ChevronDown className="w-4 h-4" />
         </DropdownMenuTrigger>
+
         <DropdownMenuContent className="h-80 overflow-auto">
-          {moods.map((mood, index) => (
+          <div className="p-2">
+            <input
+              type="text"
+              placeholder="Search moods"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              ref={inputRef}
+              onBlur={() => inputRef.current?.focus({ preventScroll: true })}
+              className="h-9 px-3 text-sm rounded-[6px] border border-zinc-300 focus:outline-none w-full"
+            />
+          </div>
+          {filteredMoods.map((mood, index) => (
             <DropdownMenuItem key={index}>
               <button
                 onClick={() => insertMoods(mood.id)}
