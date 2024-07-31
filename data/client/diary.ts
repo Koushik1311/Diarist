@@ -9,14 +9,16 @@ export const getAllRecords = async (year?: number, month?: number) => {
   if (year && month) {
     startDate = new Date(year, month - 1, 1);
     endDate = new Date(year, month, 0);
+    endDate.setHours(23, 59, 59, 999);
   } else {
     const currentDate = new Date();
-    startDate = new Date(currentDate.getFullYear(), currentDate.getMonth());
+    startDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
     endDate = new Date(
       currentDate.getFullYear(),
       currentDate.getMonth() + 1,
       0
     );
+    endDate.setHours(23, 59, 59, 999);
   }
 
   const formattedStartOfMonth = startDate.toISOString();
