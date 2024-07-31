@@ -16,6 +16,7 @@ import { toast } from "sonner";
 
 import { Gloria_Hallelujah, Kalam } from "next/font/google";
 import { DropdownMenuSeparator } from "@radix-ui/react-dropdown-menu";
+import { saveToLocalStorage } from "@/utils/localStorage";
 
 const kalam = Kalam({
   weight: "400",
@@ -34,12 +35,18 @@ export default function OptionBtn({ id }: { id: number }) {
 
   const handleIncrementSize = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.stopPropagation();
-    dispatch(setTextStyle({ text_size: textSize + 1 }));
+    const newSize = textSize + 1;
+    dispatch(setTextStyle({ text_size: newSize }));
+
+    saveToLocalStorage("text_size", newSize);
   };
 
   const handleDecrementSize = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.stopPropagation();
-    dispatch(setTextStyle({ text_size: textSize - 1 }));
+    const newSize = textSize - 1;
+    dispatch(setTextStyle({ text_size: newSize }));
+
+    saveToLocalStorage("text_size", newSize);
   };
 
   const handleFontChange = (
@@ -48,6 +55,8 @@ export default function OptionBtn({ id }: { id: number }) {
   ) => {
     event.stopPropagation();
     dispatch(setTextStyle({ text_font: fontName }));
+
+    saveToLocalStorage("text_font", fontName);
   };
 
   const handleDelete = async () => {

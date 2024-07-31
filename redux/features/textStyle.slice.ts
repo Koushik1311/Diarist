@@ -1,3 +1,4 @@
+import { getFromLocalStorage } from "@/utils/localStorage";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 type TextStyleState = {
@@ -5,10 +6,17 @@ type TextStyleState = {
   text_font: string;
 };
 
-const initialState: TextStyleState = {
-  text_size: 20,
-  text_font: "gloriaHallelujah",
+const getInitialState = (): TextStyleState => {
+  const textSize = getFromLocalStorage("text_size");
+  const textFont = getFromLocalStorage("text_font");
+
+  return {
+    text_size: textSize !== null ? textSize : 20,
+    text_font: textFont !== null ? textFont : "gloriaHallelujah",
+  };
 };
+
+const initialState: TextStyleState = getInitialState();
 
 export const textSlice = createSlice({
   name: "textStyle",
