@@ -62,10 +62,10 @@ export default function Moods({ id }: Props) {
   };
 
   return (
-    <div className="flex flex-wrap items-center gap-5">
+    <div className="flex flex-wrap items-center gap-x-5 text-[18px]">
       <DropdownMenu>
         <DropdownMenuTrigger className="border-none ring-0 focus:outline-none flex items-center justify-center gap-2 h-6 hover:bg-zinc-200 transition-colors lg:px-2 rounded-md">
-          <span>Add moods</span>
+          <span>How&apos;s your mood today?</span>
           <ChevronDown className="w-4 h-4" />
         </DropdownMenuTrigger>
         <DropdownMenuContent className="h-80 overflow-auto">
