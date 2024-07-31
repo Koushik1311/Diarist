@@ -106,7 +106,7 @@ export default function ListedMoods({ id }: { id: number }) {
         {
           event: "INSERT",
           schema: "public",
-          table: "diarry_entries_moods",
+          table: "diary_entries_moods",
         },
         async (payload: RealtimePostgresInsertPayload<MoodsIdTypes>) => {
           // Fetch the new mood data
