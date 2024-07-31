@@ -18,6 +18,19 @@ import { browserClient } from "@/utils/supabase/client";
 import { motion } from "framer-motion";
 import { useAppSelector } from "@/redux/store";
 
+import { Kalam, Gloria_Hallelujah } from "next/font/google";
+import { GeistSans } from "geist/font/sans";
+
+const kalam = Kalam({
+  weight: "400",
+  subsets: ["latin"],
+});
+
+const gloriaHallelujah = Gloria_Hallelujah({
+  weight: "400",
+  subsets: ["latin"],
+});
+
 type Props = {
   id: number;
   content: string;
@@ -25,8 +38,23 @@ type Props = {
 
 export default function Editor({ id, content }: Props) {
   const supabase = browserClient();
+  const [changeFont, setChangeFont] = useState<string>(
+    gloriaHallelujah.style.fontFamily
+  );
   const [currentContent, setCurrentContent] = useState(content);
   const textSize = useAppSelector((state) => state.textStyleReducer.text_size);
+  const textFont = useAppSelector((state) => state.textStyleReducer.text_font);
+
+  useEffect(() => {
+    console.log("FontFamily: ", kalam.style.fontFamily);
+    if (textFont === "kalam") {
+      setChangeFont(kalam.style.fontFamily);
+    } else if (textFont === "gloriaHallelujah") {
+      setChangeFont(gloriaHallelujah.style.fontFamily);
+    } else if (textFont === "normal") {
+      setChangeFont(GeistSans.style.fontFamily);
+    }
+  }, [textFont]);
 
   const updateContentField = (id: number, content: string) => {
     return supabase
@@ -162,7 +190,10 @@ export default function Editor({ id, content }: Props) {
       )}
       <EditorContent
         editor={editor}
-        style={{ fontSize: `${textSize}px` }}
+        style={{
+          fontSize: `${textSize}px`,
+          fontFamily: changeFont,
+        }}
         className="flex-1 w-full"
       />
 
