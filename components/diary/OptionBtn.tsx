@@ -14,6 +14,19 @@ import { Ellipsis, Minus, Plus, Trash2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 
+import { Gloria_Hallelujah, Kalam } from "next/font/google";
+import { DropdownMenuSeparator } from "@radix-ui/react-dropdown-menu";
+
+const kalam = Kalam({
+  weight: "400",
+  subsets: ["latin"],
+});
+
+const gloriaHallelujah = Gloria_Hallelujah({
+  weight: "400",
+  subsets: ["latin"],
+});
+
 export default function OptionBtn({ id }: { id: number }) {
   const dispatch = useAppDispatch();
   const textSize = useAppSelector((state) => state.textStyleReducer.text_size);
@@ -27,6 +40,14 @@ export default function OptionBtn({ id }: { id: number }) {
   const handleDecrementSize = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.stopPropagation();
     dispatch(setTextStyle({ text_size: textSize - 1 }));
+  };
+
+  const handleFontChange = (
+    event: React.MouseEvent<HTMLButtonElement>,
+    fontName: string
+  ) => {
+    event.stopPropagation();
+    dispatch(setTextStyle({ text_font: fontName }));
   };
 
   const handleDelete = async () => {
@@ -49,6 +70,32 @@ export default function OptionBtn({ id }: { id: number }) {
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56 mr-3">
         {/* Typography */}
+        <DropdownMenuItem className="grid grid-cols-3 mx-2">
+          <button
+            onClick={(event) => handleFontChange(event, "kalam")}
+            className={`flex flex-col items-center justify-center text-zinc-500 hover:text-zinc-800 transition-colors ${kalam.className}`}
+          >
+            <span className="text-2xl">Ag</span>
+            <span className="text-xs font-light">Kalam</span>
+          </button>
+
+          <button
+            onClick={(event) => handleFontChange(event, "gloriaHallelujah")}
+            className={`flex flex-col items-center justify-center text-zinc-500 hover:text-zinc-800 transition-colors ${gloriaHallelujah.className}`}
+          >
+            <span className="text-2xl">Ag</span>
+            <span className="text-xs font-light">IF</span>
+          </button>
+
+          <button
+            onClick={(event) => handleFontChange(event, "normal")}
+            className="flex flex-col items-center justify-center text-zinc-500 hover:text-zinc-800 transition-colors"
+          >
+            <span className="text-2xl">Ag</span>
+            <span className="text-xs font-light">Normal</span>
+          </button>
+        </DropdownMenuItem>
+        <DropdownMenuSeparator />
         <DropdownMenuItem className="flex items-center justify-between">
           <button onClick={handleDecrementSize}>
             <Minus />

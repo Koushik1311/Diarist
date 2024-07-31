@@ -6,8 +6,8 @@ type TextStyleState = {
 };
 
 const initialState: TextStyleState = {
-  text_size: 16,
-  text_font: "GeistSans",
+  text_size: 20,
+  text_font: "gloriaHallelujah",
 };
 
 export const textSlice = createSlice({
