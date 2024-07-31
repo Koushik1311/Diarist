@@ -13,6 +13,8 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { getAllMoods, getDiaryEntriesByMoodId } from "@/data/mood";
+import { MoodTypes } from "@/types/mood.types";
 import { Months } from "@/constants/months";
 import { getLocalMonth, getLocalYear } from "@/utils/local-day";
 import { usePathname } from "next/navigation";
@@ -28,6 +30,8 @@ export default function EntryList() {
   const [year, setYear] = useState<number>();
   const [month, setMonth] = useState<number>();
   const [entryRecords, setEntryRecords] = useState<DiaryTypes[]>([]);
+  const [filterBox, setFilterBox] = useState<string>("FilterByMood");
+  const [moods, setMoods] = useState<MoodTypes[]>([]);
 
   const pathname = usePathname();
 
@@ -113,10 +117,49 @@ export default function EntryList() {
     return month ? month.name : "";
   };
 
+  // Filter by mood
+  useEffect(() => {
+    const fetchMoods = async () => {
+      const { data } = await getAllMoods();
+
+      if (data) {
+        setMoods(data);
+      }
+    };
+
+    fetchMoods();
+  }, []);
+
+  const filterData = async (id: number, name: string) => {
+    setFilterBox(name);
+    const data = await getDiaryEntriesByMoodId(id);
+
+    if (!data) {
+      console.log("Error filtering");
+    }
+    setEntryRecords(data);
+  };
+
   return (
     <>
       <div className="pl-3 pr-1 text-xs font-medium text-zinc-400 mt-2 h-8 flex items-center justify-between rounded-sm">
-        <Link href={`/diary/${getLocalYear()}`}>Diaryspace</Link>
+        {/* Filter by moods */}
+
+        <DropdownMenu>
+          <DropdownMenuTrigger className="flex items-center gap-2 border-none ring-0 focus:outline-none">
+            <span>{filterBox}</span>
+            <ChevronDown className="w-4 h-4" />
+          </DropdownMenuTrigger>
+          <DropdownMenuContent className="max-h-80 overflow-auto ml-1">
+            {moods.map((mood) => (
+              <DropdownMenuItem key={mood.id}>
+                <button onClick={() => filterData(mood.id, mood.name)}>
+                  <span>{mood.name}</span>
+                </button>
+              </DropdownMenuItem>
+            ))}
+          </DropdownMenuContent>
+        </DropdownMenu>
 
         {/* Month & Year */}
         <DropdownMenu>

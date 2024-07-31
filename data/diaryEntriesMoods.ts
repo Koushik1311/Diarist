@@ -1,3 +1,4 @@
+import { DiaryEntriesMoodsTypes } from "@/types/diaryEntriesMoods.types";
 import { browserClient } from "@/utils/supabase/client";
 
 const insertRecord = async (diaryEntryId: number, moodId: number) => {
@@ -10,7 +11,7 @@ const insertRecord = async (diaryEntryId: number, moodId: number) => {
     return { error: "User is not authenticated" };
   }
 
-  const { error } = await supabase.from("diarry_entries_moods").insert({
+  const { error } = await supabase.from("diary_entries_moods").insert({
     diary_entry_id: diaryEntryId,
     mood_id: moodId,
   });
@@ -25,7 +26,7 @@ const getMoodId = async (diaryEntryId: number) => {
   const supabase = browserClient();
 
   const { data, error } = await supabase
-    .from("diarry_entries_moods")
+    .from("diary_entries_moods")
     .select("mood_id")
     .eq("diary_entry_id", diaryEntryId);
 
@@ -41,7 +42,7 @@ const removeMood = async (diaryEntryId: number, moodId: number) => {
   const supabase = browserClient();
 
   const response = await supabase
-    .from("diarry_entries_moods")
+    .from("diary_entries_moods")
     .delete()
     .eq("diary_entry_id", diaryEntryId)
     .eq("mood_id", moodId);
