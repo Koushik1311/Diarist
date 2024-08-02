@@ -24,7 +24,6 @@ export default function Login({
     });
 
     if (error) {
-      // return redirect("/login?message=Could not authenticate user");
       return redirect(`/login?message=${error.message}`);
     }
 
@@ -63,12 +62,20 @@ export default function Login({
             required
             className="h-9 px-3 text-sm rounded-[6px] border border-slate-200 focus:outline-violet-400"
           />
-          <label
-            htmlFor="password"
-            className="text-xs text-slate-500 font-medium mt-3"
-          >
-            Password
-          </label>
+          <div className="mt-3 flex items-center justify-between">
+            <label
+              htmlFor="password"
+              className="text-xs text-slate-500 font-medium"
+            >
+              Password
+            </label>
+            <Link
+              href="/reset-password"
+              className="text-xs text-slate-500 font-medium hover:text-violet-500 transition-colors"
+            >
+              Forgot Password?
+            </Link>
+          </div>
           <input
             type="password"
             name="password"
