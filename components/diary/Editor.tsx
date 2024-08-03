@@ -46,7 +46,6 @@ export default function Editor({ id, content }: Props) {
   const textFont = useAppSelector((state) => state.textStyleReducer.text_font);
 
   useEffect(() => {
-    console.log("FontFamily: ", kalam.style.fontFamily);
     if (textFont === "kalam") {
       setChangeFont(kalam.style.fontFamily);
     } else if (textFont === "gloriaHallelujah") {
