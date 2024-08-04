@@ -1,11 +1,18 @@
-import { updateSubscription } from "@/data/subscription";
+import { updateSubscriptionData } from "@/data/client/subscription";
 import crypto from "crypto";
 
 export async function POST(req: Request) {
   try {
-    const lifetimeVarientId = Number(
-      process.env.LEMONSQUEEZY_LIFETIME_VARIENT_ID
+    const basicLifetimeVarientId = Number(
+      process.env.LEMONSQUEEZY_BASIC_LIFETIME_VARIENT_ID
     );
+    const premiumLifetimeVarientId = Number(
+      process.env.LEMONSQUEEZY_PREMIUM_LIFETIME_VARIENT_ID
+    );
+    const eliteLifetimeVarientId = Number(
+      process.env.LEMONSQUEEZY_ELITE_LIFETIME_VARIENT_ID
+    );
+
     const entry10VarientId = Number(
       process.env.LEMONSQUEEZY_10ENTRY_VARIENT_ID
     );
@@ -34,9 +41,6 @@ export async function POST(req: Request) {
       throw new Error("Invalid signature.");
     }
 
-    // TODO: Remove me
-    // console.log(body);
-
     // Logic according to event
     if (eventType === "order_created") {
       const isSuccessful = body.data.attributes.status === "paid";
@@ -44,21 +48,57 @@ export async function POST(req: Request) {
       const varientId: number =
         body.data.attributes.first_order_item.variant_id;
       if (isSuccessful) {
-        if (varientId === lifetimeVarientId) {
-          await updateSubscription(userId, { lifetime: true });
+        if (varientId === basicLifetimeVarientId) {
+          await updateSubscriptionData({
+            userId: userId,
+            dailyEntryLimit: 1,
+            bonusEntriesPerYear: 10,
+            vaultEntryLimit: 50,
+            lifetime: "basic",
+          });
+        } else if (varientId === premiumLifetimeVarientId) {
+          await updateSubscriptionData({
+            userId: userId,
+            dailyEntryLimit: 2,
+            bonusEntriesPerYear: 20,
+            vaultEntryLimit: 100,
+            lifetime: "premium",
+          });
+        } else if (varientId === eliteLifetimeVarientId) {
+          await updateSubscriptionData({
+            userId: userId,
+            dailyEntryLimit: 3,
+            bonusEntriesPerYear: 50,
+            vaultEntryLimit: 200,
+            lifetime: "elite",
+          });
         } else if (varientId === entry10VarientId) {
-          await updateSubscription(userId, { entries: 10 });
+          await updateSubscriptionData({
+            userId: userId,
+            entries: 10,
+            lifetime: "none",
+          });
         } else if (varientId === entry25VarientId) {
-          await updateSubscription(userId, { entries: 25 });
+          await updateSubscriptionData({
+            userId: userId,
+            entries: 25,
+            lifetime: "none",
+          });
         } else if (varientId === entry50VarientId) {
-          await updateSubscription(userId, { entries: 50 });
+          await updateSubscriptionData({
+            userId: userId,
+            entries: 50,
+            lifetime: "none",
+          });
         }
       }
     }
 
-    return Response.json({ message: "Webhook received" });
+    return new Response(JSON.stringify({ message: "Webhook received" }));
   } catch (error) {
     console.error(error);
-    return Response.json({ message: "Server error" }, { status: 500 });
+    return new Response(JSON.stringify({ message: "Server error" }), {
+      status: 500,
+    });
   }
 }
