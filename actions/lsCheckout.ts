@@ -30,8 +30,8 @@ export async function getCheckoutURL(variantId: number, discountCode?: string) {
     productOptions: {
       enabledVariants: [variantId],
       redirectUrl: `${process.env.NEXT_PUBLIC_APP_URL}/diary`,
-      // receiptButtonText: "Go to Dashboard",
-      // receiptThankYouNote: "Thank you for signing up to Lemon Stand!",
+      // receiptButtonText: "My diary",
+      // receiptThankYouNote: "Thank you foryour support!",
     },
   };
 
