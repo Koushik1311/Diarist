@@ -20,8 +20,8 @@ import Link from "next/link";
 import EntryList from "./EntryList";
 import { signOut } from "@/actions/auth";
 import { getLocalYear } from "@/utils/local-day";
-import { getSubscription } from "@/data/subscription";
 import { getUser } from "@/data/User";
+import { fetchSubscription } from "@/data/server/subscription";
 
 export default async function LeftbarMenu() {
   const user = await getUser();
@@ -30,7 +30,7 @@ export default async function LeftbarMenu() {
     user?.user_metadata.full_name?.charAt(0) ??
     "";
 
-  const subscription = await getSubscription(user?.id!);
+  const subscription = await fetchSubscription(user?.id!);
 
   return (
     <div className="w-80 pt-4 pr-5 flex flex-col h-screen group">
@@ -65,6 +65,7 @@ export default async function LeftbarMenu() {
                 </p>
                 <p className="text-xs text-zinc-700 font-extralight">
                   {subscription?.lifetime && <>Lifetime Plan . </>}
+                  {subscription?.lifetime === "premium" && <>Premium </>}
                   <span>{subscription?.entries} entries</span>
                 </p>
               </div>
