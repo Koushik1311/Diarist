@@ -4,4 +4,6 @@ export type DiaryTypes = {
   title: string;
   content: string;
   user_id: string;
+  is_time_capsule: boolean;
+  unlock_date: string;
 };
