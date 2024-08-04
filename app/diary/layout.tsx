@@ -1,5 +1,5 @@
+import { fetchSubscription } from "@/data/server/subscription";
 import { getUser } from "@/data/User";
-import { getSubscription } from "@/data/subscription";
 import { Metadata } from "next";
 import { redirect } from "next/navigation";
 import React from "react";
@@ -18,7 +18,7 @@ export default async function DiaryRootLayout({
   if (!user) {
     return redirect("/login");
   }
-  const subscriptionData = await getSubscription(user?.id!);
+  const subscriptionData = await fetchSubscription(user?.id!);
 
   if (!subscriptionData) {
     return redirect("/onboarding");
