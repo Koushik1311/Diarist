@@ -1,8 +1,8 @@
 "use client";
 
-import { getAllRecords } from "@/data/client/diary";
+import { getAllRecords } from "@/data/diary";
 import { DiaryTypes } from "@/types/diary.types";
-import { getDay, getMonth, getYear } from "@/utils/local-date-&-time";
+import { getDay, getMonth } from "@/utils/local-date-&-time";
 import { ChevronDown, NotebookPen } from "lucide-react";
 import Link from "next/link";
 import React, { useEffect, useRef, useState } from "react";
@@ -25,6 +25,7 @@ import {
   RealtimePostgresInsertPayload,
   RealtimePostgresUpdatePayload,
 } from "@supabase/supabase-js";
+import TimeCapsule from "./left-list/TimeCapsule";
 
 export default function EntryList() {
   const [year, setYear] = useState<number>();
@@ -228,28 +229,26 @@ export default function EntryList() {
                 key={index}
                 href={`/diary/${getLocalYear()}/${entry.id}`}
                 className={cn(
-                  "h-14 hover:bg-zinc-200 flex items-center px-3 rounded-sm w-full",
-                  isActive && "bg-zinc-200/60"
+                  "h-8 hover:bg-zinc-200/60 flex items-center px-3 rounded-sm w-full",
+                  isActive && "bg-zinc-200/50"
                 )}
               >
-                <div className="text-sm font-medium w-full">
-                  <div className="flex items-center gap-1 font-bold">
-                    <NotebookPen className={`w-[14px] h-[14px]`} />
+                <div className="text-sm w-full">
+                  <div className="flex items-center gap-2 font-medium text-zinc-600">
+                    <NotebookPen className={`w-4 h-4`} />
                     <p className="flex-1 truncate">{entry.title}</p>
-                  </div>
-                  <div className="text-xs mt-1">
-                    <p className="truncate">
-                      {getMonth(entry.created_at)} {getDay(entry.created_at)},{" "}
-                      {getYear(entry.created_at)}
+                    <p className="truncate text-xs">
+                      {getMonth(entry.created_at)} {getDay(entry.created_at)}
                     </p>
                   </div>
                 </div>
               </Link>
-              {!isActive && <div className="border-b border-zinc-200" />}
             </div>
           );
         })}
       </div>
+
+      <TimeCapsule />
     </>
   );
 }
