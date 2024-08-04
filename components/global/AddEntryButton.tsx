@@ -1,6 +1,6 @@
 "use client";
 
-import { insertRecord } from "@/data/diary";
+import { createEntry } from "@/helper/entry-creation-limit";
 import { getLocalYear } from "@/utils/local-day";
 import { useRouter } from "next/navigation";
 import React from "react";
@@ -21,14 +21,14 @@ export default function AddEntryButton({ children, className, userId }: Props) {
     const loadingToastId = toast.loading("Creating entry...");
 
     try {
-      const { data, error } = await insertRecord(userId);
-      if (error) {
-        console.error("Error inserting record: ", error);
+      const { entryData, error } = await createEntry(userId);
+      if (!error) {
+        console.error("Error inserting record.", error);
         toast.info(error, { id: loadingToastId });
       }
 
-      if (data) {
-        const lastRecord = data[data.length - 1];
+      if (entryData) {
+        const lastRecord = entryData[entryData.length - 1];
         router.push(`/diary/${getLocalYear()}/${lastRecord.id}`);
         toast.success("Entry created successfully!", { id: loadingToastId });
       }
