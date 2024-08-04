@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { getUser } from "@/data/User";
-import { createSubscription } from "@/data/subscription";
+import { createSubscription } from "@/data/server/subscription";
 import { redirect } from "next/navigation";
 import React from "react";
 
@@ -26,7 +26,6 @@ export default async function OnboardingPage() {
     const error = await createSubscription(user?.id!);
 
     if (error) {
-      console.log(error.error);
       return redirect("/onboarding?message=Error choosing a pricing plan");
     }
 
