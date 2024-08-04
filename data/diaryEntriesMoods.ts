@@ -1,4 +1,3 @@
-import { DiaryEntriesMoodsTypes } from "@/types/diaryEntriesMoods.types";
 import { browserClient } from "@/utils/supabase/client";
 
 const insertRecord = async (diaryEntryId: number, moodId: number) => {
