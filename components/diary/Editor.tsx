@@ -4,14 +4,7 @@ import Placeholder from "@tiptap/extension-placeholder";
 import { BubbleMenu, EditorContent, Extension, useEditor } from "@tiptap/react";
 import Underline from "@tiptap/extension-underline";
 import StarterKit from "@tiptap/starter-kit";
-import {
-  Bold,
-  Italic,
-  List,
-  ListOrdered,
-  Save,
-  Underline as UnderlineIcon,
-} from "lucide-react";
+import { Bold, Italic, Save, Underline as UnderlineIcon } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import { debounce } from "lodash";
 import { browserClient } from "@/utils/supabase/client";
@@ -129,61 +122,42 @@ export default function Editor({ id, content }: Props) {
   const newContent = editor?.getHTML();
 
   return (
-    <>
+    <div>
       {editor && (
         <BubbleMenu
           editor={editor}
-          tippyOptions={{ duration: 100 }}
-          className="bg-zinc-800 text-zinc-100 border border-zinc-600 rounded-lg shadow-lg p-2"
+          tippyOptions={{ duration: 100, appendTo: "parent" }}
+          className="bg-white text-gray-800 border border-gray-300 rounded-lg shadow-lg p-2 flex gap-5 px-5"
         >
           <button
             type="button"
             onClick={() => editor.chain().focus().toggleBold().run()}
-            className={`p-1 rounded ${
-              editor.isActive("bold") ? "bg-zinc-600" : "hover:bg-zinc-700"
-            }`}
           >
-            <Bold className="text-zinc-100" />
+            <Bold
+              className={`text-gray-800 w-4 h-4 ${
+                editor.isActive("bold") ? "text-fuchsia-500" : ""
+              }`}
+            />
           </button>
           <button
             type="button"
             onClick={() => editor.chain().focus().toggleItalic().run()}
-            className={`p-1 rounded ${
-              editor.isActive("italic") ? "bg-zinc-600" : "hover:bg-zinc-700"
-            }`}
           >
-            <Italic className="text-zinc-100" />
+            <Italic
+              className={`text-gray-800 w-4 h-4 ${
+                editor.isActive("italic") ? "text-fuchsia-500" : ""
+              }`}
+            />
           </button>
           <button
             type="button"
             onClick={() => editor.chain().focus().toggleMark("underline").run()}
-            className={`p-1 rounded ${
-              editor.isActive("underline") ? "bg-zinc-600" : "hover:bg-zinc-700"
-            }`}
           >
-            <UnderlineIcon className="text-zinc-100" />
-          </button>
-          <button
-            type="button"
-            onClick={() => editor.chain().focus().toggleBulletList().run()}
-            className={`p-1 rounded ${
-              editor.isActive("bulletList")
-                ? "bg-zinc-600"
-                : "hover:bg-zinc-700"
-            }`}
-          >
-            <List className="text-zinc-100" />
-          </button>
-          <button
-            type="button"
-            onClick={() => editor.chain().focus().toggleOrderedList().run()}
-            className={`p-1 rounded ${
-              editor.isActive("orderedList")
-                ? "bg-zinc-600"
-                : "hover:bg-zinc-700"
-            }`}
-          >
-            <ListOrdered className="text-zinc-100" />
+            <UnderlineIcon
+              className={`text-gray-800 w-4 h-4 ${
+                editor.isActive("underline") ? "text-fuchsia-500" : ""
+              }`}
+            />
           </button>
         </BubbleMenu>
       )}
@@ -210,6 +184,6 @@ export default function Editor({ id, content }: Props) {
       >
         <Save className="text-zinc-800" />
       </motion.div>
-    </>
+    </div>
   );
 }
