@@ -1,13 +1,11 @@
 import { getToday } from "@/utils/local-day";
 import { browserClient } from "@/utils/supabase/client";
+import { endOfDay, startOfDay } from "date-fns";
 
 export const fetchAllTimeCapsuleEntries = async () => {
   const supabase = browserClient();
 
-  const { data, error } = await supabase
-    .from("diary_entries")
-    .select()
-    .eq("is_time_capsule", true);
+  const { data, error } = await supabase.from("time_capsules").select();
 
   if (error) {
     console.error("Error getting TimeCapsuleEntry: ", error.message);
@@ -40,18 +38,47 @@ export const fetchTimeCapsuleEntry = async () => {
 export const insertTimeCapsuleEntry = async (userId: string) => {
   const supabase = browserClient();
 
-  const { data, error } = await supabase
-    .from("diary_entries")
-    .insert({
-      title: `Time capsule ${getToday()}`,
-      user_id: userId,
-    })
-    .select();
+  const { data: timeCapsuleEntry, error: timeCapsuleEntryError } =
+    await supabase
+      .from("time_capsules")
+      .insert({
+        title: `Time capsule ${getToday()}`,
+        user_id: userId,
+      })
+      .select();
 
-  if (error) {
-    console.error("Error inserting TimeCapsuleEntry: ", error.message);
-    return { error };
+  if (timeCapsuleEntryError) {
+    console.error(
+      "Error inserting TimeCapsuleEntry: ",
+      timeCapsuleEntryError.message
+    );
+    return { timeCapsuleEntryError };
   }
 
-  return { data };
+  return { timeCapsuleEntry };
+};
+
+export const fetchTodaysTimeCapsuleEntry = async () => {
+  const supabase = browserClient();
+
+  const today = new Date();
+  const start = startOfDay(today);
+  const end = endOfDay(today);
+
+  const startDate = start.toISOString();
+  const endDate = end.toISOString();
+
+  const { data: todaysTimeCapsuleEntry, error: todaysTimeCapsuleEntryError } =
+    await supabase
+      .from("time_capsules")
+      .select("id")
+      .gte("created_at", startDate)
+      .lte("created_at", endDate);
+
+  if (todaysTimeCapsuleEntryError) {
+    console.error("Error: ", todaysTimeCapsuleEntryError.message);
+    return { todaysTimeCapsuleEntryError };
+  }
+
+  return { todaysTimeCapsuleEntry };
 };
