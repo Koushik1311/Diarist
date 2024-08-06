@@ -88,7 +88,7 @@ const insertRecord = async (userId: string) => {
   const { data, error } = await supabase
     .from("diary_entries")
     .insert({
-      title: `Diary Entry ${day}`,
+      title: `Diary New ${day}`,
       user_id: userId,
     })
     .select();
@@ -135,7 +135,7 @@ const getAllRecords = async (year?: number, month?: number) => {
     return [];
   }
 
-  return data as DiaryTypes[];
+  return data;
 };
 
 // Get single record on client
