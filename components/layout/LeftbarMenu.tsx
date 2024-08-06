@@ -6,6 +6,7 @@ import {
   Menu,
   MessageCircle,
   Plus,
+  User,
 } from "lucide-react";
 import AddEntryButton from "../global/AddEntryButton";
 import {
@@ -35,7 +36,7 @@ export default async function LeftbarMenu() {
   return (
     <div className="w-80 pt-4 pr-5 flex flex-col h-screen group">
       {/* Top */}
-      <div className="flex items-center justify-between px-3">
+      <div className="flex items-center justify-between pl-3">
         <DropdownMenu>
           <DropdownMenuTrigger className="border-none ring-0 focus:outline-none flex items-center gap-2 text-zinc-600 hover:text-zinc-900">
             <span className="h-6 w-6 rounded-sm text-sm font-medium bg-zinc-200 flex items-center justify-center uppercase">
@@ -112,6 +113,11 @@ export default async function LeftbarMenu() {
       </Link>
 
       <EntryList />
+
+      <button className="pl-3 py-4 border-t border-zinc-200 text-left text-sm font-medium text-zinc-600 flex items-center gap-3">
+        <User className="w-4 h-4" />
+        <span>My account</span>
+      </button>
     </div>
   );
 }
