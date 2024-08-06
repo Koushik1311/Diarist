@@ -1,4 +1,7 @@
-import { updateSubscriptionData } from "@/data/client/subscription";
+import {
+  fetchEntries,
+  updateSubscriptionData,
+} from "@/data/client/subscription";
 import crypto from "crypto";
 
 export async function POST(req: Request) {
@@ -48,11 +51,13 @@ export async function POST(req: Request) {
       const varientId: number =
         body.data.attributes.first_order_item.variant_id;
       if (isSuccessful) {
+        const { entriesData } = await fetchEntries();
+
         if (varientId === basicLifetimeVarientId) {
           await updateSubscriptionData({
             userId: userId,
             dailyEntryLimit: 1,
-            bonusEntriesPerYear: 10,
+            entries: entriesData?.entries! + 10,
             vaultEntryLimit: 50,
             lifetime: "basic",
           });
@@ -60,7 +65,7 @@ export async function POST(req: Request) {
           await updateSubscriptionData({
             userId: userId,
             dailyEntryLimit: 2,
-            bonusEntriesPerYear: 20,
+            entries: entriesData?.entries! + 20,
             vaultEntryLimit: 100,
             lifetime: "premium",
           });
@@ -68,26 +73,26 @@ export async function POST(req: Request) {
           await updateSubscriptionData({
             userId: userId,
             dailyEntryLimit: 3,
-            bonusEntriesPerYear: 50,
+            entries: entriesData?.entries! + 50,
             vaultEntryLimit: 200,
             lifetime: "elite",
           });
         } else if (varientId === entry10VarientId) {
           await updateSubscriptionData({
             userId: userId,
-            entries: 10,
+            entries: entriesData?.entries! + 10,
             lifetime: "none",
           });
         } else if (varientId === entry25VarientId) {
           await updateSubscriptionData({
             userId: userId,
-            entries: 25,
+            entries: entriesData?.entries! + 25,
             lifetime: "none",
           });
         } else if (varientId === entry50VarientId) {
           await updateSubscriptionData({
             userId: userId,
-            entries: 50,
+            entries: entriesData?.entries! + 50,
             lifetime: "none",
           });
         }
