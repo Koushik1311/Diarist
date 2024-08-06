@@ -13,33 +13,30 @@ export type Database = {
         Row: {
           content: string | null
           created_at: string
-          id: number
-          is_time_capsule: boolean
+          id: string
           title: string | null
-          unlock_date: string | null
+          updated_at: string
           user_id: string
         }
         Insert: {
           content?: string | null
           created_at?: string
-          id?: number
-          is_time_capsule?: boolean
+          id?: string
           title?: string | null
-          unlock_date?: string | null
-          user_id?: string
+          updated_at?: string
+          user_id: string
         }
         Update: {
           content?: string | null
           created_at?: string
-          id?: number
-          is_time_capsule?: boolean
+          id?: string
           title?: string | null
-          unlock_date?: string | null
+          updated_at?: string
           user_id?: string
         }
         Relationships: [
           {
-            foreignKeyName: "diary_entry_user_id_fkey"
+            foreignKeyName: "diary_entries_user_id_fkey"
             columns: ["user_id"]
             isOneToOne: false
             referencedRelation: "users"
@@ -50,35 +47,35 @@ export type Database = {
       diary_entries_moods: {
         Row: {
           created_at: string
-          diary_entry_id: number
+          diary_entry_id: string
           id: number
           mood_id: number
         }
         Insert: {
           created_at?: string
-          diary_entry_id: number
+          diary_entry_id: string
           id?: number
           mood_id: number
         }
         Update: {
           created_at?: string
-          diary_entry_id?: number
+          diary_entry_id?: string
           id?: number
           mood_id?: number
         }
         Relationships: [
           {
-            foreignKeyName: "diarry_entries_moods_diary_entry_id_fkey"
-            columns: ["diary_entry_id"]
-            isOneToOne: false
-            referencedRelation: "diary_entries"
-            referencedColumns: ["id"]
-          },
-          {
             foreignKeyName: "diarry_entries_moods_mood_id_fkey"
             columns: ["mood_id"]
             isOneToOne: false
             referencedRelation: "moods"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "diary_entries_moods_diary_entry_id_fkey"
+            columns: ["diary_entry_id"]
+            isOneToOne: false
+            referencedRelation: "diary_entries"
             referencedColumns: ["id"]
           },
         ]
@@ -101,42 +98,118 @@ export type Database = {
         }
         Relationships: []
       }
+      private_memory_vault: {
+        Row: {
+          content: string | null
+          created_at: string
+          encrypted_key: string | null
+          id: string
+          title: string | null
+          updated_at: string
+          user_id: string | null
+        }
+        Insert: {
+          content?: string | null
+          created_at?: string
+          encrypted_key?: string | null
+          id?: string
+          title?: string | null
+          updated_at?: string
+          user_id?: string | null
+        }
+        Update: {
+          content?: string | null
+          created_at?: string
+          encrypted_key?: string | null
+          id?: string
+          title?: string | null
+          updated_at?: string
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "private_memory_vault_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       subscriptions: {
         Row: {
-          bonus_entries_per_year: number
           created_at: string
           daily_entry_limit: number
           entries: number
-          id: number
+          id: string
           lifetime: Database["public"]["Enums"]["lifetime"]
+          updated_at: string
           user_id: string
           vault_entry_limit: number
         }
         Insert: {
-          bonus_entries_per_year?: number
           created_at?: string
           daily_entry_limit?: number
           entries?: number
-          id?: number
+          id?: string
           lifetime?: Database["public"]["Enums"]["lifetime"]
-          user_id?: string
+          updated_at?: string
+          user_id: string
           vault_entry_limit?: number
         }
         Update: {
-          bonus_entries_per_year?: number
           created_at?: string
           daily_entry_limit?: number
           entries?: number
-          id?: number
+          id?: string
           lifetime?: Database["public"]["Enums"]["lifetime"]
+          updated_at?: string
           user_id?: string
           vault_entry_limit?: number
         }
         Relationships: [
           {
-            foreignKeyName: "public_subscriptions_user_id_fkey"
+            foreignKeyName: "subscriptions_user_id_fkey"
             columns: ["user_id"]
             isOneToOne: true
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      time_capsules: {
+        Row: {
+          content: string | null
+          created_at: string
+          id: string
+          title: string | null
+          unlock_date: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          content?: string | null
+          created_at?: string
+          id?: string
+          title?: string | null
+          unlock_date?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          content?: string | null
+          created_at?: string
+          id?: string
+          title?: string | null
+          unlock_date?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "time_capsules_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
             referencedRelation: "users"
             referencedColumns: ["id"]
           },
