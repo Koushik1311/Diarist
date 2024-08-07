@@ -8,15 +8,21 @@ import TitleInput from "@/components/diary/TitleInput";
 import { NotebookPen } from "lucide-react";
 import Moods from "@/components/diary/Moods";
 import OptionBtn from "@/components/diary/OptionBtn";
+import { fetchSingleEntry } from "@/data/server/diary";
+import { notFound } from "next/navigation";
 
 const dancing_script = Dancing_Script({ subsets: ["latin"] });
 
 export default async function DiaryPage({
   params: { id },
 }: {
-  params: { id: number };
+  params: { id: string };
 }) {
-  const record = await getSingleRecord(id);
+  const record = await fetchSingleEntry(id);
+
+  if (!record) {
+    return notFound();
+  }
 
   return (
     <div className="flex flex-col h-screen">
@@ -25,7 +31,7 @@ export default async function DiaryPage({
           <div className="w-4 h-4">
             <NotebookPen className="w-4 h-4 mr-1 mt-1" />
           </div>
-          <TitleInput id={id} title={record.title} />
+          <TitleInput id={id} title={record?.title!} />
         </div>
         <OptionBtn id={id} />
       </div>
@@ -35,15 +41,15 @@ export default async function DiaryPage({
           <h1
             className={`${dancing_script.className} text-4xl font-extrabold mb-2`}
           >
-            <span>{getWeekday(record.created_at)} </span>
-            <span>{getDay(record.created_at)}</span>
+            <span>{getWeekday(record?.created_at!)} </span>
+            <span>{getDay(record?.created_at!)}</span>
           </h1>
           {/* Moods */}
           <Moods id={id} />
           {/* Editor */}
           <div className="border-b border-zinc-200 mt-3" />
 
-          <Editor id={id} content={record.content} />
+          <Editor id={id} content={record?.content!} />
         </div>
       </div>
     </div>
