@@ -18,22 +18,30 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { getLocalMonth, getLocalYear } from "@/utils/local-day";
 import { cn } from "@/lib/utils";
+import { getFromLocalStorage, saveToLocalStorage } from "@/utils/localStorage";
 
 type Props = {
-  entryRecords: DiaryEntry[];
-  setEntryRecords: React.Dispatch<React.SetStateAction<DiaryEntry[]>>;
+  entryRecords: DiaryEntryType[];
+  setEntryRecords: React.Dispatch<React.SetStateAction<DiaryEntryType[]>>;
 };
 
 export default function NormalEntry({ entryRecords, setEntryRecords }: Props) {
-  const [showEntry, setShowEntry] = useState<boolean>(false);
   const [year, setYear] = useState<number>();
   const [month, setMonth] = useState<number>();
   const [filterBox, setFilterBox] = useState<string>("FilterByMood");
   const [moods, setMoods] = useState<MoodTypes[]>([]);
   const [searchQuery, setSearchQuery] = useState<string>("");
   const inputRef = useRef<HTMLInputElement | null>(null);
+  const [showEntry, setShowEntry] = useState<boolean>(true);
 
   const pathname = usePathname();
+
+  useEffect(() => {
+    const storedValue = getFromLocalStorage("show-normal-entry");
+    if (storedValue !== null) {
+      setShowEntry(JSON.parse(storedValue));
+    }
+  }, []);
 
   useEffect(() => {
     const getData = async () => {
@@ -98,7 +106,10 @@ export default function NormalEntry({ entryRecords, setEntryRecords }: Props) {
     <div>
       <div className="pl-3 text-xs font-medium text-zinc-500 mt-2 h-8 flex items-center justify-between rounded-sm w-full">
         <button
-          onClick={() => setShowEntry(!showEntry)}
+          onClick={() => {
+            setShowEntry(!showEntry);
+            saveToLocalStorage("show-normal-entry", JSON.stringify(!showEntry));
+          }}
           className="flex-1 text-left"
         >
           <p>Diary Entry</p>

@@ -37,7 +37,7 @@ export default async function LifetimeAccess({
       url: basicUrl || "#",
       benefits: [
         "1 entry per day",
-        "5 additional entries per year",
+        "10 additional entries per year",
         "Time Capsule: Included, counts towards the daily entry limit",
         "Private Memory Vault: Included, with a limit of 50 encrypted entries",
       ],
@@ -49,7 +49,7 @@ export default async function LifetimeAccess({
       url: premiumUrl || "#",
       benefits: [
         "2 entry per day",
-        "10 additional entries per year",
+        "20 additional entries per year",
         "Time Capsule: Included, counts towards the daily entry limit",
         "Private Memory Vault: Included, with a limit of 100 encrypted entries",
       ],
@@ -61,7 +61,7 @@ export default async function LifetimeAccess({
       url: eliteUrl || "#",
       benefits: [
         "3 entry per day",
-        "25 additional entries per year",
+        "50 additional entries per year",
         "Time Capsule: Included, counts towards the daily entry limit",
         "Private Memory Vault: Included, with a limit of 200 encrypted entries",
       ],

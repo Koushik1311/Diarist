@@ -59,3 +59,18 @@ export const updateSubscriptionData = async ({
 
   return { updateData };
 };
+
+export const fetchEntries = async () => {
+  const supabase = browserClient();
+
+  const { data: entriesData, error: entriesError } = await supabase
+    .from("subscriptions")
+    .select("entries")
+    .single();
+
+  if (entriesError) {
+    return { entriesError };
+  }
+
+  return { entriesData };
+};

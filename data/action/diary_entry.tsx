@@ -35,10 +35,10 @@ const getAllRecords = async (year?: number, month?: number) => {
     return [];
   }
 
-  return data as DiaryTypes[];
+  return data;
 };
 
-const getSingleRecord = async (id: number) => {
+const getSingleRecord = async (id: string) => {
   const supabase = createClient();
   const { data, error } = await supabase
     .from("diary_entries")
@@ -50,7 +50,7 @@ const getSingleRecord = async (id: number) => {
     console.log("Error fetching diary record: ", error.message);
   }
 
-  return data as DiaryTypes;
+  return data;
 };
 
 const insertRecord = async (userId: string) => {
@@ -72,7 +72,7 @@ const insertRecord = async (userId: string) => {
   return data;
 };
 
-const updateContentField = async (id: number, content: string) => {
+const updateContentField = async (id: string, content: string) => {
   const supabase = browserClient();
 
   const { data, error } = await supabase

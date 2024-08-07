@@ -1,4 +1,4 @@
-export const sortEntries = (entries: DiaryEntry[]) => {
+export const sortEntries = (entries: DiaryEntryType[]) => {
   const sortedEntries = entries
     .slice()
     .sort(

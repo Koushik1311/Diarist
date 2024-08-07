@@ -1,6 +1,7 @@
 "use client";
 
-import { createEntry } from "@/helper/entry-creation";
+import { getUserOnClient } from "@/data/client/user";
+import { createTimeCapsule } from "@/helper/time-capsule-creation";
 import { getLocalYear } from "@/utils/local-day";
 import { useRouter } from "next/navigation";
 import React from "react";
@@ -9,10 +10,9 @@ import { toast } from "sonner";
 type Props = {
   children: React.ReactNode;
   className: string;
-  userId: string;
 };
 
-export default function AddEntryButton({ children, className, userId }: Props) {
+export default function AddTimeCapsuleButton({ children, className }: Props) {
   const router = useRouter();
 
   const insertEntry = async (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -21,16 +21,19 @@ export default function AddEntryButton({ children, className, userId }: Props) {
     const loadingToastId = toast.loading("Creating entry...");
 
     try {
-      const { entryData, error } = await createEntry(userId);
+      const user = await getUserOnClient();
+      const { timeCapsuleEntry, error } = await createTimeCapsule(user?.id!);
       if (error) {
-        console.error("Error inserting record.", error);
+        console.error("Error inserting Time Capsule.", error);
         toast.info(error, { id: loadingToastId });
       }
 
-      if (entryData) {
-        const lastRecord = entryData[entryData.length - 1];
+      if (timeCapsuleEntry) {
+        const lastRecord = timeCapsuleEntry[timeCapsuleEntry.length - 1];
         router.push(`/diary/${getLocalYear()}/${lastRecord.id}`);
-        toast.success("Entry created successfully!", { id: loadingToastId });
+        toast.success("Time Capsule created successfully!", {
+          id: loadingToastId,
+        });
       }
     } catch (error) {
       console.error("Error inserting record: ", error);

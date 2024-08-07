@@ -10,12 +10,16 @@ import {
 } from "@supabase/supabase-js";
 import TimeCapsule from "./left-list/TimeCapsule";
 import NormalEntry from "./left-list/NormalEntry";
+import UnlockedTimeCapsule from "./left-list/UnlockedTimeCapsule";
 
 export default function EntryList() {
-  const [entryRecords, setEntryRecords] = useState<DiaryEntry[]>([]);
-  const [timeCapsuleEntries, setTimeCapsuleEntries] = useState<DiaryEntry[]>(
-    []
-  );
+  const [entryRecords, setEntryRecords] = useState<DiaryEntryType[]>([]);
+  const [timeCapsuleEntries, setTimeCapsuleEntries] = useState<
+    TimeCapsuleType[]
+  >([]);
+  const [unlockedTimeCapsuleEntries, setUnlockedTimeCapsuleEntries] = useState<
+    TimeCapsuleType[]
+  >([]);
 
   const containerRef = useRef<HTMLDivElement | null>(null);
 
@@ -32,7 +36,7 @@ export default function EntryList() {
           schema: "public",
           table: "diary_entries",
         },
-        (payload: RealtimePostgresInsertPayload<DiaryEntry>) => {
+        (payload: RealtimePostgresInsertPayload<DiaryEntryType>) => {
           setEntryRecords((prevRecords) => [payload.new, ...prevRecords]);
         }
       )
@@ -43,7 +47,7 @@ export default function EntryList() {
           schema: "public",
           table: "diary_entries",
         },
-        (payload: RealtimePostgresUpdatePayload<DiaryEntry>) => {
+        (payload: RealtimePostgresUpdatePayload<DiaryEntryType>) => {
           setEntryRecords((prevRecords) =>
             prevRecords.map((record) =>
               record.id === payload.new.id ? payload.new : record
@@ -58,7 +62,7 @@ export default function EntryList() {
           schema: "public",
           table: "diary_entries",
         },
-        (payload: RealtimePostgresDeletePayload<DiaryEntry>) => {
+        (payload: RealtimePostgresDeletePayload<DiaryEntryType>) => {
           setEntryRecords((prevRecords) =>
             prevRecords.filter((record) => record.id !== payload.old.id)
           );
@@ -71,7 +75,7 @@ export default function EntryList() {
           schema: "public",
           table: "time_capsules",
         },
-        (payload: RealtimePostgresInsertPayload<TimeCapsule>) => {
+        (payload: RealtimePostgresInsertPayload<TimeCapsuleType>) => {
           setTimeCapsuleEntries((prevEntry) => [payload.new, ...prevEntry]);
         }
       )
@@ -82,7 +86,7 @@ export default function EntryList() {
           schema: "public",
           table: "time_capsules",
         },
-        (payload: RealtimePostgresUpdatePayload<TimeCapsule>) => {
+        (payload: RealtimePostgresUpdatePayload<TimeCapsuleType>) => {
           setTimeCapsuleEntries((prevEntry) =>
             prevEntry.map((record) =>
               record.id === payload.new.id ? payload.new : record
@@ -97,7 +101,7 @@ export default function EntryList() {
           schema: "public",
           table: "time_capsules",
         },
-        (payload: RealtimePostgresDeletePayload<TimeCapsule>) => {
+        (payload: RealtimePostgresDeletePayload<TimeCapsuleType>) => {
           setTimeCapsuleEntries((prevEntry) =>
             prevEntry.filter((record) => record.id !== payload.old.id)
           );
@@ -145,6 +149,11 @@ export default function EntryList() {
       <TimeCapsule
         timeCapsuleEntries={timeCapsuleEntries}
         setTimeCapsuleEntries={setTimeCapsuleEntries}
+      />
+
+      <UnlockedTimeCapsule
+        unlockedTimeCapsuleEntries={unlockedTimeCapsuleEntries}
+        setUnlockedTimeCapsuleEntries={setUnlockedTimeCapsuleEntries}
       />
     </div>
   );

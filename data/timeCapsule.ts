@@ -15,7 +15,7 @@ export const fetchAllTimeCapsuleEntries = async () => {
   return { data };
 };
 
-export const fetchTimeCapsuleEntry = async () => {
+export const fetchTimeCapsuleEntry = async (id: string) => {
   const supabase = browserClient();
 
   const now = new Date();
@@ -23,9 +23,11 @@ export const fetchTimeCapsuleEntry = async () => {
   const timestamp = now.toISOString();
 
   const { data, error } = await supabase
-    .from("diary_entries")
+    .from("time_capsules")
     .select()
-    .lt("unlock_date", timestamp);
+    .lte("unlock_date", timestamp)
+    .eq("id", id)
+    .single();
 
   if (error) {
     console.error("Error getting TimeCapsuleEntry: ", error.message);

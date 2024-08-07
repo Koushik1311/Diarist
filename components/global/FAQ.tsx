@@ -10,14 +10,14 @@ import {
 const faqData = [
   {
     id: "item-1",
-    question: "Is it accessible?",
-    answer: "Yes. It adheres to the WAI-ARIA design pattern.",
+    question: "Is there a free trial available?",
+    answer:
+      "We currently do not offer a free trial, but you can explore our services with our flexible subscription plans.",
   },
   {
     id: "item-2",
     question: "How can I get support?",
-    answer:
-      "You can contact our support team via email or phone. Our support hours are from Monday to Friday, 9 AM to 5 PM.",
+    answer: "You can send us your problem through the conact form.",
   },
   {
     id: "item-3",
