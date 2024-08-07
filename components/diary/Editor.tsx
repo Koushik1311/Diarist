@@ -25,7 +25,7 @@ const gloriaHallelujah = Gloria_Hallelujah({
 });
 
 type Props = {
-  id: number;
+  id: string;
   content: string;
 };
 
@@ -48,7 +48,7 @@ export default function Editor({ id, content }: Props) {
     }
   }, [textFont]);
 
-  const updateContentField = (id: number, content: string) => {
+  const updateContentField = (id: string, content: string) => {
     return supabase
       .from("diary_entries")
       .update({ content: content })
