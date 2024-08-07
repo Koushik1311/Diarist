@@ -47,35 +47,35 @@ export type Database = {
       diary_entries_moods: {
         Row: {
           created_at: string
-          diary_entry_id: string
-          id: number
-          mood_id: number
+          diary_entry_id: string | null
+          id: string
+          mood_id: number | null
         }
         Insert: {
           created_at?: string
-          diary_entry_id: string
-          id?: number
-          mood_id: number
+          diary_entry_id?: string | null
+          id?: string
+          mood_id?: number | null
         }
         Update: {
           created_at?: string
-          diary_entry_id?: string
-          id?: number
-          mood_id?: number
+          diary_entry_id?: string | null
+          id?: string
+          mood_id?: number | null
         }
         Relationships: [
-          {
-            foreignKeyName: "diarry_entries_moods_mood_id_fkey"
-            columns: ["mood_id"]
-            isOneToOne: false
-            referencedRelation: "moods"
-            referencedColumns: ["id"]
-          },
           {
             foreignKeyName: "diary_entries_moods_diary_entry_id_fkey"
             columns: ["diary_entry_id"]
             isOneToOne: false
             referencedRelation: "diary_entries"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "diary_entries_moods_mood_id_fkey"
+            columns: ["mood_id"]
+            isOneToOne: false
+            referencedRelation: "moods"
             referencedColumns: ["id"]
           },
         ]
@@ -211,6 +211,42 @@ export type Database = {
             columns: ["user_id"]
             isOneToOne: false
             referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      time_capsules_moods: {
+        Row: {
+          created_at: string
+          id: string
+          mood_id: number | null
+          time_capsule_id: string | null
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          mood_id?: number | null
+          time_capsule_id?: string | null
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          mood_id?: number | null
+          time_capsule_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "time_capsules_moods_mood_id_fkey"
+            columns: ["mood_id"]
+            isOneToOne: false
+            referencedRelation: "moods"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "time_capsules_moods_time_capsule_id_fkey"
+            columns: ["time_capsule_id"]
+            isOneToOne: false
+            referencedRelation: "time_capsules"
             referencedColumns: ["id"]
           },
         ]
