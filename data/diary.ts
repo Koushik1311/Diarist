@@ -139,7 +139,7 @@ const getAllRecords = async (year?: number, month?: number) => {
 };
 
 // Get single record on client
-const getRecordTitle = async (id: number) => {
+const getRecordTitle = async (id: string) => {
   const supabase = browserClient();
   const { data, error } = await supabase
     .from("diary_entries")
@@ -154,7 +154,7 @@ const getRecordTitle = async (id: number) => {
   return data;
 };
 
-const deleteRecord = async (id: number) => {
+const deleteRecord = async (id: string) => {
   const supabase = browserClient();
   const { data, error } = await supabase
     .from("diary_entries")
