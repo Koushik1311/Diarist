@@ -23,16 +23,7 @@ const gloriaHallelujah = Gloria_Hallelujah({
   subsets: ["latin"],
 });
 
-type MoodType = {
-  id: number;
-  name: string;
-};
-
-type MoodsIdTypes = {
-  mood_id: number;
-};
-
-export default function ListedMoods({ id }: { id: number }) {
+export default function ListedMoods({ id }: { id: string }) {
   const [moods, setMoods] = useState<MoodType[]>([]);
 
   const supabase = browserClient();
@@ -47,9 +38,12 @@ export default function ListedMoods({ id }: { id: number }) {
           schema: "public",
           table: "diary_entries_moods",
         },
-        async (payload: RealtimePostgresInsertPayload<MoodsIdTypes>) => {
+        async (
+          payload: RealtimePostgresInsertPayload<DiaryEntriesMoodsType>
+        ) => {
           // Fetch the new mood data
-          const { data, error } = await getSingleMood(payload.new.mood_id);
+
+          const { data, error } = await getSingleMood(payload.new.mood_id!);
           if (error) {
             toast.error(`Error getting mood with ID ${payload.new.mood_id}.`);
             return;
@@ -58,7 +52,11 @@ export default function ListedMoods({ id }: { id: number }) {
           if (data) {
             setMoods((prevMoods) => [
               ...prevMoods,
-              { id: data[0].id, name: data[0].name },
+              {
+                id: data[0].id,
+                name: data[0].name,
+                created_at: data[0].created_at,
+              },
             ]);
           }
         }
@@ -80,7 +78,7 @@ export default function ListedMoods({ id }: { id: number }) {
 
     if (data) {
       const moodPromises = data.map(async (mood) => {
-        const response = await getSingleMood(mood.mood_id);
+        const response = await getSingleMood(mood.mood_id!);
         if (response.error) {
           toast.error(`Error getting mood with ID ${mood.mood_id}.`);
           return null;
@@ -134,7 +132,7 @@ export default function ListedMoods({ id }: { id: number }) {
           <HoverCard key={mood.id}>
             <HoverCardTrigger asChild>
               <Button
-                className="flex items-center gap-1 text-base text-zinc-900 px-[-14px]"
+                className="flex items-center gap-1 text-sm text-zinc-900 px-[-14px] h-6"
                 variant="link"
               >
                 <span>{mood.name}</span>

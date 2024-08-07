@@ -28,7 +28,7 @@ const gloriaHallelujah = Gloria_Hallelujah({
   subsets: ["latin"],
 });
 
-export default function OptionBtn({ id }: { id: number }) {
+export default function OptionBtn({ id }: { id: string }) {
   const dispatch = useAppDispatch();
   const textSize = useAppSelector((state) => state.textStyleReducer.text_size);
   const router = useRouter();
