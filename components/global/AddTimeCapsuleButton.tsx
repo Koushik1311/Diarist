@@ -30,7 +30,7 @@ export default function AddTimeCapsuleButton({ children, className }: Props) {
 
       if (timeCapsuleEntry) {
         const lastRecord = timeCapsuleEntry[timeCapsuleEntry.length - 1];
-        router.push(`/diary/${getLocalYear()}/${lastRecord.id}`);
+        router.push(`/diary/${getLocalYear()}/time-capsule/${lastRecord.id}`);
         toast.success("Time Capsule created successfully!", {
           id: loadingToastId,
         });
