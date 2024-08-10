@@ -34,7 +34,7 @@ export default function SaveAlert({
       toast.error(`Error: ${error.message}`, { id: loadingToastId });
     }
 
-    router.push(`/diary/${getLocalYear}`);
+    router.push(`/diary/${getLocalYear()}`);
     toast.success("Time capsule is saved.", { id: loadingToastId });
   };
 
