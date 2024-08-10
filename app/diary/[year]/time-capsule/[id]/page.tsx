@@ -2,13 +2,14 @@ import React from "react";
 import { Dancing_Script } from "next/font/google";
 import { getDay, getWeekday } from "@/utils/local-date-&-time";
 import TitleInput from "@/components/diary/TitleInput";
-import { NotebookPen } from "lucide-react";
+import { NotebookPen, Timer } from "lucide-react";
 import OptionBtn from "@/components/diary/OptionBtn";
 import { fetchInitialTimeCapsuleEntry } from "@/data/server/timeCapsule";
 import { notFound } from "next/navigation";
 import TimeCapsuleEditor from "@/components/time-capsule/TimeCapsuleEditor";
 import Moods from "@/components/time-capsule/Moods";
 import { DateTimePicker } from "@/components/time-capsule/DateTimePicker";
+import TimeCapsuleTitleInput from "@/components/time-capsule/TimeCapsuleTitleEntry";
 
 const dancing_script = Dancing_Script({ subsets: ["latin"] });
 
@@ -28,9 +29,9 @@ export default async function TimeCapsulePage({
       <div className="flex justify-between items-start pl-10 md:px-6 py-2">
         <div className="flex items-start">
           <div className="w-4 h-4">
-            <NotebookPen className="w-4 h-4 mr-1 mt-1" />
+            <Timer className="w-4 h-4 mr-1 mt-1" />
           </div>
-          <TitleInput id={data.id} title={data.title!} />
+          <TimeCapsuleTitleInput id={data.id} title={data.title!} />
         </div>
         <OptionBtn id={data.id} />
       </div>
