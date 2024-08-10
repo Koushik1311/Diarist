@@ -15,6 +15,8 @@ import { notFound } from "next/navigation";
 import TimeCapsuleEditor from "@/components/time-capsule/TimeCapsuleEditor";
 import Moods from "@/components/time-capsule/Moods";
 import { DateTimePicker } from "@/components/time-capsule/DateTimePicker";
+import TimeCapsuleContent from "@/components/time-capsule/TimeCapsuleContent";
+import ShowMoods from "@/components/time-capsule/ShowMoods";
 
 const dancing_script = Dancing_Script({ subsets: ["latin"] });
 
@@ -64,12 +66,12 @@ export default async function TimeCapsulePage({
             </h2>
           </div>
           {/* Moods */}
-          <Moods id={data.id} />
+          <ShowMoods id={data.id} />
           {/* Editor */}
           <div className="border-b border-zinc-200 mt-3" />
 
-          {/* <TimeCapsuleEditor id={data.id} content={data.content!} /> */}
-          <p>{data.content}</p>
+          <TimeCapsuleContent content={data.content!} />
+          {/* <p>{data.content}</p> */}
         </div>
       </div>
     </div>
