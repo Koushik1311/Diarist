@@ -58,8 +58,6 @@ export default function UnlockedTimeCapsule({
 
   const sortedTimeCapsuleEntries = sortEntries(unlockedTimeCapsuleEntries);
 
-  console.log("Show entry:", showEntry);
-
   return (
     <div>
       <div className="pl-3 pr-1 text-xs font-medium text-zinc-500 mt-2 h-8 flex items-center justify-between rounded-sm">
