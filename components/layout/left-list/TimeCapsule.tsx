@@ -2,7 +2,7 @@
 
 import AddTimeCapsuleButton from "@/components/global/AddTimeCapsuleButton";
 import { fetchLockedTimeCapsule } from "@/data/client/time-capsule";
-import { fetchAllTimeCapsuleEntries } from "@/data/timeCapsule";
+
 import { cn } from "@/lib/utils";
 import { getLocalYear } from "@/utils/local-day";
 import { getFromLocalStorage, saveToLocalStorage } from "@/utils/localStorage";
@@ -159,31 +159,57 @@ export default function TimeCapsule({
             );
             const remainingTime = currentTimes[entry.id];
 
+            const enable = entry.unlock_date === null ? true : false;
+
             return (
               <div key={index}>
-                <Link
-                  key={index}
-                  href={`/diary/${getLocalYear()}/time-capsule/${entry.id}`}
-                  className={cn(
-                    "h-8 hover:bg-zinc-200/60 flex items-center px-3 rounded-sm w-full",
-                    isActive && "bg-zinc-200/50"
-                  )}
-                >
-                  <div className="text-sm w-full">
-                    <div className="flex items-center gap-2 font-medium text-zinc-600">
-                      <Timer className="w-4 h-4" />
-                      <p className="flex-1 truncate">{entry.title}</p>
-                      {remainingTime ? (
-                        <p className="truncate text-xs">
-                          {remainingTime.days}d {remainingTime.hours}h{" "}
-                          {remainingTime.minutes}m {remainingTime.seconds}s
-                        </p>
-                      ) : (
-                        <></>
-                      )}
+                {enable ? (
+                  <Link
+                    key={index}
+                    href={`/diary/${getLocalYear()}/time-capsule/${entry.id}`}
+                    className={cn(
+                      "h-8 hover:bg-zinc-200/60 flex items-center px-3 rounded-sm w-full",
+                      isActive && "bg-zinc-200/50"
+                    )}
+                  >
+                    <div className="text-sm w-full">
+                      <div className="flex items-center gap-2 font-medium text-zinc-600">
+                        <Timer className="w-4 h-4" />
+                        <p className="flex-1 truncate">{entry.title}</p>
+                        {remainingTime ? (
+                          <p className="truncate text-xs">
+                            {remainingTime.days}d {remainingTime.hours}h{" "}
+                            {remainingTime.minutes}m {remainingTime.seconds}s
+                          </p>
+                        ) : (
+                          <></>
+                        )}
+                      </div>
+                    </div>
+                  </Link>
+                ) : (
+                  <div
+                    key={index}
+                    className={cn(
+                      "h-8 flex items-center px-3 rounded-sm w-full cursor-not-allowed"
+                    )}
+                  >
+                    <div className="text-sm w-full">
+                      <div className="flex items-center gap-2 font-medium text-zinc-400">
+                        <Timer className="w-4 h-4" />
+                        <p className="flex-1 truncate">{entry.title}</p>
+                        {remainingTime ? (
+                          <p className="truncate text-xs text-zinc-600">
+                            {remainingTime.days}d {remainingTime.hours}h{" "}
+                            {remainingTime.minutes}m {remainingTime.seconds}s
+                          </p>
+                        ) : (
+                          <></>
+                        )}
+                      </div>
                     </div>
                   </div>
-                </Link>
+                )}
               </div>
             );
           })}
