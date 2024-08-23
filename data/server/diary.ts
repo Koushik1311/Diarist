@@ -14,3 +14,15 @@ export const fetchSingleEntry = async (id: string) => {
 
   return data;
 };
+
+export const fetchDiaryEntries = async () => {
+  const supabase = createClient();
+
+  const { data, error } = await supabase.from("diary_entries").select();
+
+  if (error) {
+    return { error };
+  }
+
+  return { data };
+};
