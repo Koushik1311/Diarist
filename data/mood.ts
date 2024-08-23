@@ -39,16 +39,15 @@ const getDiaryEntriesByMoodId = async (moodId: number) => {
     .eq("mood_id", moodId);
 
   if (moodIdError) {
-    console.error(moodIdError);
     return [];
   }
 
-  // const ids = moodIds.map((id) => id.);
+  const ids = moodIds.map((id) => id.diary_entry_id);
 
   const { data: diaryEntry, error: diaryEntryError } = await supabase
     .from("diary_entries")
     .select("*")
-    .in("id", moodIds);
+    .in("id", ids);
 
   if (diaryEntryError) {
     console.error("Error fetching data:", diaryEntryError.message);
