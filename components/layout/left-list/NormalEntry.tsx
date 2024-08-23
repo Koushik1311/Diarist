@@ -28,7 +28,7 @@ type Props = {
 export default function NormalEntry({ entryRecords, setEntryRecords }: Props) {
   const [year, setYear] = useState<number>();
   const [month, setMonth] = useState<number>();
-  const [filterBox, setFilterBox] = useState<string>("FilterByMood");
+  const [filterBox, setFilterBox] = useState<string>("Mood");
   const [moods, setMoods] = useState<MoodTypes[]>([]);
   const [searchQuery, setSearchQuery] = useState<string>("");
   const inputRef = useRef<HTMLInputElement | null>(null);
@@ -115,7 +115,7 @@ export default function NormalEntry({ entryRecords, setEntryRecords }: Props) {
           <p>Diary Entry</p>
         </button>
 
-        {/* <DropdownMenu>
+        <DropdownMenu>
           <DropdownMenuTrigger className="flex items-center gap-2 border-none ring-0 focus:outline-none">
             <span>{filterBox}</span>
             <ChevronDown className="w-4 h-4" />
@@ -140,7 +140,7 @@ export default function NormalEntry({ entryRecords, setEntryRecords }: Props) {
               </DropdownMenuItem>
             ))}
           </DropdownMenuContent>
-        </DropdownMenu> */}
+        </DropdownMenu>
 
         {/* Month & Year */}
         <DropdownMenu>
