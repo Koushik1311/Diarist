@@ -4,7 +4,13 @@ import Placeholder from "@tiptap/extension-placeholder";
 import { BubbleMenu, EditorContent, Extension, useEditor } from "@tiptap/react";
 import Underline from "@tiptap/extension-underline";
 import StarterKit from "@tiptap/starter-kit";
-import { Bold, Italic, Save, Underline as UnderlineIcon } from "lucide-react";
+import {
+  Bold,
+  CloudUpload,
+  Italic,
+  Save,
+  Underline as UnderlineIcon,
+} from "lucide-react";
 import React, { useEffect, useState } from "react";
 import { debounce } from "lodash";
 import { browserClient } from "@/utils/supabase/client";
@@ -13,6 +19,7 @@ import { useAppSelector } from "@/redux/store";
 
 import { Kalam, Gloria_Hallelujah } from "next/font/google";
 import { GeistSans } from "geist/font/sans";
+import { toast } from "sonner";
 
 const kalam = Kalam({
   weight: "400",
@@ -110,7 +117,7 @@ export default function Editor({ id, content }: Props) {
           updateContentField(id, newContent);
         }
       }
-    }, 1000);
+    }, 100);
 
     window.addEventListener("mousemove", handleContentUpdate);
 
@@ -123,6 +130,21 @@ export default function Editor({ id, content }: Props) {
 
   return (
     <div>
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{
+          opacity: newContent !== currentContent ? 1 : 0,
+          transition: { duration: 0.9 },
+        }}
+        style={{
+          cursor: newContent !== currentContent ? "pointer" : "none",
+          zIndex: newContent !== currentContent ? 1 : -5,
+        }}
+        className="fixed top-2 right-7 md:bottom-12 md:right-16 h-6 px-2 flex items-center justify-center rounded-sm gap-1"
+      >
+        <CloudUpload className="text-zinc-800 w-5 h-5" />
+        <span>Save</span>
+      </motion.div>
       {editor && (
         <BubbleMenu
           editor={editor}
@@ -169,21 +191,6 @@ export default function Editor({ id, content }: Props) {
         }}
         className="flex-1 w-full"
       />
-
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{
-          opacity: newContent !== currentContent ? 1 : 0,
-          transition: { duration: 0.9 },
-        }}
-        style={{
-          cursor: newContent !== currentContent ? "pointer" : "none",
-          zIndex: newContent !== currentContent ? 1 : -5,
-        }}
-        className="fixed bottom-5 right-7 md:bottom-12 md:right-16 w-14 h-14 bg-zinc-200 hover:bg-zinc-300 transition-colors flex items-center justify-center rounded-full"
-      >
-        <Save className="text-zinc-800" />
-      </motion.div>
     </div>
   );
 }
