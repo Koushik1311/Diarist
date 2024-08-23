@@ -3,7 +3,10 @@
 // import { fetchTimeCapsuleEntry } from "@/data/timeCapsule";
 import { DateTimePicker } from "@/components/time-capsule/DateTimePicker";
 import SaveAlert from "@/components/time-capsule/SaveAlert";
-import { fetchLockedTimeCapsule } from "@/data/client/time-capsule";
+import {
+  fetchIfNull,
+  fetchLockedTimeCapsule,
+} from "@/data/client/time-capsule";
 import { fetchTimeCapsuleEntry } from "@/data/server/timeCapsule";
 import { browserClient } from "@/utils/supabase/client";
 import { useEffect } from "react";
@@ -21,7 +24,7 @@ export default async function Page() {
 
   useEffect(() => {
     const getdata = async () => {
-      const { data, error } = await fetchLockedTimeCapsule();
+      const { data, error } = await fetchIfNull();
 
       if (error) {
         console.log(error);

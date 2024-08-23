@@ -38,3 +38,15 @@ export const fetchTimeCapsuleEntry = async (id: string) => {
 
   return { data };
 };
+
+export const fetchTimeCapsules = async () => {
+  const supabase = createClient();
+
+  const { data, error } = await supabase.from("time_capsules").select();
+
+  if (error) {
+    return { error };
+  }
+
+  return { data };
+};
