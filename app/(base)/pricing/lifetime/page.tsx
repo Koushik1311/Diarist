@@ -8,7 +8,7 @@ export default async function LifetimePricingPage() {
 
   return (
     <div className="flex items-center justify-center lg:h-[90vh]">
-      <LifetimeAccess isUser={isUser} />
+      <LifetimeAccess isUser={isUser} userId={user?.id!} />
     </div>
   );
 }

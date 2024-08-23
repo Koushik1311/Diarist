@@ -1,4 +1,3 @@
-import SubLinks from "@/components/subscription/SubLinks";
 import { getUser } from "@/data/User";
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
@@ -14,7 +13,7 @@ export default async function OnboardingLayout({
   const { data } = await supabase
     .from("subscriptions")
     .select("id")
-    .eq("user_id", user?.id)
+    .eq("user_id", user?.id!)
     .single();
 
   if (data) {

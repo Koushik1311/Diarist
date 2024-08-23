@@ -1,10 +1,12 @@
 import GetStartedBtn from "@/components/global/GetStartedBtn";
 import Image from "next/image";
-import Features from "@/components/home/Features";
 import BundlePricing from "@/components/subscription/BundlePricing";
 import FAQ from "@/components/global/FAQ";
 import { getUser } from "@/data/User";
 import { redirect } from "next/navigation";
+import YourPersonalDiaryApp from "@/components/home/YourPersonalDiaryApp";
+import { merriweather } from "@/utils/google-fonts";
+import FilterSection from "@/components/home/FilterSection";
 
 export default async function Index() {
   const user = await getUser();
@@ -14,17 +16,7 @@ export default async function Index() {
   }
 
   return (
-    // <div className="flex-1 w-full flex flex-col gap-20 items-center">
-    //   <nav className="w-full flex justify-center border-b border-b-foreground/10 h-16">
-    //     <div className="w-full max-w-4xl flex justify-between items-center p-3 text-sm">
-    //       <DeployButton />
-    //       {isSupabaseConnected && <AuthButton />}
-    //     </div>
-    //   </nav>
-
-    //   <p>This is new Home page</p>
-    // </div>
-    <main className="container">
+    <main className="container px-10 md:px-16 lg:px-0 max-w-[1150px]">
       <section className="mt-20">
         {/* Hero */}
         <div className="flex flex-col items-center justify-center gap-3 md:gap-5">
@@ -46,20 +38,37 @@ export default async function Index() {
         <GetStartedBtn className="mt-6 md:mt-8 flex mx-auto px-7 py-6" />
       </section>
 
+      {/* App Image */}
       <section className="flex items-center justify-center mt-12">
-        <div className="shadow-[0px_19px_84px_1px_#ddd6fe] w-full h-full lg:w-[80%]">
+        <div className="shadow-[0px_19px_84px_1px_#ddd6fe] w-full h-full lg:w-[900px]">
           <Image
-            src="/diary-image.jpg"
-            width={1024}
-            height={800}
+            src="/font.png"
+            width={2879}
+            height={1574}
             quality={100}
+            priority
             alt="Diary Image"
-            className="w-full h-full rounded-lg"
+            className="w-[900px] h-auto rounded-lg"
           />
         </div>
       </section>
 
-      <Features />
+      <section className="flex items-center justify-center mt-20 lg:mt-32">
+        {/* <YourPersonalDiaryApp /> */}
+        <YourPersonalDiaryApp />
+      </section>
+
+      <section className="flex flex-col items-center justify-center mt-20 lg:mt-32 max-w-[980px] mx-auto">
+        <p
+          className={`${merriweather.className} text-xl font-semibold text-gray-700 md:w-[700px] text-center mt-5`}
+        >
+          &apos;&apos;Your Journal Adapts to Your Preferences. It&apos;s as
+          Focused or as Comprehensive as You Need It to Be.&apos;&apos;
+        </p>
+        <FilterSection />
+      </section>
+
+      {/* <Features /> */}
 
       <section className="mt-24">
         <h2 className="text-center text-[28px] md:text-3xl lg:text-5xl font-semibold text-violet-500">

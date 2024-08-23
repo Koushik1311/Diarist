@@ -1,7 +1,6 @@
-import { DiaryEntriesMoodsTypes } from "@/types/diaryEntriesMoods.types";
 import { browserClient } from "@/utils/supabase/client";
 
-const insertRecord = async (diaryEntryId: number, moodId: number) => {
+const insertRecord = async (diaryEntryId: string, moodId: number) => {
   const supabase = browserClient();
 
   const user = await supabase.auth.getUser();
@@ -22,7 +21,7 @@ const insertRecord = async (diaryEntryId: number, moodId: number) => {
   }
 };
 
-const getMoodId = async (diaryEntryId: number) => {
+const getMoodId = async (diaryEntryId: string) => {
   const supabase = browserClient();
 
   const { data, error } = await supabase
@@ -38,7 +37,7 @@ const getMoodId = async (diaryEntryId: number) => {
   return { data };
 };
 
-const removeMood = async (diaryEntryId: number, moodId: number) => {
+const removeMood = async (diaryEntryId: string, moodId: number) => {
   const supabase = browserClient();
 
   const response = await supabase

@@ -35,5 +35,5 @@ export const getAllRecords = async (year?: number, month?: number) => {
     return [];
   }
 
-  return data as DiaryTypes[];
+  return data;
 };

@@ -12,7 +12,7 @@ export default function TitleInput({
   id,
   title,
 }: {
-  id: number;
+  id: string;
   title: string;
 }) {
   const [inputTitle, setInputTitle] = useState(title);
@@ -39,7 +39,7 @@ export default function TitleInput({
     }
 
     if (data) {
-      setCheckTitle(data?.title);
+      setCheckTitle(data?.title!);
     }
   };
 

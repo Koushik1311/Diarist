@@ -67,8 +67,9 @@ export default async function BundlePricing({ isUser }: { isUser?: boolean }) {
 
   return (
     <div className="flex flex-col items-center">
-      <h2 className="text-center text-[28px] md:text-3xl lg:text-5xl font-semibold text-violet-500">
-        Bundle Pricing
+      <h2 className="text-center text-lg md:text-2xl mt-10 lg:text-2xl font-medium text-violet-500 md:w-[700px] mx-auto">
+        Flexible Bundles to Suit Your Needs—Choose the Right Amount of Entries
+        for Your Personal Journey.
       </h2>
       <div className="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-9 w-full max-w-6xl">
         {bundles.map((bundle, index) => (

@@ -1,7 +1,7 @@
-import { DiaryTypes } from "@/types/diary.types";
 import { getToday } from "@/utils/local-day";
 import { browserClient } from "@/utils/supabase/client";
 import { endOfDay, startOfDay } from "date-fns";
+import { DiaryTypes } from "@/types/diary.types";
 
 // Insert Diary Entry
 const insertRecord = async (userId: string) => {
@@ -88,7 +88,7 @@ const insertRecord = async (userId: string) => {
   const { data, error } = await supabase
     .from("diary_entries")
     .insert({
-      title: `Diary Entry ${day}`,
+      title: `Diary New ${day}`,
       user_id: userId,
     })
     .select();
@@ -101,8 +101,45 @@ const insertRecord = async (userId: string) => {
   return { data };
 };
 
+const getAllRecords = async (year?: number, month?: number) => {
+  const supabase = browserClient();
+
+  let startDate: Date, endDate: Date;
+
+  if (year && month) {
+    startDate = new Date(year, month - 1, 1);
+    endDate = new Date(year, month, 0);
+    endDate.setHours(23, 59, 59, 999);
+  } else {
+    const currentDate = new Date();
+    startDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
+    endDate = new Date(
+      currentDate.getFullYear(),
+      currentDate.getMonth() + 1,
+      0
+    );
+    endDate.setHours(23, 59, 59, 999);
+  }
+
+  const formattedStartOfMonth = startDate.toISOString();
+  const formattedEndOfMonth = endDate.toISOString();
+
+  const { data, error } = await supabase
+    .from("diary_entries")
+    .select("*")
+    .gte("created_at", formattedStartOfMonth)
+    .lte("created_at", formattedEndOfMonth);
+
+  if (error) {
+    console.log("Error fetching diary records: ", error.message);
+    return [];
+  }
+
+  return data;
+};
+
 // Get single record on client
-const getRecordTitle = async (id: number) => {
+const getRecordTitle = async (id: string) => {
   const supabase = browserClient();
   const { data, error } = await supabase
     .from("diary_entries")
@@ -117,7 +154,7 @@ const getRecordTitle = async (id: number) => {
   return data;
 };
 
-const deleteRecord = async (id: number) => {
+const deleteRecord = async (id: string) => {
   const supabase = browserClient();
   const { data, error } = await supabase
     .from("diary_entries")
@@ -132,5 +169,51 @@ const deleteRecord = async (id: number) => {
   return { data };
 };
 
+export const fetchTodaysEntry = async () => {
+  const supabase = browserClient();
+
+  const today = new Date();
+  const start = startOfDay(today);
+  const end = endOfDay(today);
+
+  const startDate = start.toISOString();
+  const endDate = end.toISOString();
+
+  const { data: entriesToday, error: entriesError } = await supabase
+    .from("diary_entries")
+    .select("id")
+    .gte("created_at", startDate)
+    .lte("created_at", endDate);
+
+  if (entriesError) {
+    console.error("Error: ", entriesError.message);
+    return { entriesError };
+  }
+
+  return { entriesToday };
+};
+
+export const insertEntry = async (userId: string) => {
+  const supabase = browserClient();
+
+  const day = getToday();
+
+  const { data: entryData, error: entryError } = await supabase
+    .from("diary_entries")
+    .insert({
+      title: `Diary Entry ${day}`,
+      user_id: userId,
+    })
+    .select();
+
+  if (entryError) {
+    console.error("Error inserting entry: ", entryError.message);
+
+    return { entryError };
+  }
+
+  return { entryData };
+};
+
 // Exports
-export { insertRecord, getRecordTitle, deleteRecord };
+export { insertRecord, getRecordTitle, deleteRecord, getAllRecords };
