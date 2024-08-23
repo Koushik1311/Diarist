@@ -1,12 +1,11 @@
 import {
+  BookLock,
   ChevronDown,
   CreditCard,
   Home,
   LogOut,
-  Menu,
   MessageCircle,
   Plus,
-  User,
 } from "lucide-react";
 import AddEntryButton from "../global/AddEntryButton";
 import {
@@ -111,13 +110,16 @@ export default async function LeftbarMenu() {
         <Home className="w-4 h-4" />
         <span className="text-sm">Home</span>
       </Link>
+      <Link
+        target="_blank"
+        href={`/diary/${getLocalYear()}/private-memory-vault`}
+        className="flex items-center gap-2 px-4 h-8 hover:bg-zinc-200 rounded-sm"
+      >
+        <BookLock className="w-4 h-4" />
+        <span className="text-sm">Private memory vault</span>
+      </Link>
 
       <EntryList />
-
-      <button className="pl-3 py-4 border-t border-zinc-200 text-left text-sm font-medium text-zinc-600 flex items-center gap-3">
-        <User className="w-4 h-4" />
-        <span>My account</span>
-      </button>
     </div>
   );
 }
