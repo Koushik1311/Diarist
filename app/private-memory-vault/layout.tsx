@@ -1,3 +1,4 @@
+import Leftbar from "@/components/layout/private-memory-vault/Leftbar";
 import { fetchSubscription } from "@/data/server/subscription";
 import { getUser } from "@/data/User";
 import { Metadata } from "next";
@@ -25,9 +26,14 @@ export default async function DiaryRootLayout({
   }
 
   return (
-    <>
+    <main className="flex">
       <Toaster position="top-right" duration={2000} />
+
+      <Leftbar />
+      <div className="border-r-[1.6px] border-zinc-200 h-screen" />
+
+      <div className="flex-1">{children}</div>
       {children}
-    </>
+    </main>
   );
 }
