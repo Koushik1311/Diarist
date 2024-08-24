@@ -7,7 +7,6 @@ import {
   MessageCircle,
   Plus,
 } from "lucide-react";
-import AddEntryButton from "../global/AddEntryButton";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -17,7 +16,6 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import Link from "next/link";
-import EntryList from "./EntryList";
 import { signOut } from "@/actions/auth";
 import { getLocalYear } from "@/utils/local-day";
 import { getUser } from "@/data/User";
@@ -98,12 +96,12 @@ export default async function LeftbarMenu() {
         </DropdownMenu>
 
         {/* Add button */}
-        <AddEntryButton
-          userId={user?.id!}
-          className="w-6 h-6 hover:bg-zinc-200 flex items-center justify-center rounded-sm"
-        >
-          <Plus className="h-5 w-5 text-zinc-600" />
-        </AddEntryButton>
+        {/* <AddEntryButton
+            userId={user?.id!}
+            className="w-6 h-6 hover:bg-zinc-200 flex items-center justify-center rounded-sm"
+          >
+            <Plus className="h-5 w-5 text-zinc-600" />
+          </AddEntryButton> */}
       </div>
       <Link
         href={`/diary/${getLocalYear()}`}
@@ -112,16 +110,8 @@ export default async function LeftbarMenu() {
         <Home className="w-4 h-4" />
         <span className="text-sm">Home</span>
       </Link>
-      <Link
-        target="_blank"
-        href={`/private-memory-vault`}
-        className="flex items-center gap-2 px-4 h-8 hover:bg-zinc-200 rounded-sm"
-      >
-        <BookLock className="w-4 h-4" />
-        <span className="text-sm">Private memory vault</span>
-      </Link>
 
-      <EntryList />
+      {/* <EntryList /> */}
     </div>
   );
 }
