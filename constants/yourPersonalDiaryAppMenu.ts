@@ -1,4 +1,4 @@
-import { Notebook, SmilePlus, Type, AlignJustify } from "lucide-react";
+import { Notebook, SmilePlus, Timer } from "lucide-react";
 
 export const YourPersonalDiaryAppMenu = [
   {
@@ -7,19 +7,13 @@ export const YourPersonalDiaryAppMenu = [
     icon: Notebook,
   },
   {
-    id: "title",
-    name: "Title",
-    icon: Type,
+    id: "time-capsule",
+    name: "Capsule",
+    icon: Timer,
   },
   {
-    id: "mood",
-    name: "Mood",
+    id: "private-memory-vault",
+    name: "Vault",
     icon: SmilePlus,
-  },
-  {
-    id: "text",
-    name: "Text",
-    icon: AlignJustify,
-    image: "./mood.png",
   },
 ] as const;

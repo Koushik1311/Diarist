@@ -6,7 +6,8 @@ import { getUser } from "@/data/User";
 import { redirect } from "next/navigation";
 import YourPersonalDiaryApp from "@/components/home/YourPersonalDiaryApp";
 import { merriweather } from "@/utils/google-fonts";
-import FilterSection from "@/components/home/FilterSection";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 export default async function Index() {
   const user = await getUser();
@@ -54,55 +55,86 @@ export default async function Index() {
       </section>
 
       <section className="flex items-center justify-center mt-20 lg:mt-32">
-        {/* <YourPersonalDiaryApp /> */}
         <YourPersonalDiaryApp />
       </section>
 
       <section className="flex flex-col items-center justify-center mt-20 lg:mt-32 max-w-[980px] mx-auto">
         <p
-          className={`${merriweather.className} text-xl font-semibold text-gray-700 md:w-[700px] text-center mt-5`}
+          className={`${merriweather.className} text-xl font-semibold text-violet-500 md:w-[700px] text-center mt-5`}
         >
-          &apos;&apos;Your Journal Adapts to Your Preferences. It&apos;s as
-          Focused or as Comprehensive as You Need It to Be.&apos;&apos;
+          “Your Journal Adapts to Your Preferences. It&apos;s as Focused or as
+          Comprehensive as You Need It to Be.”
         </p>
-        <FilterSection />
       </section>
 
       {/* <Features /> */}
 
-      <section className="mt-24">
-        <h2 className="text-center text-[28px] md:text-3xl lg:text-5xl font-semibold text-violet-500">
-          Special Lifetime Offer
-        </h2>
-        <p className="text-center text-lg md:text-xl text-slate-600 mt-2">
-          Capture your memories and thoughts with our exclusive discount.
-        </p>
+      <section className="mt-16 bg-gray-50 py-12 px-4 md:px-8 lg:px-16">
+        <div className="text-center">
+          <h2 className="text-[28px] md:text-3xl lg:text-4xl font-semibold text-violet-500 mb-8">
+            Special Lifetime Offer
+          </h2>
+        </div>
 
-        <div className="mt-8 flex flex-col items-center">
-          {/* Lifetime Discount */}
-          <div className="discount-box bg-violet-100 p-8 rounded-lg shadow-lg text-center max-w-md">
-            <h3 className="text-2xl md:text-3xl font-semibold text-violet-700">
-              $100 Off for the First 1000 Lifetime Users
-            </h3>
-            <p className="text-lg font-normal text-slate-500 mt-4">
-              Get a lifetime subscription for just $139 instead of $239. Limited
-              time offer for the first 1,000 users.
+        <div className="flex flex-col lg:flex-row justify-center items-center gap-10 lg:gap-16">
+          <Image
+            src="/offer_11545137.png"
+            width={200}
+            height={200}
+            quality={100}
+            priority={true}
+            alt="Discount"
+            className="w-32 lg:w-48 h-auto"
+          />
+          <div className="flex flex-col items-center lg:items-start gap-4 text-center lg:text-left">
+            <p className="text-xl md:text-2xl lg:text-3xl font-semibold text-slate-700">
+              $100 off for the first 1000 Lifetime Users
             </p>
-            <ul className="text-left text-lg font-normal text-slate-500 mt-4 list-disc list-inside">
-              <li>Lifetime access to all premium features</li>
-              <li>Can add a single entry per day</li>
-              <li>Unlimited storage for your diary entries</li>
-              <li>Access your diary from any device, anytime</li>
-              <li>Priority customer support</li>
-            </ul>
-            <GetStartedBtn className="mt-6 md:mt-8 px-7 py-4" />
+            <p className="text-sm md:text-base text-slate-500">
+              Sign up today for a lifetime membership!
+            </p>
+            <GetStartedBtn className="" />
           </div>
         </div>
       </section>
 
-      {/* Bundle Pricing Section */}
-      <section className="mt-24 flex items-center justify-center">
-        <BundlePricing />
+      <section className="mt-16 bg-gray-100 py-12 px-4 md:px-8 lg:px-16 rounded-lg shadow-lg">
+        <div className="text-center">
+          <h2 className="text-[28px] md:text-3xl lg:text-4xl font-semibold text-violet-500 mb-6">
+            Choose Your Plan
+          </h2>
+          <p className="text-lg md:text-xl lg:text-2xl text-gray-700 font-medium mb-8">
+            Get started with our bundle system or purches lifetime plan!
+          </p>
+        </div>
+
+        <div className="flex flex-col lg:flex-row justify-center items-center gap-8 lg:gap-16">
+          {/* Lifetime Membership Card */}
+          <div className="bg-white p-6 w-full lg:w-1/2 flex flex-col items-center text-center">
+            <h3 className="text-2xl font-semibold text-violet-500 mb-4">
+              Lifetime
+            </h3>
+            <p className="text-lg text-gray-600 mb-6">
+              One-time payment for lifetime access.
+            </p>
+            <Link href="/pricing/lifetime">
+              <Button>Explore Lifetime plans</Button>
+            </Link>
+          </div>
+
+          {/* Bundle Options Card */}
+          <div className="bg-white p-6 w-full lg:w-1/2 flex flex-col items-center text-center">
+            <h3 className="text-2xl font-semibold text-violet-500 mb-4">
+              Bundle Options
+            </h3>
+            <p className="text-lg text-gray-600 mb-6">
+              Choose from flexible bundles tailored to your needs.
+            </p>
+            <Link href="/pricing/bundle">
+              <Button>Explore Bundle Options</Button>
+            </Link>
+          </div>
+        </div>
       </section>
 
       <FAQ />
