@@ -42,7 +42,7 @@ const faqData = [
 export default function FAQ() {
   return (
     <section className="container mx-auto mt-24 pb-12 px-4 max-w-3xl">
-      <h2 className="text-3xl md:text-4xl lg:text-5xl font-semibold text-violet-500 mb-8 text-center">
+      <h2 className="text-[28px] md:text-3xl lg:text-4xl font-semibold text-violet-500 mb-8 text-center">
         Frequently Asked Questions
       </h2>
       <Accordion type="single" collapsible>

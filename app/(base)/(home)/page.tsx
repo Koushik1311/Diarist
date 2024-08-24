@@ -8,6 +8,7 @@ import YourPersonalDiaryApp from "@/components/home/YourPersonalDiaryApp";
 import { merriweather } from "@/utils/google-fonts";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { CalendarHeart, FileStack, MoveRight } from "lucide-react";
 
 export default async function Index() {
   const user = await getUser();
@@ -98,40 +99,50 @@ export default async function Index() {
         </div>
       </section>
 
-      <section className="mt-16 bg-gray-100 py-12 px-4 md:px-8 lg:px-16 rounded-lg shadow-lg">
-        <div className="text-center">
-          <h2 className="text-[28px] md:text-3xl lg:text-4xl font-semibold text-violet-500 mb-6">
+      <section className="mt-16 bg-gray-100 py-12 px-4 md:px-8 lg:px-16">
+        <div className="text-left">
+          <h2 className="text-[28px] md:text-3xl lg:text-4xl font-semibold text-violet-500 mb-3">
             Choose Your Plan
           </h2>
-          <p className="text-lg md:text-xl lg:text-2xl text-gray-700 font-medium mb-8">
+          <p className="text-lg text-gray-700 font-medium mb-8">
             Get started with our bundle system or purches lifetime plan!
           </p>
         </div>
 
-        <div className="flex flex-col lg:flex-row justify-center items-center gap-8 lg:gap-16">
+        <div className="flex flex-col lg:flex-row gap-8 lg:gap-16">
           {/* Lifetime Membership Card */}
-          <div className="bg-white p-6 w-full lg:w-1/2 flex flex-col items-center text-center">
-            <h3 className="text-2xl font-semibold text-violet-500 mb-4">
+          <div className="bg-white p-6 w-full lg:w-1/2 flex flex-col">
+            <CalendarHeart className="w-16 h-16 text-violet-500 mb-3" />
+            <h3 className="text-2xl font-semibold text-gray-800 mb-4">
               Lifetime
             </h3>
             <p className="text-lg text-gray-600 mb-6">
               One-time payment for lifetime access.
             </p>
-            <Link href="/pricing/lifetime">
-              <Button>Explore Lifetime plans</Button>
+            <Link
+              href="/pricing/lifetime"
+              className="hover:text-violet-500 transition-all flex items-center gap-3"
+            >
+              <span className="font-medium">Explore Lifetime Options</span>
+              <MoveRight />
             </Link>
           </div>
 
           {/* Bundle Options Card */}
-          <div className="bg-white p-6 w-full lg:w-1/2 flex flex-col items-center text-center">
-            <h3 className="text-2xl font-semibold text-violet-500 mb-4">
+          <div className="bg-white p-6 w-full lg:w-1/2 flex flex-col">
+            <FileStack className="w-16 h-16 text-violet-500 mb-3" />
+            <h3 className="text-2xl font-semibold text-gray-800 mb-4">
               Bundle Options
             </h3>
             <p className="text-lg text-gray-600 mb-6">
-              Choose from flexible bundles tailored to your needs.
+              Choose from flexible bundles.
             </p>
-            <Link href="/pricing/bundle">
-              <Button>Explore Bundle Options</Button>
+            <Link
+              href="/pricing/bundle"
+              className="hover:text-violet-500 transition-all flex items-center gap-3"
+            >
+              <span className="font-medium">Explore Bundle Options</span>
+              <MoveRight />
             </Link>
           </div>
         </div>
