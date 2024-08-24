@@ -23,20 +23,20 @@ const faqData = [
     id: "item-3",
     question: "What payment methods do you accept?",
     answer:
-      "We accept major credit cards (Visa, MasterCard, American Express) and PayPal for payments.",
+      "We accept major credit/debit cards (Visa, MasterCard, American Express), Alipay, WeChat Pay, and PayPal for payments.",
   },
   {
     id: "item-4",
     question: "Can I cancel my subscription?",
     answer:
-      "Yes, you can cancel your subscription at any time. Your current subscription will remain active until the end of the billing period.",
+      "We do not provide monthly or yearly subscription. So there is no need for cancel subscription.",
   },
-  {
-    id: "item-5",
-    question: "Is there a free trial available?",
-    answer:
-      "We currently do not offer a free trial, but you can explore our services with our flexible subscription plans.",
-  },
+  // {
+  //   id: "item-5",
+  //   question: "Is there a free trial available?",
+  //   answer:
+  //     "We currently do not offer a free trial, but you can explore our services with our flexible subscription plans.",
+  // },
 ];
 
 export default function FAQ() {

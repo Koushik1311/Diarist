@@ -21,17 +21,13 @@ const menuContent: MenuContent = {
     text: "Write about what happened in your daily journal.",
     image: "/journal.png",
   },
-  title: {
-    text: "Change your title to suit your day.",
-    image: "/title.png",
+  "time-capsule": {
+    text: "Create a time capsule for your future self.",
+    image: "/time-capsule.png",
   },
-  mood: {
-    text: "Add up to 5 moods that describe how your day was.",
+  "private-memory-vault": {
+    text: "Create your private entries.",
     image: "/mood.png",
-  },
-  text: {
-    text: "Change the text style and font to suit your preference.",
-    image: "/text.png",
   },
 };
 
@@ -58,10 +54,21 @@ export default function YourPersonalDiaryApp() {
               >
                 <menu.icon
                   className={cn(
-                    "w-5 h-5 group-hover:text-gray-800 transition duration-300",
-                    menuId === menu.id && "text-gray-800"
+                    `w-5 h-5 transition duration-300`,
+                    menuId === menu.id
+                      ? cn(
+                          menuId === "journal"
+                            ? "text-orange-500"
+                            : menuId === "time-capsule"
+                            ? "text-amber-500"
+                            : menuId === "private-memory-vault"
+                            ? "text-yellow-500"
+                            : "text-gray-400"
+                        )
+                      : "group-hover:text-gray-800"
                   )}
                 />
+
                 <span
                   className={cn(
                     "text-lg lg:text-2xl font-semibold group-hover:text-gray-800 transition duration-300",
