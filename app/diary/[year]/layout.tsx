@@ -6,7 +6,6 @@ import React from "react";
 
 export const metadata: Metadata = {
   title: "Diary",
-  description: "The fastest way to build apps with Next.js and Supabase",
 };
 
 export default async function DiaryLayout({
@@ -22,7 +21,7 @@ export default async function DiaryLayout({
   return (
     <main className="flex">
       <Leftbar />
-      <div className="border-r-[1.6px] border-violet-100 h-screen" />
+      <div className="border-r-[1.6px] border-zinc-200 h-screen" />
 
       <div className="flex-1">{children}</div>
     </main>
