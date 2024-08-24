@@ -64,9 +64,11 @@ export default async function LeftbarMenu() {
                     user?.user_metadata.full_name}
                 </p>
                 <p className="text-xs text-zinc-700 font-extralight">
-                  {subscription?.lifetime && <>Lifetime Plan . </>}
+                  <span>Lifetime: </span>
+                  {subscription?.lifetime === "none" && <></>}
                   {subscription?.lifetime === "premium" && <>Premium </>}
-                  <span>{subscription?.entries} entries</span>
+                  {subscription?.lifetime === "elite" && <>Elite </>}
+                  <span>. Entries: {subscription?.entries}</span>
                 </p>
               </div>
             </DropdownMenuItem>
@@ -112,7 +114,7 @@ export default async function LeftbarMenu() {
       </Link>
       <Link
         target="_blank"
-        href={`/diary/${getLocalYear()}/private-memory-vault`}
+        href={`/private-memory-vault`}
         className="flex items-center gap-2 px-4 h-8 hover:bg-zinc-200 rounded-sm"
       >
         <BookLock className="w-4 h-4" />
