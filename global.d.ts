@@ -12,4 +12,6 @@ declare global {
     DB["public"]["Tables"]["time_capsules_moods"]["Row"];
   type PrivateMemoryVaultType =
     DB["public"]["Tables"]["private_memory_vault"]["Row"];
+  type GoalsForTomorrowType =
+    DB["public"]["Tables"]["goals_for_tomorrow"]["Row"];
 }
