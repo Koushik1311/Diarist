@@ -195,7 +195,7 @@ export default function TimeCapsule({
                     )}
                   >
                     <div className="text-sm w-full">
-                      <div className="flex items-center gap-2 font-medium text-zinc-400">
+                      <div className="flex items-center gap-2 font-light text-zinc-400">
                         <Timer className="w-4 h-4" />
                         <p className="flex-1 truncate">{entry.title}</p>
                         {remainingTime ? (
