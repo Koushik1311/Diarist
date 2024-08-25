@@ -4,6 +4,7 @@ import {
   updateSubscriptionData,
 } from "@/data/client/subscription";
 import { fetchTodaysTimeCapsuleEntry } from "@/data/timeCapsule";
+import { fetchTodaysPrivateMemoryVaultEntry } from "@/data/client/private-memory-vault";
 
 export const createEntry = async (userId: string) => {
   const { subData, subError } = await fetchSubscription(userId);
@@ -19,8 +20,10 @@ export const createEntry = async (userId: string) => {
     const { entriesToday, entriesError } = await fetchTodaysEntry();
     const { todaysTimeCapsuleEntry, todaysTimeCapsuleEntryError } =
       await fetchTodaysTimeCapsuleEntry();
+    const { todaysVaultEntry, todaysVaultEntryError } =
+      await fetchTodaysPrivateMemoryVaultEntry();
 
-    if (entriesError || todaysTimeCapsuleEntryError) {
+    if (entriesError || todaysTimeCapsuleEntryError || todaysVaultEntryError) {
       return { error: "Error inserting entry." };
     }
 
@@ -28,8 +31,12 @@ export const createEntry = async (userId: string) => {
     const timeCapsuleEntryCount = todaysTimeCapsuleEntry
       ? todaysTimeCapsuleEntry.length
       : 0;
+    const vaultEntryCount = todaysVaultEntry ? todaysVaultEntry.length : 0;
 
-    if (entryLimit! >= entriesCount || entryLimit >= timeCapsuleEntryCount) {
+    // total entries by adding normal entry + time capsule entry + vault entry
+    const totalEntry = entriesCount + timeCapsuleEntryCount + vaultEntryCount;
+
+    if (entryLimit! >= totalEntry) {
       const { entryData, entryError } = await insertEntry(userId);
 
       if (entryError) {
