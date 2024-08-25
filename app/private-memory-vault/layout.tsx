@@ -33,7 +33,6 @@ export default async function DiaryRootLayout({
       <div className="border-r-[1.6px] border-zinc-200 h-screen" />
 
       <div className="flex-1">{children}</div>
-      {children}
     </main>
   );
 }
