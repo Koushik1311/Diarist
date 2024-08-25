@@ -10,4 +10,6 @@ declare global {
     DB["public"]["Tables"]["diary_entries_moods"]["Row"];
   type TimeCapsulseMoodsType =
     DB["public"]["Tables"]["time_capsules_moods"]["Row"];
+  type PrivateMemoryVaultType =
+    DB["public"]["Tables"]["private_memory_vault"]["Row"];
 }
