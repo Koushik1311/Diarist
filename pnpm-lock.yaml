@@ -169,8 +169,8 @@ importers:
         specifier: ^12.1.5
         version: 12.1.5(postcss@8.4.33)
       supabase:
-        specifier: ^1.187.10
-        version: 1.187.10
+        specifier: ^1.190.0
+        version: 1.190.0
 
 packages:
 
@@ -2012,8 +2012,8 @@ packages:
     engines: {node: '>=16 || 14 >=14.17'}
     hasBin: true
 
-  supabase@1.187.10:
-    resolution: {integrity: sha512-7Nc50xN0k/G5fX3bpa+ZaulBoK/i5jwdjXhiNzyZhUf8qEWQnSsT1LTidCvpzuGt+8Gi6G3aMAh/5GlRdBLIoQ==}
+  supabase@1.190.0:
+    resolution: {integrity: sha512-Ez07pA+xhffXbfWAF9PfE2teW95vINFPFAbTlXUChMh4Jjm0CYO7cgg4qSxJjmnylSB3R0uo36WFEKm1wUeupA==}
     engines: {npm: '>=8'}
     hasBin: true
 
@@ -3964,7 +3964,7 @@ snapshots:
       pirates: 4.0.6
       ts-interface-checker: 0.1.13
 
-  supabase@1.187.10:
+  supabase@1.190.0:
     dependencies:
       bin-links: 4.0.4
       https-proxy-agent: 7.0.5
