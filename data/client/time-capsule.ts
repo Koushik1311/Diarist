@@ -56,3 +56,17 @@ export const fetchUnlockedTimeCapsule = async () => {
 
   return { data };
 };
+
+export const deleteTimeCapsule = async (id: string) => {
+  const supabase = browserClient();
+  const { data, error } = await supabase
+    .from("time_capsules")
+    .delete()
+    .eq("id", id);
+
+  if (error) {
+    return { error: error.message };
+  }
+
+  return { data };
+};

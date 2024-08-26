@@ -27,7 +27,7 @@ const fetchTodaysPrivateMemoryVaultEntry = async () => {
   return { todaysVaultEntry };
 };
 
-const fetchAllPrivateMemoryVaultEntries = async (userId: string) => {
+const fetchAllPrivateMemoryVaultEntries = async () => {
   const supabase = browserClient();
   const {
     data: vaultRecords,
@@ -35,8 +35,7 @@ const fetchAllPrivateMemoryVaultEntries = async (userId: string) => {
     error: vaultError,
   } = await supabase
     .from("private_memory_vault")
-    .select("*", { count: "exact", head: true })
-    .eq("user_id", userId);
+    .select("*", { count: "exact" });
 
   if (vaultError) {
     return { vaultError };

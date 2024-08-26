@@ -42,7 +42,7 @@ export const createVaultEntry = async (userId: string, key: string) => {
 
     // get total vault entry count
     const { vaultTotalCount, vaultError } =
-      await fetchAllPrivateMemoryVaultEntries(userId);
+      await fetchAllPrivateMemoryVaultEntries();
 
     if (vaultError || vaultTotalCount === null) {
       return {

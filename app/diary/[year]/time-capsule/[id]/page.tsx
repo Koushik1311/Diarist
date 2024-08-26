@@ -1,15 +1,14 @@
 import React from "react";
 import { Dancing_Script } from "next/font/google";
 import { getDay, getWeekday } from "@/utils/local-date-&-time";
-import TitleInput from "@/components/diary/TitleInput";
-import { NotebookPen, Timer } from "lucide-react";
-import OptionBtn from "@/components/diary/OptionBtn";
+import { Timer } from "lucide-react";
 import { fetchInitialTimeCapsuleEntry } from "@/data/server/timeCapsule";
 import { notFound } from "next/navigation";
 import TimeCapsuleEditor from "@/components/time-capsule/TimeCapsuleEditor";
 import Moods from "@/components/time-capsule/Moods";
 import { DateTimePicker } from "@/components/time-capsule/DateTimePicker";
 import TimeCapsuleTitleInput from "@/components/time-capsule/TimeCapsuleTitleEntry";
+import OptionBtn from "@/components/time-capsule/OptionBtn";
 
 const dancing_script = Dancing_Script({ subsets: ["latin"] });
 

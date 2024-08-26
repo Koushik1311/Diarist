@@ -80,6 +80,35 @@ export type Database = {
           },
         ]
       }
+      goals_for_tomorrow: {
+        Row: {
+          created_at: string
+          goal: string
+          id: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          goal?: string
+          id?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          goal?: string
+          id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "goals_for_tomorrow_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       moods: {
         Row: {
           created_at: string

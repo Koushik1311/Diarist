@@ -19,6 +19,7 @@ import {
 import { getLocalMonth, getLocalYear } from "@/utils/local-day";
 import { cn } from "@/lib/utils";
 import { getFromLocalStorage, saveToLocalStorage } from "@/utils/localStorage";
+import { fetchAllPrivateMemoryVaultEntries } from "@/data/client/private-memory-vault";
 
 type Props = {
   vaultEntryRecords: PrivateMemoryVaultType[];
@@ -42,27 +43,27 @@ export default function VaultEntry({
     }
   }, []);
 
-  //   useEffect(() => {
-  //     const getData = async () => {
-  //         //   TODO: Get all vault records
-  //       let records;
-  //       if (year === undefined && month === undefined) {
-  //         records = await getAllRecords();
-  //       } else {
-  //         records = await getAllRecords(year, month);
-  //       }
-  //       setVaultEntryRecords(records);
-  //     };
+  useEffect(() => {
+    const getData = async () => {
+      const { vaultRecords, vaultError } =
+        await fetchAllPrivateMemoryVaultEntries();
 
-  //     getData();
-  //   }, [year, month]);
+      if (vaultError) {
+        setVaultEntryRecords([]);
+      }
 
-  //   const sortedRecords = vaultEntryRecords
-  //     .slice()
-  //     .sort(
-  //       (a, b) =>
-  //         new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
-  //     );
+      setVaultEntryRecords(vaultRecords!);
+    };
+
+    getData();
+  }, []);
+
+  const sortedRecords = vaultEntryRecords
+    .slice()
+    .sort(
+      (a, b) =>
+        new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+    );
 
   return (
     <div>
@@ -78,18 +79,18 @@ export default function VaultEntry({
         </button>
       </div>
 
-      {/* {showEntry && (
+      {showEntry && (
         <div className="">
           {sortedRecords.map((entry, index) => {
             const isActive = pathname.startsWith(
-              `/diary/${getLocalYear()}/${entry.id}`
+              `/private-memory-vault/${entry.id}`
             );
 
             return (
               <div key={index}>
                 <Link
                   key={index}
-                  href={`/diary/${getLocalYear()}/${entry.id}`}
+                  href={`/private-memory-vault/${entry.id}`}
                   className={cn(
                     "h-8 hover:bg-zinc-200/60 flex items-center px-3 rounded-sm w-full",
                     isActive && "bg-zinc-200/50"
@@ -109,7 +110,7 @@ export default function VaultEntry({
             );
           })}
         </div>
-      )} */}
+      )}
     </div>
   );
 }

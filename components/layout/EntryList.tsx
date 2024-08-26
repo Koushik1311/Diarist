@@ -76,7 +76,7 @@ export default function EntryList() {
           table: "time_capsules",
         },
         (payload: RealtimePostgresInsertPayload<TimeCapsuleType>) => {
-          setTimeCapsuleEntries((prevEntry) => [payload.new, ...prevEntry]);
+          setTimeCapsuleEntries((prevRecords) => [payload.new, ...prevRecords]);
         }
       )
       .on(
