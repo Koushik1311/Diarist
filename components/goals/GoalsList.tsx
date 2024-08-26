@@ -35,7 +35,7 @@ export default function GoalsList() {
   }, []);
 
   useEffect(() => {
-    const channel = supabase
+    const goalsChannel = supabase
       .channel("realtime entry")
       .on(
         "postgres_changes",
@@ -64,7 +64,7 @@ export default function GoalsList() {
       .subscribe();
 
     return () => {
-      supabase.removeChannel(channel);
+      supabase.removeChannel(goalsChannel);
     };
   }, [supabase]);
 
