@@ -2,6 +2,7 @@ import {
   BookLock,
   ChevronDown,
   CreditCard,
+  Goal,
   Home,
   LogOut,
   MessageCircle,
@@ -109,8 +110,8 @@ export default async function LeftbarMenu() {
         href={`/diary/${getLocalYear()}`}
         className="flex items-center gap-2 px-4 h-8 mt-2 hover:bg-zinc-200 rounded-sm"
       >
-        <Home className="w-4 h-4" />
-        <span className="text-sm">Home</span>
+        <Goal className="w-4 h-4" />
+        <span className="text-sm">Goals for tomorrow</span>
       </Link>
       <Link
         target="_blank"
