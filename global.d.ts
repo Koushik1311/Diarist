@@ -14,4 +14,6 @@ declare global {
     DB["public"]["Tables"]["private_memory_vault"]["Row"];
   type GoalsForTomorrowType =
     DB["public"]["Tables"]["goals_for_tomorrow"]["Row"];
+
+  type UserPasskeyType = DB["public"]["Tables"]["user_passkeys"]["Row"];
 }
