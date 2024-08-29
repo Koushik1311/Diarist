@@ -131,7 +131,6 @@ export type Database = {
         Row: {
           content: string | null
           created_at: string
-          encrypted_key: string | null
           id: string
           title: string | null
           updated_at: string
@@ -140,7 +139,6 @@ export type Database = {
         Insert: {
           content?: string | null
           created_at?: string
-          encrypted_key?: string | null
           id?: string
           title?: string | null
           updated_at?: string
@@ -149,7 +147,6 @@ export type Database = {
         Update: {
           content?: string | null
           created_at?: string
-          encrypted_key?: string | null
           id?: string
           title?: string | null
           updated_at?: string
@@ -280,6 +277,44 @@ export type Database = {
           },
         ]
       }
+      user_passkeys: {
+        Row: {
+          created_at: string
+          id: string
+          passkey_hash: string
+          security_answer_hash: string
+          security_question: Database["public"]["Enums"]["security_questions"]
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          passkey_hash?: string
+          security_answer_hash?: string
+          security_question: Database["public"]["Enums"]["security_questions"]
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          passkey_hash?: string
+          security_answer_hash?: string
+          security_question?: Database["public"]["Enums"]["security_questions"]
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "user_passkeys_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: true
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
@@ -289,6 +324,20 @@ export type Database = {
     }
     Enums: {
       lifetime: "none" | "basic" | "premium" | "elite"
+      security_questions:
+        | "Who was your first crush?"
+        | "What was your first concert or event?"
+        | "What was your most unusual job?"
+        | "What was the first foreign country you visited?"
+        | "What was your childhood dream job?"
+        | "What was your first big purchase?"
+        | "What was the first video game you played?"
+        | "Describe your childhood in one word."
+        | "What was your favorite childhood toy?"
+        | "What was your first movie in a theater?"
+        | "Who was your first favorite band?"
+        | "What was the first meal you cooked?"
+        | "Where was your favorite hiding spot as a child?"
     }
     CompositeTypes: {
       [_ in never]: never
