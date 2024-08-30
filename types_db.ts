@@ -129,28 +129,34 @@ export type Database = {
       }
       private_memory_vault: {
         Row: {
-          content: string | null
+          content: string
           created_at: string
           id: string
-          title: string | null
+          iv: string
+          salt: string
+          title: string
           updated_at: string
-          user_id: string | null
+          user_id: string
         }
         Insert: {
-          content?: string | null
+          content?: string
           created_at?: string
           id?: string
-          title?: string | null
+          iv?: string
+          salt?: string
+          title?: string
           updated_at?: string
-          user_id?: string | null
+          user_id: string
         }
         Update: {
-          content?: string | null
+          content?: string
           created_at?: string
           id?: string
-          title?: string | null
+          iv?: string
+          salt?: string
+          title?: string
           updated_at?: string
-          user_id?: string | null
+          user_id?: string
         }
         Relationships: [
           {
