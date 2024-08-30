@@ -8,7 +8,9 @@ export default async function GoalsForTomorrow() {
   return (
     <div className="w-full">
       <div className="flex items-center justify-between mb-4">
-        <h2 className="font-medium text-zinc-700">Goals For Tomorrow</h2>
+        <h2 className="font-semibold text-lg text-zinc-800">
+          Goals For Tomorrow
+        </h2>
         <AddGoalsForTomorrow userId={user?.id!} />
       </div>
 
