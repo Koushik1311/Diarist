@@ -30,12 +30,13 @@ export default function AddGoalsForTomorrow({ userId }: { userId: string }) {
     }
 
     toast.success("Goal added successfully.", { id: loadingToastId });
+    setGoal("");
   };
 
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <button>
+        <button className="p-2 rounded-full hover:bg-zinc-200 transition-all duration-300">
           <Plus />
         </button>
       </DialogTrigger>
@@ -44,14 +45,23 @@ export default function AddGoalsForTomorrow({ userId }: { userId: string }) {
           <DialogDescription className="w-full flex items-center justify-center gap-4">
             <input
               onChange={(e) => setGoal(e.target.value)}
+              value={goal}
               type="text"
               name="goal"
               placeholder="What is your goal for tomorrow?"
               required
-              className="h-9 px-3 text-sm rounded-[6px] border border-slate-200 focus:outline-zinc-600 flex-1 text-zinc-950"
+              className="h-9 px-3 text-sm rounded-[6px] border border-slate-200 focus:outline-none focus:ring-2 focus:ring-zinc-500 flex-1 text-zinc-950"
             />
             <DialogClose asChild>
-              <button onClick={onButtonClick}>
+              <button
+                onClick={onButtonClick}
+                disabled={!goal}
+                className={`p-2 rounded-md ${
+                  goal
+                    ? "hover:bg-zinc-200 transition-all duration-300"
+                    : "cursor-not-allowed"
+                }`}
+              >
                 <Plus />
               </button>
             </DialogClose>

@@ -17,18 +17,21 @@ export default function GoalsList() {
   const [goalsForTomorrow, setGoalsForTomorrow] = useState<
     GoalsForTomorrowType[]
   >([]);
+  const [loading, setLoading] = useState(true);
 
   const supabase = browserClient();
 
   useEffect(() => {
     async function getAllGoalsForTomorrow() {
       const { data, error } = await fetchAllGoalsForTomorrow();
+      setLoading(false);
 
       if (error) {
+        toast.error("Failed to load goals.");
         setGoalsForTomorrow([]);
+      } else {
+        setGoalsForTomorrow(data!);
       }
-
-      setGoalsForTomorrow(data!);
     }
 
     getAllGoalsForTomorrow();
@@ -69,40 +72,51 @@ export default function GoalsList() {
   }, [supabase]);
 
   const handleCompleteButtonClick = async (goalId: string) => {
-    const loadingToastId = toast.loading("Adding goal for tomorrow...");
+    const loadingToastId = toast.loading("Completing goal...");
     const error = await deleteGoalsForTomorrow(goalId);
 
     if (error) {
-      toast.info("Something went wrong.", { id: loadingToastId });
+      toast.error("Failed to complete goal.", { id: loadingToastId });
+    } else {
+      toast.success("Goal completed successfully.", { id: loadingToastId });
     }
-    toast.success("Goal completed successfully.", { id: loadingToastId });
   };
 
   const handleDeleteButtonClick = async (goalId: string) => {
-    const loadingToastId = toast.loading("Adding goal for tomorrow...");
+    const loadingToastId = toast.loading("Deleting goal...");
     const error = await deleteGoalsForTomorrow(goalId);
 
     if (error) {
-      toast.info("Error deleting goal.", { id: loadingToastId });
+      toast.error("Error deleting goal.", { id: loadingToastId });
+    } else {
+      toast.success("Goal deleted successfully.", { id: loadingToastId });
     }
-    toast.success("Goal deleted successfully.", { id: loadingToastId });
   };
 
   return (
     <ul className="space-y-2 text-zinc-700">
-      {goalsForTomorrow.map((goals, index) => (
-        <li key={index} className="flex items-center gap-8">
-          <>{goals.goal}</>
-          <div className="flex items-center gap-4">
-            <button onClick={() => handleCompleteButtonClick(goals.id)}>
-              <CheckCheck className="h-4 w-4" />
-            </button>
-            <button onClick={() => handleDeleteButtonClick(goals.id)}>
-              <Trash2 className="h-4 w-4" />
-            </button>
-          </div>
-        </li>
-      ))}
+      {loading ? (
+        <p>Loading goals...</p>
+      ) : goalsForTomorrow.length === 0 ? (
+        <p>No goals set for tomorrow.</p>
+      ) : (
+        goalsForTomorrow.map((goal, index) => (
+          <li
+            key={index}
+            className="flex items-center justify-between gap-4 p-2 border-x-2 hover:bg-gray-100"
+          >
+            <span>{goal.goal}</span>
+            <div className="flex items-center gap-2">
+              <button onClick={() => handleCompleteButtonClick(goal.id)}>
+                <CheckCheck className="h-4 w-4 hover:text-green-500 transition-all duration-300" />
+              </button>
+              <button onClick={() => handleDeleteButtonClick(goal.id)}>
+                <Trash2 className="h-4 w-4 hover:text-red-500 transition-all duration-300" />
+              </button>
+            </div>
+          </li>
+        ))
+      )}
     </ul>
   );
 }
