@@ -190,6 +190,7 @@ export default function NormalEntry({ entryRecords, setEntryRecords }: Props) {
               <div key={index}>
                 <Link
                   key={index}
+                  prefetch={false}
                   href={`/diary/${getLocalYear()}/${entry.id}`}
                   className={cn(
                     "h-8 hover:bg-zinc-200/60 flex items-center px-3 rounded-sm w-full",
