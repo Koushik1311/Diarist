@@ -1,29 +1,68 @@
-import Editor from "@/components/diary/Editor";
-
 import React from "react";
 import { Dancing_Script } from "next/font/google";
-import { getSingleRecord } from "@/data/action/diary_entry";
 import { getDay, getWeekday } from "@/utils/local-date-&-time";
-import TitleInput from "@/components/diary/TitleInput";
 import { NotebookPen } from "lucide-react";
 import Moods from "@/components/diary/Moods";
-import { fetchSingleEntry } from "@/data/server/diary";
 import { notFound } from "next/navigation";
+
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 
 const dancing_script = Dancing_Script({ subsets: ["latin"] });
 
 import OptionBtn from "@/components/diary/OptionBtn";
 import VaultEditor from "@/components/private-memory-vault/VaultEditor";
+import { fetchSingleVaultEntry } from "@/data/server/private-memory-vault";
+import decryptAfterVerification from "@/helper/decrypt-after-verification";
 
 export default async function page({
   params: { id },
 }: {
   params: { id: string };
 }) {
-  const record = await fetchSingleEntry(id);
+  const record = await fetchSingleVaultEntry(id);
 
   if (!record) {
     return notFound();
+  }
+
+  if (record.iv || record.salt) {
+    return (
+      <Dialog open={true}>
+        <DialogTrigger asChild></DialogTrigger>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Enter Passkey</DialogTitle>
+            <DialogDescription></DialogDescription>
+          </DialogHeader>
+          <form className="flex flex-col gap-1 w-full h-full">
+            <label
+              htmlFor="passkey"
+              className="text-xs text-zinc-500 font-medium mt-4"
+            >
+              Passkey
+            </label>
+            <input
+              type="password"
+              name="passkey"
+              placeholder="Enter your passkey"
+              required
+              className="h-9 px-3 text-sm rounded-[6px] border border-zinc-300 focus:outline-zinc-600 text-zinc-950"
+            />
+            <DialogClose asChild className="mt-4">
+              <button type="submit">Create</button>
+            </DialogClose>
+          </form>
+        </DialogContent>
+      </Dialog>
+    );
   }
 
   return (
