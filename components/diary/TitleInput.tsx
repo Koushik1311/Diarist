@@ -23,12 +23,13 @@ export default function TitleInput({
     if (title) {
       setInputTitle(title);
     }
-  });
+  }, []);
 
   const supabase = browserClient();
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newTitle = e.target.value;
+
     setInputTitle(newTitle);
   };
 
@@ -71,7 +72,9 @@ export default function TitleInput({
   return (
     <DropdownMenu>
       <DropdownMenuTrigger className="relative border-none ring-0 focus:outline-none px-2 rounded-sm hover:bg-zinc-200 text-left">
-        <p className="text-wrap">{inputTitle}</p>
+        <p className="text-wrap">
+          {inputTitle === "" ? <>Untitled</> : <>{inputTitle}</>}
+        </p>
       </DropdownMenuTrigger>
       <DropdownMenuContent
         align="start"
