@@ -11,26 +11,26 @@ export type Database = {
     Tables: {
       diary_entries: {
         Row: {
-          content: string | null
+          content: string
           created_at: string
           id: string
-          title: string | null
+          title: string
           updated_at: string
           user_id: string
         }
         Insert: {
-          content?: string | null
+          content?: string
           created_at?: string
           id?: string
-          title?: string | null
+          title?: string
           updated_at?: string
           user_id: string
         }
         Update: {
-          content?: string | null
+          content?: string
           created_at?: string
           id?: string
-          title?: string | null
+          title?: string
           updated_at?: string
           user_id?: string
         }
