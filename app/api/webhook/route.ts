@@ -51,7 +51,7 @@ export async function POST(req: Request) {
       const varientId: number =
         body.data.attributes.first_order_item.variant_id;
       if (isSuccessful) {
-        const { entriesData } = await fetchEntries();
+        const { entriesData } = await fetchEntries(userId);
 
         if (varientId === basicLifetimeVarientId) {
           await updateSubscriptionData({
