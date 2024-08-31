@@ -15,9 +15,15 @@ export default function TitleInput({
   id: string;
   title: string;
 }) {
-  const [inputTitle, setInputTitle] = useState(title);
+  const [inputTitle, setInputTitle] = useState<string>();
   const [checkTitle, setCheckTitle] = useState(title);
   const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (title) {
+      setInputTitle(title);
+    }
+  });
 
   const supabase = browserClient();
 

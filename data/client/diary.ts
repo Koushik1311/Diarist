@@ -37,3 +37,18 @@ export const getAllRecords = async (year?: number, month?: number) => {
 
   return data;
 };
+
+export const fetchSingleEntryOnClient = async (id: string) => {
+  const supabase = browserClient();
+  const { data, error } = await supabase
+    .from("diary_entries")
+    .select("*")
+    .eq("id", id)
+    .single();
+
+  if (error) {
+    console.log("Error fetching diary record: ", error.message);
+  }
+
+  return data;
+};

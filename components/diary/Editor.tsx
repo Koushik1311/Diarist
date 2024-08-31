@@ -19,7 +19,6 @@ import { useAppSelector } from "@/redux/store";
 
 import { Kalam, Gloria_Hallelujah } from "next/font/google";
 import { GeistSans } from "geist/font/sans";
-import { toast } from "sonner";
 
 const kalam = Kalam({
   weight: "400",
@@ -99,6 +98,7 @@ export default function Editor({ id, content }: Props) {
       },
     },
     content: currentContent,
+    immediatelyRender: false,
   });
 
   // useEffect(() => {
