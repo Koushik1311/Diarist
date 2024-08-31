@@ -11,8 +11,6 @@ export default async function DiaryPage({
 }: {
   params: { id: string };
 }) {
-  console.log("Get page now");
-  console.log("Id: ", id);
   const record = await fetchSingleEntry(id);
 
   if (!record) {
