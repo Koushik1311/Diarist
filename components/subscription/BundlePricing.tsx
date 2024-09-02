@@ -25,10 +25,8 @@ export default async function BundlePricing({ isUser }: { isUser?: boolean }) {
       url: urlEntry10 || "#",
       benefits: [
         "Get 10 entries",
-        "Access from anywhere",
-        "Track daily activities",
-        "Reflect on your action",
-        "Update entries on the go",
+        "Entries can be used in Time Capsule",
+        "Purchase more entries as needed",
       ],
     },
     {
@@ -37,10 +35,8 @@ export default async function BundlePricing({ isUser }: { isUser?: boolean }) {
       url: urlEntry25 || "#",
       benefits: [
         "Get 25 entries",
-        "Access from anywhere",
-        "Track daily activities",
-        "Reflect on your action",
-        "Update entries on the go",
+        "Entries can be used in Time Capsule",
+        "Purchase more entries as needed",
       ],
     },
     {
@@ -49,10 +45,8 @@ export default async function BundlePricing({ isUser }: { isUser?: boolean }) {
       url: urlEntry50 || "#",
       benefits: [
         "Get 50 entries",
-        "Access from anywhere",
-        "Track daily activities",
-        "Reflect on your action",
-        "Update entries on the go",
+        "Entries can be used in Time Capsule",
+        "Purchase more entries as needed",
       ],
     },
   ];

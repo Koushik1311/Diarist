@@ -127,47 +127,6 @@ export type Database = {
         }
         Relationships: []
       }
-      private_memory_vault: {
-        Row: {
-          content: string
-          created_at: string
-          id: string
-          iv: string
-          salt: string
-          title: string
-          updated_at: string
-          user_id: string
-        }
-        Insert: {
-          content?: string
-          created_at?: string
-          id?: string
-          iv?: string
-          salt?: string
-          title?: string
-          updated_at?: string
-          user_id: string
-        }
-        Update: {
-          content?: string
-          created_at?: string
-          id?: string
-          iv?: string
-          salt?: string
-          title?: string
-          updated_at?: string
-          user_id?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "private_memory_vault_user_id_fkey"
-            columns: ["user_id"]
-            isOneToOne: false
-            referencedRelation: "users"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
       subscriptions: {
         Row: {
           created_at: string
@@ -177,7 +136,6 @@ export type Database = {
           lifetime: Database["public"]["Enums"]["lifetime"]
           updated_at: string
           user_id: string
-          vault_entry_limit: number
         }
         Insert: {
           created_at?: string
@@ -187,7 +145,6 @@ export type Database = {
           lifetime?: Database["public"]["Enums"]["lifetime"]
           updated_at?: string
           user_id: string
-          vault_entry_limit?: number
         }
         Update: {
           created_at?: string
@@ -197,7 +154,6 @@ export type Database = {
           lifetime?: Database["public"]["Enums"]["lifetime"]
           updated_at?: string
           user_id?: string
-          vault_entry_limit?: number
         }
         Relationships: [
           {
@@ -279,44 +235,6 @@ export type Database = {
             columns: ["time_capsule_id"]
             isOneToOne: false
             referencedRelation: "time_capsules"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
-      user_passkeys: {
-        Row: {
-          created_at: string
-          id: string
-          passkey_hash: string
-          security_answer_hash: string
-          security_question: Database["public"]["Enums"]["security_questions"]
-          updated_at: string
-          user_id: string
-        }
-        Insert: {
-          created_at?: string
-          id?: string
-          passkey_hash?: string
-          security_answer_hash?: string
-          security_question: Database["public"]["Enums"]["security_questions"]
-          updated_at?: string
-          user_id: string
-        }
-        Update: {
-          created_at?: string
-          id?: string
-          passkey_hash?: string
-          security_answer_hash?: string
-          security_question?: Database["public"]["Enums"]["security_questions"]
-          updated_at?: string
-          user_id?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "user_passkeys_user_id_fkey"
-            columns: ["user_id"]
-            isOneToOne: true
-            referencedRelation: "users"
             referencedColumns: ["id"]
           },
         ]

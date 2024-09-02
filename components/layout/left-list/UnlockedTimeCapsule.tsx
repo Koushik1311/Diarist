@@ -2,6 +2,7 @@
 
 import { fetchUnlockedTimeCapsule } from "@/data/client/time-capsule";
 import { cn } from "@/lib/utils";
+import { getDay, getMonth } from "@/utils/local-date-&-time";
 import { getLocalYear } from "@/utils/local-day";
 import { getFromLocalStorage, saveToLocalStorage } from "@/utils/localStorage";
 import { Pill, Plus, Timer, TimerOff } from "lucide-react";
@@ -98,7 +99,7 @@ export default function UnlockedTimeCapsule({
                     <div className="flex items-center gap-2 font-medium text-zinc-600">
                       <Pill className="w-4 h-4" />
                       <p className="flex-1 truncate">{entry.title}</p>
-                      {}
+                      {getMonth(entry.created_at)} {getDay(entry.created_at)}
                     </div>
                   </div>
                 </Link>

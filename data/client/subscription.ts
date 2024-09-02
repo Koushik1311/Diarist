@@ -26,14 +26,12 @@ export const updateSubscriptionData = async ({
   dailyEntryLimit,
   entries,
   lifetime,
-  vaultEntryLimit,
 }: {
   userId: string;
   bonusEntriesPerYear?: number;
   dailyEntryLimit?: number;
   entries?: number;
   lifetime?: "none" | "basic" | "premium" | "elite";
-  vaultEntryLimit?: number;
 }) => {
   const supabase = browserClient();
 
@@ -44,7 +42,6 @@ export const updateSubscriptionData = async ({
       daily_entry_limit: dailyEntryLimit,
       entries: entries,
       lifetime: lifetime,
-      vault_entry_limit: vaultEntryLimit,
     })
     .eq("user_id", userId)
     .select();

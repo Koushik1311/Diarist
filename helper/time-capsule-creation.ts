@@ -1,4 +1,3 @@
-import { fetchTodaysPrivateMemoryVaultEntry } from "@/data/client/private-memory-vault";
 import {
   fetchSubscription,
   updateSubscriptionData,
@@ -23,10 +22,8 @@ export const createTimeCapsule = async (userId: string) => {
     const { entriesToday, entriesError } = await fetchTodaysEntry();
     const { todaysTimeCapsuleEntry, todaysTimeCapsuleEntryError } =
       await fetchTodaysTimeCapsuleEntry();
-    const { todaysVaultEntry, todaysVaultEntryError } =
-      await fetchTodaysPrivateMemoryVaultEntry();
 
-    if (entriesError || todaysTimeCapsuleEntryError || todaysVaultEntryError) {
+    if (entriesError || todaysTimeCapsuleEntryError) {
       return { error: "Error inserting entry." };
     }
 
@@ -35,10 +32,8 @@ export const createTimeCapsule = async (userId: string) => {
       ? todaysTimeCapsuleEntry.length
       : 0;
 
-    const vaultEntryCount = todaysVaultEntry ? todaysVaultEntry.length : 0;
-
-    // total entries by adding normal entry + time capsule entry + vault entry
-    const totalEntry = entriesCount + timeCapsuleEntryCount + vaultEntryCount;
+    // total entries by adding normal entry + time capsule entry
+    const totalEntry = entriesCount + timeCapsuleEntryCount;
 
     if (entryLimit! >= totalEntry) {
       const { timeCapsuleEntry, timeCapsuleEntryError } =

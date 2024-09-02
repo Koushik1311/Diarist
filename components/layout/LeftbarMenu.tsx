@@ -67,6 +67,7 @@ export default async function LeftbarMenu() {
                 <p className="text-xs text-zinc-700 font-extralight">
                   <span>Lifetime: </span>
                   {subscription?.lifetime === "none" && <></>}
+                  {subscription?.lifetime === "basic" && <>Basic</>}
                   {subscription?.lifetime === "premium" && <>Premium </>}
                   {subscription?.lifetime === "elite" && <>Elite </>}
                   <span>. Entries: {subscription?.entries}</span>
@@ -112,14 +113,6 @@ export default async function LeftbarMenu() {
       >
         <Goal className="w-4 h-4" />
         <span className="text-sm">Goals for tomorrow</span>
-      </Link>
-      <Link
-        target="_blank"
-        href={`/private-memory-vault`}
-        className="flex items-center gap-2 px-4 h-8 hover:bg-zinc-200 rounded-sm"
-      >
-        <BookLock className="w-4 h-4" />
-        <span className="text-sm">Private memory vault</span>
       </Link>
 
       <EntryList />
