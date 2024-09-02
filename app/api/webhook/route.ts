@@ -58,7 +58,6 @@ export async function POST(req: Request) {
             userId: userId,
             dailyEntryLimit: 1,
             entries: entriesData?.entries! + 10,
-            vaultEntryLimit: 50,
             lifetime: "basic",
           });
         } else if (varientId === premiumLifetimeVarientId) {
@@ -66,7 +65,6 @@ export async function POST(req: Request) {
             userId: userId,
             dailyEntryLimit: 2,
             entries: entriesData?.entries! + 20,
-            vaultEntryLimit: 100,
             lifetime: "premium",
           });
         } else if (varientId === eliteLifetimeVarientId) {
@@ -74,7 +72,6 @@ export async function POST(req: Request) {
             userId: userId,
             dailyEntryLimit: 3,
             entries: entriesData?.entries! + 50,
-            vaultEntryLimit: 200,
             lifetime: "elite",
           });
         } else if (varientId === entry10VarientId) {
