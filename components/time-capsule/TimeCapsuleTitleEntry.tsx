@@ -65,7 +65,9 @@ export default function TimeCapsuleTitleInput({
   return (
     <DropdownMenu>
       <DropdownMenuTrigger className="relative border-none ring-0 focus:outline-none px-2 rounded-sm hover:bg-zinc-200 text-left">
-        <p className="text-wrap">{inputTitle}</p>
+        <p className="text-wrap">
+          {inputTitle === "" ? <>Untitled</> : <>{inputTitle}</>}
+        </p>
       </DropdownMenuTrigger>
       <DropdownMenuContent
         align="start"

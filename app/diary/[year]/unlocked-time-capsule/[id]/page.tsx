@@ -9,7 +9,6 @@ import {
 } from "@/utils/local-date-&-time";
 import TitleInput from "@/components/diary/TitleInput";
 import { Pill } from "lucide-react";
-import OptionBtn from "@/components/diary/OptionBtn";
 import { fetchTimeCapsuleEntry } from "@/data/server/timeCapsule";
 import { notFound } from "next/navigation";
 import TimeCapsuleEditor from "@/components/time-capsule/TimeCapsuleEditor";
@@ -17,6 +16,7 @@ import Moods from "@/components/time-capsule/Moods";
 import { DateTimePicker } from "@/components/time-capsule/DateTimePicker";
 import TimeCapsuleContent from "@/components/time-capsule/TimeCapsuleContent";
 import ShowMoods from "@/components/time-capsule/ShowMoods";
+import OptionBtn from "@/components/time-capsule/OptionBtn";
 
 const dancing_script = Dancing_Script({ subsets: ["latin"] });
 
