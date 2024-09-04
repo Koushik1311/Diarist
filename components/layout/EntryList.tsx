@@ -105,6 +105,9 @@ export default function EntryList() {
           setTimeCapsuleEntries((prevEntry) =>
             prevEntry.filter((record) => record.id !== payload.old.id)
           );
+          setUnlockedTimeCapsuleEntries((prevEntry) =>
+            prevEntry.filter((record) => record.id !== payload.old.id)
+          );
         }
       )
       .subscribe();
