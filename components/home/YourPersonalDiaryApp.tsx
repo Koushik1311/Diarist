@@ -7,8 +7,6 @@ import Image from "next/image";
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 
-type MenuId = "journal" | "title" | "mood" | "text" | "features";
-
 interface MenuContent {
   [key: string]: {
     text: string;
@@ -24,10 +22,6 @@ const menuContent: MenuContent = {
   "time-capsule": {
     text: "Create a time capsule for your future self.",
     image: "/time-capsule.png",
-  },
-  "private-memory-vault": {
-    text: "Create your private entries.",
-    image: "/mood.png",
   },
 };
 
@@ -61,8 +55,6 @@ export default function YourPersonalDiaryApp() {
                             ? "text-orange-500"
                             : menuId === "time-capsule"
                             ? "text-amber-500"
-                            : menuId === "private-memory-vault"
-                            ? "text-yellow-500"
                             : "text-gray-400"
                         )
                       : "group-hover:text-gray-800"
