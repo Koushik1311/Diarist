@@ -1,4 +1,4 @@
-import { Notebook, SmilePlus, Timer } from "lucide-react";
+import { Notebook, Timer } from "lucide-react";
 
 export const YourPersonalDiaryAppMenu = [
   {
@@ -10,10 +10,5 @@ export const YourPersonalDiaryAppMenu = [
     id: "time-capsule",
     name: "Capsule",
     icon: Timer,
-  },
-  {
-    id: "private-memory-vault",
-    name: "Vault",
-    icon: SmilePlus,
   },
 ] as const;
