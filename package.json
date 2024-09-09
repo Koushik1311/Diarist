@@ -19,6 +19,9 @@
     "supabase:pull": "npx supabase db pull"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.6.0",
+    "@fortawesome/free-solid-svg-icons": "^6.6.0",
+    "@fortawesome/react-fontawesome": "^0.2.2",
     "@lemonsqueezy/lemonsqueezy.js": "^3.2.0",
     "@radix-ui/react-accordion": "^1.2.0",
     "@radix-ui/react-alert-dialog": "^1.1.1",
@@ -37,6 +40,7 @@
     "@tiptap/pm": "^2.6.6",
     "@tiptap/react": "^2.6.6",
     "@tiptap/starter-kit": "^2.6.6",
+    "add": "^2.0.6",
     "autoprefixer": "10.4.17",
     "axios": "^1.7.6",
     "bcrypt": "^5.1.1",
