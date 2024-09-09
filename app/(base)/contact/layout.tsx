@@ -1,12 +1,10 @@
 import { Metadata } from "next";
 import React from "react";
 
-const defaultUrl = process.env.VERCEL_URL
-  ? `https://${process.env.VERCEL_URL}/contact`
-  : "http://localhost:3000/contact";
+const defaultUrl = process.env.NEXT_PUBLIC_APP_URL!;
 
 export const metadata: Metadata = {
-  metadataBase: new URL(defaultUrl),
+  metadataBase: new URL(`${defaultUrl}/contact`),
   title: "Diarist - Contact Us",
   description:
     "Get in touch with the Diarist team. Send us your queries, feedback, or support requests. We're here to help you with your digital diary experience.",
